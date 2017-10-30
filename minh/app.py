@@ -34,5 +34,25 @@ def signup():
         account.save()
         return "Done!"
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method=="GET":
+        return render_template('login.html')
+    elif request.method=="POST":
+        form=request.form
+        username=form['username']
+        password=form['password']
+        try:
+            account=Account.objects.get(username=username)
+        except Account.DoesNotExist:
+            account=None
+        if account is None:
+            return "Sai tài khoản"
+        else:
+            if password==account.password:
+                return "Đăng nhập thành công!"
+            else:
+                return "Sai mật khẩu"
+
 if __name__ == '__main__':
   app.run(debug=True)
