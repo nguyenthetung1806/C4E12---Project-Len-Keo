@@ -34,6 +34,8 @@ def signup():
         account.save()
         return "Done!"
 
+<<<<<<< HEAD
+=======
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method=="GET":
@@ -54,5 +56,6 @@ def login():
             else:
                 return "Sai mật khẩu"
 
+>>>>>>> 81ed240fec783af41c37285637bb9fdb63d654c2
 if __name__ == '__main__':
   app.run(debug=True)
