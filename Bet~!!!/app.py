@@ -61,5 +61,21 @@ def login():
                 return render_template('message.html', message = message)
 
 
+@app.route('/lenkeo', methods=['GET','POST'])
+def lenkeo():
+    if request.method=="GET":
+        return render_template('lenkeo.html')
+    # elif request.method=="POST":
+    #     form=request.form
+
+@app.route('/lenkeo2', methods=['GET','POST'])
+def lenkeo2():
+    if request.method=="GET":
+        return render_template('lenkeo2.html')
+    # elif request.method=="POST":
+    #     form=request.form
+
+
+
 if __name__ == '__main__':
   app.run(debug=True)
