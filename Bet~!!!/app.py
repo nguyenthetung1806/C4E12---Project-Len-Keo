@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from passlib.hash import sha256_crypt
 import mlab
 from bson.objectid import ObjectId
 from mongoengine import *
@@ -28,7 +29,8 @@ def signup():
     elif request.method == "POST":
         form = request.form
         name = form['name']
-        password = form['password']
+        password = sha256_crypt.encrypt(form['password'])
+
         username = form['username']
         image = form['image']
         email = form['email']
@@ -46,6 +48,7 @@ def login():
         form = request.form
         username = form['username']
         password = form['password']
+        
         try:
             account = Account.objects.get(username=username)
         except Account.DoesNotExist:
@@ -54,11 +57,12 @@ def login():
             message = "Tài khoản không tồn tại"
             return render_template('message.html', message = message)
         else:
-            if password == account.password:
+            if sha256_crypt.verify(password, account.password) == True:
                 return render_template('profile.html', account = account)
             else:
                 message = "Sai mật khẩu"
                 return render_template('message.html', message = message)
+
 
 
 @app.route('/lenkeo', methods=['GET','POST'])
