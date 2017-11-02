@@ -67,9 +67,17 @@ def signup():
         phone=form['phone']
         image = request.files['image']
         image = b64encode(image.read())
-        account=Account(name=name,password=password,image=image,username=username,email=email,phone=phone)
-        account.save()
-        return "Done!"
+        try:
+            account=Account.objects.get(username=username)
+        except Account.DoesNotExist:
+            account=None
+        if account is None:
+            account=Account(name=name,password=password,image=image,username=username,email=email,phone=phone)
+            account.save()
+            return "Done!"
+        else:
+            return "Tên đăng nhập đã tồn tại"
+
 
 @app.route('/login', methods=['GET','POST'])
 def login():
