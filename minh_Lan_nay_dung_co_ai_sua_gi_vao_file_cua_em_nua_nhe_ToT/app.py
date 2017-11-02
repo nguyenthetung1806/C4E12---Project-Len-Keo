@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request
 import mlab
+from base64 import b64encode
 from mongoengine import *
 
 app = Flask(__name__)
@@ -8,7 +9,7 @@ mlab.connect()
 
 class Account(Document):
     name=StringField()
-    image=FileField()
+    image=StringField()
     username=StringField()
     password=StringField()
     email=EmailField()
@@ -62,10 +63,11 @@ def signup():
         name=form['name']
         password=form['password']
         username=form['username']
-        image=form['image']
         email=form['email']
         phone=form['phone']
-        account=Account(name=name,password=password,username=username,email=email,phone=phone)
+        image = request.files['image']
+        image = b64encode(image.read())
+        account=Account(name=name,password=password,image=image,username=username,email=email,phone=phone)
         account.save()
         return "Done!"
 

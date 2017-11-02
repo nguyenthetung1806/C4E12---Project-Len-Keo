@@ -14,7 +14,7 @@ def index():
 
         b64_image = b64encode(image.read())
 
-        return "Oh yeah"
+        return b64_image
 
 if __name__ == '__main__':
   app.run(debug=True)
