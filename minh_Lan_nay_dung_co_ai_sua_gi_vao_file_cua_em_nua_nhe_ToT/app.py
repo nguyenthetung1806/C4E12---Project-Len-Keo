@@ -118,7 +118,7 @@ def lenkeo():
         year2=form['year2']
         join=form['join']
         up=form['up']
-        down=form['dowm']
+        down=form['down']
         guest=form['guest']
         id1=form['id1']
         keo=Keo(license=license,hour1=hour1,minute1=minute1,day1=day1,month1=month1,year1=year1,hour2=hour2,minute2=minute2,day2=day2,month2=month2,year2=year2,join=join,up=up,down=down,guest=guest,id1=id1)
