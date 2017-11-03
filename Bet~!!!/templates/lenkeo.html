@@ -3,203 +3,119 @@
   <head>
     <meta charset="utf-8">
     <title>Đặt kèo</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="icon" href="https://tctechcrunch2011.files.wordpress.com/2014/02/troll-2.png?w=400">
   </head>
   <body>
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand mb-1" href="/">Tạo kèo</a>
-        <ul class="navbar-nav col-md-9">
-        </ul>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Đăng ký</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Đăng nhập</a>
-          </li>
-        </ul>
-      </nav>
 
-      <div class="container">
-        <br>
-        <!-- Tabs để chọn loại kèo -->
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="/lenkeo">Kèo truyền thống</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/lenkeo2">Kèo nhiều bên</a>
-          </li>
-        </ul>
+    {% include 'include-template.html' %}
 
-        <br><br>
-        <!-- form để người dùng lên kèo -->
-        <form class="" action="" method="post">
-          <div class="form-group">
-            <textarea name="license" placeholder="Điều khoản" rows="5" cols="160"></textarea>
-          </div>
-
-          <!-- Thời gian diễn ra kèo -->
-          <div class="form-group form-group-inline">
-            <div class="row">
-              <div class="col">
-                <label for="">Từ</label>
-              </div>
-              <div class="col">
-                <select class="form-control" name="hour1">
-                  <option selected>Giờ</option>
-                  {% for i in range(0, 24) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="minute1">
-                  <option selected>Phút</option>
-                  {% for i in range(0, 60) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="day1">
-                  <option selected>Ngày</option>
-                  {% for i in range(1, 32) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="month1">
-                  <option selected>Tháng</option>
-                  {% for i in range(1, 13) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="year1">
-                  <option selected>Năm</option>
-                  {% for i in range(1990, 2117) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <label for="">Đến</label>
-              </div>
-              <div class="col">
-                <select class="form-control" name="hour2">
-                  <option selected>Giờ</option>
-                  {% for i in range(0, 24) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="minute2">
-                  <option selected>Phút</option>
-                  {% for i in range(0, 60) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="day2">
-                  <option selected>Ngày</option>
-                  {% for i in range(1, 32) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="month2">
-                  <option selected>Tháng</option>
-                  {% for i in range(1, 13) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <div class="col">
-                <select class="form-control" name="year2">
-                  <option selected>Năm</option>
-                  {% for i in range(1990, 2117) %}
-                  <option>{{i}}</option>
-                  {% endfor %}
-                </select>
-              </div>
+    <br><br>
 
 
+
+    <div class="container col-6 p-0">
+
+        <div class="row">
+          <div class="col-3 m-0 pr-0 ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Truyền thống</a>
             </div>
           </div>
-
-          <!-- Số bên tham gia -->
-          <div class="form-group form-group-inline">
-            <div class="row">
-              <div class="col col-md-2">
-                <label for="">Số bên tham gia: </label>
-              </div>
-              <div class="col col-md-1">
-                <input class="form-control" type="number" name="join" value="" required>
-              </div>
+          <div class="col-3 m-0 pl-0 pr-0 ">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Nhiều người</a>
             </div>
           </div>
-
-          <!-- Các cửa -->
-          <div class="form-group form-group-inline">
-            <div class="row">
-              <div class="col">
-                <textarea name="up" rows="5" placeholder="Cửa trên" cols="70"></textarea>
-              </div>
-              <div class="col">
-                <textarea name="down" rows="5" placeholder="Cửa dưới" cols="70"></textarea>
-              </div>
+          <div class="col m-0 pl-0">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="invisible nav-link active border-success border-bottom-0" href="/lenkeo">1</a>
             </div>
           </div>
+        </div>
 
-          <!-- Khán giả -->
-          <div class="form-group">
-            <input class="form-control" type="text" name="guest" value="" placeholder="Khán giả">
+
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="container col-6 p-0">
+    <div class="container p-0 m-0 rounded-bottom border border-success border-top-0">
+      <br>
+      <!-- Tabs để chọn loại kèo -->
+
+
+      <!-- form để người dùng lên kèo -->
+      <form class="" action="" method="post">
+
+
+        <div class="form-group" >
+          <label for="exampleFormControlTextarea1">Lên kèo</label>
+          <textarea class="form-control" name="license" placeholder="Điều khoản" id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+
+        <!-- Thời gian diễn ra kèo -->
+
+
+
+
+
+        <!-- Các cửa -->
+        <div class="form-group form-group-inline ">
+          <div class="row ">
+            <div class="col-12">
+            <div class="col-12">
+            </div>
           </div>
+        </div>
 
-          <!-- Hình phạt -->
-          <div class="form-group">
-            <label for="">Các gói hình phạt</label>
-            <label class="custom-control custom-radio">
-              <input id="radio1" name="radio" type="radio" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Nhẹ</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input id="radio2" name="radio" type="radio" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Liên quan đến tài chính</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input id="radio3" name="radio" type="radio" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Bẩn bựa</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input id="radio4" name="radio" type="radio" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"><input placeholder="Riêng" type="text" class="form-control" name="" value=""></span>
-            </label>
-          </div>
+        <!-- Khán giả -->
+        <div class="form-group">
+          <input class="form-control" type="text" name="guest" value="" placeholder="Khán giả">
+        </div>
+
+        <!-- Hình phạt -->
+        <div class="form-group">
+          <label for="">Các gói hình phạt</label>
+          <label class="custom-control custom-radio">
+            <input id="radio1" name="radio" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Vận động</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input id="radio2" name="radio" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Tiền Bạc</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input id="radio3" name="radio" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Bẩn bựa</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input id="radio4" name="radio" type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"><input placeholder="Riêng" type="text" class="form-control" name="" value=""></span>
+          </label>
+        </div>
+
+
+        <input type="hidden" name="id" value="{{id}}">
+        <div class="text-center">
+          <input class="btn btn-success btn-lg font-weight-bold float-middle col-md-3" type="submit" name="" value="Tạo kèo">
+        </div>
 
 
 
-
-          <input type="hidden" name="id" value="{{id}}">
-          <input class="btn btn-primary" type="submit" name="" value="Tạo kèo">
-          <br><br><br>
-
-        </form>
-      </div>
-
+      </form>
+    </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>

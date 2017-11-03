@@ -22,21 +22,30 @@
 
     <!-- nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
-      <a class="navbar-brand ml-2" href="/login">
-        Lên kèo
-      </a>
+
+
+      <div class="container">
+        <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
+          Lên kèo
+        </a>
+
+
+
       <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto col-xs-0">
-            <li class="nav-item active  pr-4 mr-4">
-              <form class="form-inline my-2 my-lg-0 ml-auto">
+          <ul class="navbar-nav mr-auto col-xs-0 ">
+            <li class="nav-item active mr-auto pl-4 ml-4">
+              <form class="form-inline my-2 my-lg-0 mr-auto ">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit">Search</button>
               </form>
             </li>
+          </ul>
+          <ul class="navbar-nav ml-auto col-xs-0 ">
+
             <li class="nav-item active  ">
               <br>
             </li>
@@ -46,11 +55,23 @@
             <li class="nav-item active">
               <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/login">Đăng nhập<span class="sr-only"></span></a>
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Đăng Nhập
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+                <br>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout"><span class="nav-item text-dark">Đăng xuất</span></a>
+              </div>
             </li>
+          </ul>
             <br>
           </ul>
+        </div>
         </div>
     </nav>
     <!-- nav _end -->
