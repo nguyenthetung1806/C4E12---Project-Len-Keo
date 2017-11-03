@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Đặt kèo</title>
+  </head>
+  <body>
+
+    <!-- navbar -->
+
+    {% include 'include-template.html' %}
+
+    <br><br>
+
+
+
+    <div class="container col-6 p-0">
+
+        <div class="row">
+          <div class="col-3 m-0 pr-0 ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Truyền thống</a>
+            </div>
+          </div>
+          <div class="col-3 m-0 pl-0 pr-0 ">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Nhiều người</a>
+            </div>
+          </div>
+          <div class="col m-0 pl-0">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="invisible nav-link active border-success border-bottom-0" href="/lenkeo">1</a>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="container col-6 p-0">
+    <div class="container  rounded-bottom border border-success border-top-0">
+      <br>
+      <!-- Tabs để chọn loại kèo -->
+
+
+      <!-- form để người dùng lên kèo -->
+      <form class="" action="" method="post">
+        <div class="form-group">
+          <label for="">Điều khoản</label>
+          <textarea class="form-control" name="contract_term" placeholder="Điền điều khoản kèo của bạn ở đây. Kèo truyền thống phù hợp với các kiểu cá độ đơn giản, với cửa trên và cửa dưới" rows="5" cols="160"></textarea>
+        </div>
+
+
+        <!-- Các cửa -->
+        <div class="form-group">
+          <label class="text-middle" for="">Các bên tham gia</label>
+          <div class="row">
+            <div class="col">
+              <textarea class="form-control" name="party_left" rows="5" placeholder="Cửa trên" cols="70"></textarea>
+            </div>
+            <div class="col">
+              <textarea class="form-control" name="party_right" rows="5" cols="70" placeholder="Cửa dưới"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Khán giả -->
+        <div class="form-group">
+          <label for="">Khản giả</label>
+          <input class="form-control" type="text" name="spectator" value="" placeholder="Hãy thông báo tới một vài người bạn của bạn để họ biết về kèo này">
+        </div>
+
+        <!-- Hình phạt -->
+        <div class="form-group">
+          <label for="">Điều khoản</label>
+          <textarea class="form-control" name="punishment" placeholder="" rows="5" cols="160"></textarea>
+        </div>
+
+
+
+        <input type="hidden" name="_id" value="{{id}}">
+        <input class="btn btn-primary" type="submit" name="" value="Tạo kèo">
+        <br><br><br>
+
+      </form>
+    </div>
+  </body>
+</html>

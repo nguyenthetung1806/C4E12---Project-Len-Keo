@@ -39,7 +39,7 @@
                         </h3>
                   </div>
 
-                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/" method="get">
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/contract.type.1" method="get">
                       <button class="btn btn-success btn-block font-weight-bold btn-lg" type="submit" name="button">
                       <i class="fa fa-bookmark" aria-hidden="true"></i>
                       Lên kèo
@@ -48,7 +48,7 @@
 
 
                     {% if username_url == username %}
-                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/edit.profile/{{username_url}}" method="post">
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/edit.profile/{{username_url}}" method="get">
                       <button class="btn btn-secondary btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         Tùy chỉnh
                       </button>
@@ -66,10 +66,10 @@
                         Hủy lời mời
                       </button>
                     </form>
-                      {% elif username_url in friend_accept_pending %}
+                      {% elif username_url in account.friend_accept_pending %}
                     <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/friend.request/accept/{{username_url}}" method="post">
                       <button class="btn btn-success btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        Chấp nhận kết bạn
+                        Chấp nhận
                       </button>
                     </form>
                       {% else %}
@@ -168,8 +168,8 @@
                     </span><span style="display:inline-block; width: YOURWIDTH;"></span> trước khi hết hạn</h5>
                     <p class=" m-0 p-0 ml-3 ">
                       <span class="text-secondary">Các bên tham gia:</span>
-                      <span><a href="#"><img src="https://www.w3schools.com/howto/img_avatar2.png" height="20px" width="20px" alt=""> stedfw sfdsf f. </a></span>
-                      <span><a href="#"><img src="http://www.andreas-wolters.com/img/avatar.png"  height="20px" width="20px" alt=""> dấđâsđá áđ ử.</a></span>
+                      <span><a href="/profile/taikhoan2"><img src="https://www.w3schools.com/howto/img_avatar2.png" height="20px" width="20px" alt=""> Tai khoan test 1 </a></span>
+                      <span><a href="/profile/taikhoan1"><img src="http://www.andreas-wolters.com/img/avatar.png"  height="20px" width="20px" alt=""> Tai khoan test 2</a></span>
                     </p>
                 </div>
                 <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">

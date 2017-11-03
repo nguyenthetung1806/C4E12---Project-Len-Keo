@@ -35,6 +35,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+
+
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto col-xs-0 ">
             <li class="nav-item active mr-auto pl-4 ml-4">
@@ -46,12 +49,56 @@
           </ul>
           <ul class="navbar-nav ml-auto col-xs-0 ">
 
-            <li class="nav-item active  ">
-              <br>
+
+
+            <li class="nav-item active ">
+              <div class="btn-group">
+                <button type="button" class=" btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class=" fa fa-users font-size-lg" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right ">
+
+
+                  {% if account.friend_accept_pending|length == 0 %}
+                    <span class="col-12 " width= >Không có lời mời kết bạn nào</span>
+                  {% else %}
+                    {% for request in account.friend_accept_pending %}
+                  <span>
+                    <a class="dropdown-item" href="#">{{ request }}</a>
+                  </span>
+                  <a href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    {% endfor %}
+                  {% endif %}
+
+
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Xem chi tiết</a>
+                </div>
+              </div>
+
             </li>
-            <li class="nav-item active  ">
-              <a class="nav-link" href="#">Về chúng tôi<span class="sr-only"></span></a>
+
+
+            <li class="nav-item active">
+              <div class="btn-group">
+                <button type="button" class=" btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bookmark " aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </div>
             </li>
+
+
+
+
             <li class="nav-item active">
               <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
             </li>
@@ -61,7 +108,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Đăng Nhập
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
                 <br>
                 <div class="dropdown-divider"></div>

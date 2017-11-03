@@ -23,6 +23,7 @@ class Account(Document):
     friend_accept_pending = ListField()
     #
     #bet system
+    pending_bet = ListField()
     active_bet = ListField()
     win_bet = ListField()
     lost_bet = ListField()
@@ -149,21 +150,28 @@ def friend_request_method(method, username_url):
     account_other = Account.objects.get(username = username_url)
     url = '/profile/' + username_url
     if method == "delete.friend":
-        account.update(pull__friendlist=account_other.username)
-        account_other.update(pull__friendlist=account.username)
+        account.update(pull__friendlist = account_other.username)
+        account_other.update(pull__friendlist = account.username)
+        return redirect(url)
     elif method == "cancel":
         account.update(pull__friend_request_sent = account_other.username)
         account_other.update(pull__friend_accept_pending = account.username)
+        return redirect(url)
     elif method == "accept":
         account.update(add_to_set__friendlist = account_other.username)
+        account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(add_to_set__friendlist = account.username)
+        account_other.update(pull__friend_request_sent = account.username)
+        return redirect(url)
     elif method == "send.request":
         account.update(add_to_set__friend_request_sent = account_other.username)
         account_other.update(add_to_set__friend_accept_pending = account.username)
-    return redirect(url)
-
-
-
+        return redirect(url)
+    elif method == "decline":
+        account.update(pull__friend_accept_pending = account_other.username)
+        account_other.update(pull__friend_request_sent = account.username)
+        url_self = '/profile/' + username
+        return redirect(url_self)
 
 
     # friendlist = ListField()
@@ -173,13 +181,49 @@ def friend_request_method(method, username_url):
 
 
 
+class Contract_type_1(Document):
+    contract_maker = StringField()
+    contract_term = StringField()
+    party_left = StringField()
+    party_right = StringField()
+    spectator = StringField()
+    punishment = StringField()
 
 
 
+@app.route('/lenkeo', methods=['GET','POST'])
+def ile():
+    return render_template('lenkeo.html')
 
 
-
-
+@app.route('/contract.type.1', methods=['GET','POST'])
+def contract_type_1():
+    username = session['username']
+    account = Account.objects.get(username = username)
+    if request.method == "GET":
+        return render_template('contract_type_1.html', account = account)
+    elif request.method == "POST":
+        form = request.form
+        contract_maker = username
+        contract_term = form['contract_term']
+        party_left = form['party_left']
+        party_right = form['party_right']
+        spectator = form['spectator']
+        punishment = form['punishment']
+        contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
+                                            contract_term = contract_term,
+                                            party_left = party_left,
+                                            party_right = party_right,
+                                            spectator = spectator,
+                                            punishment = punishment)
+        contract_type_1.save()
+        return "ok"
+        #
+        # for player in party_left and party_right:
+        #     player_pending_bet = Account.objects.get(username = player)
+        #     player_pending_bet.update(add_to_set__pending_bet = Contract_type_1.id)
+        # account.update(add_to_set__friend_request_sent = account_other.username)
+        # account_other.update(add_to_set__friend_accept_pending = account.username)
 
 
 @app.route('/logout', methods = ['GET'])
