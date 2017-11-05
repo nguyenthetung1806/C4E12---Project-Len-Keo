@@ -152,7 +152,12 @@
           <div class="form-group">
             <div class="row">
               <div class="col">
-                <textarea class="form-control" name="up" rows="5" placeholder="Cửa trên" cols="70"></textarea>
+                <select class="selectpicker" multiple>
+                {% for friend in friends %}
+                  <option>{{friend}}</option>
+                {% endfor %}
+                </select>
+
               </div>
               <div class="col">
                 <textarea class="form-control" name="down" rows="5" cols="70" placeholder="Cửa dưới"></textarea>
@@ -193,7 +198,6 @@
 
 
 
-          <input type="hidden" name="id1" value="{{id}}">
           <input class="btn btn-primary" type="submit" name="" value="Tạo kèo">
           <br><br><br>
 

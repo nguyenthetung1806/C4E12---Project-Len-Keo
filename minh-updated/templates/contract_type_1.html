@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Đặt kèo</title>
+  </head>
+  <body>
+
+    <!-- navbar -->
+
+    {% include 'include-template.html' %}
+
+    <br><br>
+
+
+
+    <div class="container col-6 p-0">
+
+        <div class="row">
+          <div class="col-3 m-0 pr-0 ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Truyền thống</a>
+            </div>
+          </div>
+          <div class="col-3 m-0 pl-0 pr-0 ">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="nav-link active border-success border-bottom-0" href="/lenkeo">Nhiều người</a>
+            </div>
+          </div>
+          <div class="col m-0 pl-0">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a class="invisible nav-link active border-success border-bottom-0" href="/lenkeo">1</a>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="container col-6 p-0">
+    <div class="container  rounded-bottom border border-success border-top-0">
+      <br>
+      <!-- Tabs để chọn loại kèo -->
+
+
+      <!-- form để người dùng lên kèo -->
+      <form class="" action="" method="post">
+        <div class="form-group">
+          <label for="">Điều khoản</label>
+          <textarea class="form-control" name="contract_term" placeholder="Điền điều khoản kèo của bạn ở đây. Kèo truyền thống phù hợp với các kiểu cá độ đơn giản, với cửa trên và cửa dưới" rows="5" cols="160"></textarea>
+        </div>
+
+
+        <!-- Các cửa -->
+        <div class="form-group">
+          <label class="text-middle" for="">Các bên tham gia</label>
+          <div class="row">
+            <div class="col">
+              <!-- Collapse để thêm bạn bè vào các cửa -->
+            <div id="accordion" role="tablist">
+              <div class="card">
+                <div class="card-header bg-success" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" class="text-light" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Cửa trên
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    {% for friend in account['friendlist'] %}
+                    <div>
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="party_left" value="{{friend}}">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">{{friend}}</span>
+                    </label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!--  -->
+            </div>
+            <div class="col">
+              <div id="accordion" role="tablist">
+                <div class="card">
+                  <div class="card-header bg-success" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                      <a data-toggle="collapse" class="text-light" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Cửa dưới
+                      </a>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      {% for friend in account['friendlist'] %}
+                      <div>
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="party_right" value="{{friend}}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{friend}}</span>
+                      </label>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Khán giả -->
+        <div class="form-group">
+          <label for="">Khản giả</label>
+          <div id="accordion" role="tablist">
+            <div class="card">
+              <div class="card-header bg-success" role="tab" id="headingThree">
+                <h5 class="mb-0">
+                  <a data-toggle="collapse" class="text-light" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Hãy thông báo tới một vài người bạn của bạn để họ biết về kèo này
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  {% for friend in account['friendlist'] %}
+                  <div>
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="spectator" value="{{friend}}">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{friend}}</span>
+                  </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hình phạt -->
+        <div class="form-group">
+          <label for="">Điều khoản</label>
+          <textarea class="form-control" name="punishment" placeholder="" rows="5" cols="160"></textarea>
+        </div>
+
+
+
+        <input type="hidden" name="_id" value="{{id}}">
+        <input class="btn btn-primary" type="submit" name="" value="Tạo kèo">
+        <br><br><br>
+
+      </form>
+    </div>
+  </body>
+</html>

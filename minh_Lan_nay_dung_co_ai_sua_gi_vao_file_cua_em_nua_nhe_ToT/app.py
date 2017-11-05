@@ -7,6 +7,10 @@ app = Flask(__name__)
 
 mlab.connect()
 
+# Cac phan tu trong list:
+class Listjoin(Document):
+    name=StringField()
+
 class Account(Document):
     name=StringField()
     image=StringField()
@@ -14,6 +18,7 @@ class Account(Document):
     password=StringField()
     email=EmailField()
     phone=FloatField()
+    friends=ListField()
 
 class Keo(Document):
     license=StringField()
@@ -28,10 +33,10 @@ class Keo(Document):
     month2=FloatField()
     year2=FloatField()
     join=FloatField()
-    up=StringField()
+    # Dua phan tu vao trong list
+    up=ListField(ReferenceField(Listjoin))
     down=StringField()
     guest=StringField()
-    id1=StringField()
 
 class Keo2(Document):
     license=StringField()
@@ -102,7 +107,8 @@ def login():
 @app.route('/lenkeo', methods=['GET','POST'])
 def lenkeo():
     if request.method=="GET":
-        return render_template('lenkeo.html')
+        friends=Account.objects()
+        return render_template('lenkeo.html',friends=friends)
     elif request.method=="POST":
         form=request.form
         license=form['license']
@@ -120,10 +126,10 @@ def lenkeo():
         up=form['up']
         down=form['down']
         guest=form['guest']
-        id1=form['id1']
-        keo=Keo(license=license,hour1=hour1,minute1=minute1,day1=day1,month1=month1,year1=year1,hour2=hour2,minute2=minute2,day2=day2,month2=month2,year2=year2,join=join,up=up,down=down,guest=guest,id1=id1)
+        keo=Keo(license=license,hour1=hour1,minute1=minute1,day1=day1,month1=month1,year1=year1,hour2=hour2,minute2=minute2,day2=day2,month2=month2,year2=year2,join=join,up=up,down=down,guest=guest)
         keo.save()
-        return "Done!!!"
+        # id1=keo.id
+        return ""
 
 @app.route('/lenkeo2', methods=['GET','POST'])
 def lenkeo2():
@@ -145,7 +151,6 @@ def lenkeo2():
         join=form['join']
         joinlist=form['joinlist']
         guest=form['guest']
-        id1=form['id1']
         keo2=Keo2(license=license,hour1=hour1,minute1=minute1,day1=day1,month1=month1,year1=year1,hour2=hour2,minute2=minute2,day2=day2,month2=month2,year2=year2,join=join,joinlist=joinlist,guest=guest,id1=id1)
         keo2.save()
         return "Done!!!"
