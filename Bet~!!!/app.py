@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 from passlib.hash import sha256_crypt
 import mlab
+from base64 import b64encode
 from bson.objectid import ObjectId
 from mongoengine import *
 
@@ -13,10 +14,10 @@ mlab.connect()
 class Account(Document):
     username = StringField()
     name = StringField()
-    image = FileField()
+    image = StringField()
     password = StringField()
     email = EmailField()
-    phone = FloatField()
+    phone = StringField()
     #friend system
     friendlist = ListField()
     friend_request_sent = ListField()
@@ -27,6 +28,7 @@ class Account(Document):
     active_bet = ListField()
     win_bet = ListField()
     lost_bet = ListField()
+
 
 
 
@@ -48,15 +50,13 @@ def signup():
         username = form['username']
         password = sha256_crypt.encrypt(form['password'])
         name = form['name']
-        image = form['image']
         email = form['email']
-        phone = form['phone']
         try:
             account = Account.objects.get(username=username)
         except Account.DoesNotExist:
             account = None
         if account is None:
-            account = Account(name=name,password=password,username=username,email=email,phone=phone)
+            account = Account(name=name, password=password, username=username, email=email)
             account.save()
             return redirect('/login')
         else:
@@ -98,27 +98,36 @@ def profile(username_url):
     username_url = username_url
     account = Account.objects.get(username = username)
     account_other = Account.objects.get(username = username_url)
-    return render_template('profile.html', account = account, account_other = account_other, username = username, username_url = username_url)
+    bets_to_show = []
+    for bet in account_other.active_bet:
+        bets_to_show.append(Contract_type_1.objects().with_id(bet))
+
+    # dùng để nhét các document player tham gia kèo vào player_to_show []
+    player_usernames = []
+    for element in bets_to_show:
+        for name_user in element.party_left:
+            if name_user not in player_usernames:
+                player_usernames.append(name_user)
+        for name_user in element.party_right:
+            if name_user not in player_usernames:
+                player_usernames.append(name_user)
+    players_to_show = []
+    for username_each in player_usernames:
+            players_to_show.append(Account.objects.get(username = username_each))
+    # xong
+
+    return render_template('profile.html',  account = account,
+                                            account_other = account_other,
+                                            username = username,
+                                            username_url = username_url,
+                                            bets_to_show = bets_to_show,
+                                            players_to_show = players_to_show)
 
 
 
 
 
 
-
-@app.route('/lenkeo', methods=['GET','POST'])
-def lenkeo():
-    if request.method=="GET":
-        return render_template('lenkeo.html')
-    # elif request.method=="POST":
-    #     form=request.form
-
-@app.route('/lenkeo2', methods=['GET','POST'])
-def lenkeo2():
-    if request.method=="GET":
-        return render_template('lenkeo2.html')
-    # elif request.method=="POST":
-    #     form=request.form
 
 
 
@@ -133,11 +142,12 @@ def edit_profile(username_url):
     elif request.method == "POST":
         form = request.form
         name = form['name']
-        image = form['image']
         email = form['email']
         phone = form['phone']
+        image = request.files['image']
+        image = b64encode(image.read())
         account.update(name = name, image = image, email = email, phone = phone)
-        url = '/profile/' + username_url
+        url = '/edit.profile/' + username_url
         return redirect(url)
 
 
@@ -170,8 +180,8 @@ def friend_request_method(method, username_url):
     elif method == "decline":
         account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(pull__friend_request_sent = account.username)
-        url_self = '/profile/' + username
-        return redirect(url_self)
+        return redirect(url)
+
 
 
     # friendlist = ListField()
@@ -188,12 +198,23 @@ class Contract_type_1(Document):
     party_right = StringField()
     spectator = StringField()
     punishment = StringField()
+    winner = ListField()
+    #claim victory
+    victory_claim = StringField()
 
 
 
-@app.route('/lenkeo', methods=['GET','POST'])
-def ile():
-    return render_template('lenkeo.html')
+# for contract in Contract_type_1:
+#     if contract.victory_claim in party_left:
+
+
+
+@app.route('/claim.victory/<username>/<contract_id>', methods=['GET','POST'])
+def claim_victory(username,contract_id):
+    contract_type_1 = Contract_type_1.objects().with_id(contract_id)
+    contract_type_1.update(add_to_set__victory_claim = username)
+    url = '/profile/' + username
+    return redirect(url)
 
 
 @app.route('/contract.type.1', methods=['GET','POST'])
@@ -217,6 +238,7 @@ def contract_type_1():
                                             spectator = spectator,
                                             punishment = punishment)
         contract_type_1.save()
+        account.update(add_to_set__active_bet = str(contract_type_1.id))
         return "ok"
         #
         # for player in party_left and party_right:

@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/signup', methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template('signup.html')
+        return render_template('b64.html')
     elif request.method == "POST":
         form = request.form
         name = form['name']
