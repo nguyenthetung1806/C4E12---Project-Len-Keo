@@ -58,10 +58,58 @@
           <label class="text-middle" for="">Các bên tham gia</label>
           <div class="row">
             <div class="col">
-              <textarea class="form-control" name="party_left" rows="5" placeholder="Cửa trên" cols="70"></textarea>
+              <!-- Collapse để thêm bạn bè vào các cửa -->
+            <div id="accordion" role="tablist">
+              <div class="card">
+                <div class="card-header bg-success" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" class="text-light" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Cửa trên
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    {% for friend in account['friendlist'] %}
+                    <div>
+                    <label class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" name="party_left" value="{{friend}}">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">{{friend}}</span>
+                    </label>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!--  -->
             </div>
             <div class="col">
-              <textarea class="form-control" name="party_right" rows="5" cols="70" placeholder="Cửa dưới"></textarea>
+              <div id="accordion" role="tablist">
+                <div class="card">
+                  <div class="card-header bg-success" role="tab" id="headingTwo">
+                    <h5 class="mb-0">
+                      <a data-toggle="collapse" class="text-light" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Cửa dưới
+                      </a>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      {% for friend in account['friendlist'] %}
+                      <div>
+                      <label class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="party_right" value="{{friend}}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{friend}}</span>
+                      </label>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -69,7 +117,30 @@
         <!-- Khán giả -->
         <div class="form-group">
           <label for="">Khản giả</label>
-          <input class="form-control" type="text" name="spectator" value="" placeholder="Hãy thông báo tới một vài người bạn của bạn để họ biết về kèo này">
+          <div id="accordion" role="tablist">
+            <div class="card">
+              <div class="card-header bg-success" role="tab" id="headingThree">
+                <h5 class="mb-0">
+                  <a data-toggle="collapse" class="text-light" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Hãy thông báo tới một vài người bạn của bạn để họ biết về kèo này
+                  </a>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  {% for friend in account['friendlist'] %}
+                  <div>
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="spectator" value="{{friend}}">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{ friend }}</span>
+                  </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Hình phạt -->

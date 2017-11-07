@@ -231,6 +231,8 @@ def contract_type_1():
         party_right = form['party_right']
         spectator = form['spectator']
         punishment = form['punishment']
+        # print(party_left)
+        # return ""
         contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
                                             contract_term = contract_term,
                                             party_left = party_left,
@@ -239,7 +241,8 @@ def contract_type_1():
                                             punishment = punishment)
         contract_type_1.save()
         account.update(add_to_set__active_bet = str(contract_type_1.id))
-        return "ok"
+        url = '/profile/' + username
+        return redirect(url)
         #
         # for player in party_left and party_right:
         #     player_pending_bet = Account.objects.get(username = player)
