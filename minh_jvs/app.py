@@ -42,10 +42,11 @@ def index():
 def signup():
     if request.method == "GET":
         prompt=0
-        return render_template('signup.html',prompt=prompt)
+        return render_template('signup.html',prompt=prompt,usn="",psw="",nm="",eml="")
     elif request.method == "POST":
         form = request.form
         username = form['username']
+        password1=form['password']
         password = sha256_crypt.encrypt(form['password'])
         name = form['name']
         email = form['email']
@@ -59,7 +60,7 @@ def signup():
             return redirect('/login')
         else:
             prompt=1
-            return render_template('signup.html',prompt=prompt)
+            return render_template('signup.html',prompt=prompt,usn=username,psw=password1,nm=name,eml=email)
             # message = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác"
             # return render_template('message.html', message = message)
 
@@ -69,7 +70,7 @@ def signup():
 def login():
     if request.method == "GET":
         prompt=0
-        return render_template('login.html',prompt=prompt)
+        return render_template('login.html',prompt=prompt,usn="",psw="")
     elif request.method == "POST":
         form = request.form
         username = form['username']
@@ -81,7 +82,7 @@ def login():
         if account is None:
             prompt=1
             # message = "Tài khoản không tồn tại"
-            return render_template('login.html', prompt = prompt)
+            return render_template('login.html', prompt = prompt,usn=username,psw=password)
         else:
             if sha256_crypt.verify(password, account.password) == True:
                 session["username"] = account.username
@@ -90,7 +91,7 @@ def login():
             else:
                 # message = "Sai mật khẩu"
                 prompt=2
-                return render_template('login.html', prompt = prompt)
+                return render_template('login.html', prompt = prompt,usn=username,psw=password)
 
 
 
