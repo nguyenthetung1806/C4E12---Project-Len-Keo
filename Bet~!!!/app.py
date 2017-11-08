@@ -33,9 +33,6 @@ class Account(Document):
 
 
 
-
-
-
 @app.route('/')
 def index():
     return render_template('homepage.html')
@@ -111,6 +108,9 @@ def profile(username_url):
         for name_user in element.party_right:
             if name_user not in player_usernames:
                 player_usernames.append(name_user)
+        for name_user in element.party_multiplayers:
+            if name_user not in player_usernames:
+                player_usernames.append(name_user)
     players_to_show = []
     for username_each in player_usernames:
             players_to_show.append(Account.objects.get(username = username_each))
@@ -126,14 +126,6 @@ def profile(username_url):
 
 
 
-
-
-
-
-
-
-
-
 @app.route('/edit.profile/<username_url>', methods=['GET','POST'])
 def edit_profile(username_url):
     account = Account.objects.get(username = username_url)
@@ -145,7 +137,7 @@ def edit_profile(username_url):
         email = form['email']
         phone = form['phone']
         image = request.files['image']
-        image = b64encode(image.read())
+        image = b64encode(image.read()).decode("utf-8")
         account.update(name = name, image = image, email = email, phone = phone)
         url = '/edit.profile/' + username_url
         return redirect(url)
@@ -194,14 +186,19 @@ def friend_request_method(method, username_url):
 class Contract_type_1(Document):
     contract_maker = StringField()
     contract_term = StringField()
-    party_left = StringField()
-    party_right = StringField()
-    spectator = StringField()
+    #traditional\
+    party_left = ListField()
+    party_right = ListField()
+    #multiparty
+    party_multiplayers = ListField()
+    number_of_winner = StringField()
+    #
+    spectator = ListField()
     punishment = StringField()
-    winner = ListField()
     #claim victory
     victory_claim = StringField()
-
+    winner = ListField()
+    loser  = ListField()
 
 
 # for contract in Contract_type_1:
@@ -217,32 +214,55 @@ def claim_victory(username,contract_id):
     return redirect(url)
 
 
-@app.route('/contract.type.1', methods=['GET','POST'])
-def contract_type_1():
+@app.route('/contract.type.1/<contract_class>', methods=['GET','POST'])
+def contract_type_1(contract_class):
     username = session['username']
     account = Account.objects.get(username = username)
+
+    friendlist_information = []
+    for friend in account.friendlist:
+        friendlist_information.append(Account.objects().get(username = friend))
     if request.method == "GET":
-        return render_template('contract_type_1.html', account = account)
+        if contract_class == "traditional":
+            return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information)
+        elif contract_class == "multiparty":
+            return render_template('contract_type_1_multiparty.html', account = account, friendlist_information = friendlist_information)
     elif request.method == "POST":
         form = request.form
-        contract_maker = username
-        contract_term = form['contract_term']
-        party_left = form['party_left']
-        party_right = form['party_right']
-        spectator = form['spectator']
-        punishment = form['punishment']
-        # print(party_left)
-        # return ""
-        contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
-                                            contract_term = contract_term,
-                                            party_left = party_left,
-                                            party_right = party_right,
-                                            spectator = spectator,
-                                            punishment = punishment)
-        contract_type_1.save()
-        account.update(add_to_set__active_bet = str(contract_type_1.id))
-        url = '/profile/' + username
-        return redirect(url)
+        if contract_class == "traditional":
+            contract_maker = username
+            contract_term = form['contract_term']
+            party_right = form.getlist('party_right')
+            party_left = form.getlist('party_left')
+            spectator = form.getlist('spectator')
+            punishment = form['punishment']
+            contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
+                                                contract_term = contract_term,
+                                                party_left = party_left,
+                                                party_right = party_right,
+                                                spectator = spectator,
+                                                punishment = punishment)
+            contract_type_1.save()
+            account.update(add_to_set__active_bet = str(contract_type_1.id))
+            url = '/profile/' + username
+            return redirect(url)
+        elif contract_class == "multiparty":
+            contract_maker = username
+            contract_term = form['contract_term']
+            party_multiplayers = form.getlist('party_multiplayers')
+            number_of_winner = form['number_of_winner']
+            spectator = form.getlist('spectator')
+            punishment = form['punishment']
+            contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
+                                                contract_term = contract_term,
+                                                party_multiplayers = party_multiplayers,
+                                                number_of_winner = number_of_winner,
+                                                spectator = spectator,
+                                                punishment = punishment)
+            contract_type_1.save()
+            account.update(add_to_set__active_bet = str(contract_type_1.id))
+            url = '/profile/' + username
+            return redirect(url)
         #
         # for player in party_left and party_right:
         #     player_pending_bet = Account.objects.get(username = player)

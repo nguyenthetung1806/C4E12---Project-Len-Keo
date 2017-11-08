@@ -45,3 +45,13 @@ button {
         font-weight: bold;
         font-size: 30px;
 }
+#footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+}
+
+img{
+  object-fit: cover;
+}
