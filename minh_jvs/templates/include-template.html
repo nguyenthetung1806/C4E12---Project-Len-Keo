@@ -21,7 +21,7 @@
 
 
     <!-- nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
 
 
       <div class="container">
@@ -51,10 +51,10 @@
 
 
 
-            <li class="nav-item active ">
-              <div class="btn-group">
-                <button type="button" class=" btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class=" fa fa-users font-size-lg" aria-hidden="true"></i>
+            <li class="nav-item active rounded  p-0 ">
+              <div class="btn-group rounded p-0 m-0" >
+                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right ">
 
@@ -81,12 +81,12 @@
             </li>
 
 
-            <li class="nav-item active">
-              <div class="btn-group">
-                <button type="button" class=" btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-bookmark " aria-hidden="true"></i>
+            <li class="nav-item active rounded p-0">
+              <div class="btn-group rounded p-0 m-0" >
+                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i>
                 </button>
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-right rounded">
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
@@ -99,21 +99,28 @@
 
 
 
-            <li class="nav-item active">
-              <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
+            <li class="ml-4 nav-item active mr-2">
+              <a class="nav-link" href="/information">Về chúng tôi<span class="sr-only"></span></a>
             </li>
 
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Đăng Nhập
+            <li class="nav-item active dropdown font-size-lg">
+              <a class="nav-link dropdown-toggle" href="/profile/{{account.username}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Thao tác
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                <i class="fa fa-tasks" aria-hidden="true"></i>
               </a>
-              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Chỉnh sửa thông tin</a>
+              <div class="dropdown-menu dropdown-menu-right rounded  text-right " aria-labelledby="navbarDropdown">
+                <br>
+                <a class="dropdown-item" href="#">Cài đặt</a>
+
                 <br>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout"><span class="nav-item text-dark">Đăng xuất</span></a>
               </div>
+
+
+
             </li>
           </ul>
             <br>
@@ -122,7 +129,11 @@
         </div>
     </nav>
     <!-- nav _end -->
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
+      <a class="navbar-brand ml-2" href="http://127.0.0.1:5000/">
+        Lên kèo
+      </a>
+    </nav>
 
 
 
