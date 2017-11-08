@@ -41,7 +41,8 @@ def index():
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method == "GET":
-        return render_template('signup.html')
+        prompt=0
+        return render_template('signup.html',prompt=prompt)
     elif request.method == "POST":
         form = request.form
         username = form['username']
@@ -57,15 +58,18 @@ def signup():
             account.save()
             return redirect('/login')
         else:
-            message = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác"
-            return render_template('message.html', message = message)
+            prompt=1
+            return render_template('signup.html',prompt=prompt)
+            # message = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác"
+            # return render_template('message.html', message = message)
 
 
 
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
-        return render_template('login.html')
+        prompt=0
+        return render_template('login.html',prompt=prompt)
     elif request.method == "POST":
         form = request.form
         username = form['username']
@@ -75,16 +79,18 @@ def login():
         except Account.DoesNotExist:
             account = None
         if account is None:
-            message = "Tài khoản không tồn tại"
-            return render_template('message.html', message = message)
+            prompt=1
+            # message = "Tài khoản không tồn tại"
+            return render_template('login.html', prompt = prompt)
         else:
             if sha256_crypt.verify(password, account.password) == True:
                 session["username"] = account.username
                 url = "/profile/" + account.username
                 return redirect(url)
             else:
-                message = "Sai mật khẩu"
-                return render_template('message.html', message = message)
+                # message = "Sai mật khẩu"
+                prompt=2
+                return render_template('login.html', prompt = prompt)
 
 
 
