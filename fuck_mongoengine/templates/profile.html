@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% include 'include-template.html' %}
+
+
+
+        <div class="container mt-3">
+          <div class="row pl-2">
+
+
+            <div class="col-sm text-light col-sm-5 pr-4">
+              <!--One of two columns-->
+
+              <div class="row">
+                <div class="col-sm-7 col-8 bg-light p-4 mb-2 border border-success rounded centered mx-auto d-block" >
+                <!--image -->
+
+                  {% if account.image is none %}
+                  <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="230px" alt="Ảnh đại diện">
+                  {% else %}
+                  <img class=" img-responsive card-img-top" src="data:image/*;base64,{{account.image}}" height="230px" alt="Ảnh đại diện">
+                  {% endif %}
+
+                <!--image end_ -->
+                </div>
+                <div class="col-sm-5 col-xs-12 pr-1 mb-2">
+                <!--button -->
+                <div class="col p-0 m-0">
+
+                  <div class="col p-0 m-0 mt-2 mb-3 align-middle text-center">
+                        <h3 class="text-success font-weight-bold ">
+                          {% if username_url == username %}                  <!--add account here -->
+                          {{ account.name }}
+                          {% else %}
+                          {{ account_other.name }}
+                          {% endif%}
+                        </h3>
+                  </div>
+
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/contract.type.1/traditional" method="get">
+                      <button class="btn btn-success btn-block font-weight-bold btn-lg" type="submit" name="">
+                      <i class="fa fa-bookmark" aria-hidden="true"></i>
+                      Lên kèo
+                    </button>
+                    </form>
+
+                    <!-- cơ chế kết bạn -->
+                    {% if username_url == username %}
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/edit.profile/{{username_url}}" method="get">
+                      <button class="btn btn-secondary btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Tùy chỉnh
+                      </button>
+                    </form>
+                    {% else %}
+                      {% if username_url in account.friendlist %}
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/friend.request/delete.friend/{{username_url}}" method="post">
+                      <button class="btn btn-danger btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Hủy kết bạn
+                      </button>
+                    </form>
+                      {% elif username_url in account.friend_request_sent %}
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/friend.request/cancel/{{username_url}}" method="post">
+                      <button class="btn btn-danger btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Hủy lời mời
+                      </button>
+                    </form>
+                      {% elif username_url in account.friend_accept_pending %}
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/friend.request/accept/{{username_url}}" method="post">
+                      <button class="btn btn-success btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Chấp nhận
+                      </button>
+                    </form>
+                      {% else %}
+                    <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/friend.request/send.request/{{username_url}}" method="post">
+                      <button class="btn btn-success btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Kết bạn
+                      </button>
+                    </form>
+                      {% endif %}
+                    {% endif %}
+                    <!-- cơ chế kết bạn end_ -->
+                </div>
+
+                <!--button end_ -->
+                </div>
+              </div>
+
+              <div class="row rounded bg-light border border-success rounded">
+              <!--medal-->
+
+                <div class="col col-6 p-0 pt-1 pl-1" >
+                  <!--first medal-->
+                  <div class="card m-2 bg-success">
+                    <div class="card-body p-2 text-center">
+                      <h5 class="card-title mb-2">Số lần thắng:</h5>
+                      <div class="card-text text-center font-weight-bold " >
+                        <h3 class="">
+                          {{ account_other.win_bet|length }}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div class="card-body p-2 ml-1 mr-1 rounded bg-light text-center">
+                      afffffffffffffffffffffffff
+                      <br><br><br><br>
+                    </div>
+
+                    <div class="card-footer text-right font-weight-bold pr-3 pb-3 p-2">
+                      <a class=" text-white" href="#">Xem chi tiết</a>
+                    </div>
+                  </div>
+
+                  <!--first medal end_-->
+                </div>
+
+
+
+                <div class="col col-6 p-0 pt-1 pr-1">
+                  <!--second medal-->
+                  <div class="card m-2 bg-danger">
+                    <div class="card-body p-2 text-center">
+                      <h5 class="card-title mb-2">Số lần thua:</h5>
+                      <div class="card-text text-center font-weight-bold" >
+                        <div class="card-text text-center font-weight-bold " >
+                          <h3 class="">
+                            {{ account_other.lost_bet|length }}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-body p-2 ml-1 mr-1 rounded bg-light text-center">
+                      afffffffffffffffffffffffff
+                      <br><br><br><br>
+                    </div>
+
+                    <div class="card-footer text-right font-weight-bold pr-3 pb-3 p-2">
+                      <a class=" text-white" href="#">Xem chi tiết</a>
+                    </div>
+                  </div>
+
+                  <!--second medal end_-->
+                </div>
+
+              <!--medal end_-->
+              </div>
+
+              <!--One of two columns end_-->
+            </div>
+            <div class="col-sm bg-light text-light col-sm-7 rounded-top pl-2 pr-2">
+            <!--One of two columns-->
+            <div class="font-weight-bold text-success m-0 m-3 text-right">
+              <h3 class="Montserrat font-weight-bold font-size-lg">Active bet</h3>
+            </div>
+
+
+
+
+            <!-- 1 display bet -->
+            {% if bets_to_show|length == 0 %}
+            {% if username == username_url %}
+            <div class="">
+              <div class="card m-0 p-0 mb-4" >
+                <div class="card-body text-dark p-2 pb-0 mb-0 text-center">
+              Hiện tại bạn không có kèo nào đang hoạt động
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="">
+              <div class="card m-0 p-0 mb-4" >
+                <div class="card-body text-dark p-2 pb-0 mb-0 text-center">
+              Hiện tại người dùng này không có kèo nào đang hoạt động
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% else %}
+            {% for bet in bets_to_show %}
+            <div class="">
+              <div class="card m-0 p-0 mb-4 border-success" >
+                <div class="card-body text-dark p-2 pb-0 mb-0">
+                  <h5 class="card-title text-secondary font-weight-bold m-0 mb-1 ml-3 "><span class="text-success">Còn: <span style="display:inline-block; width: YOURWIDTH;"></span></span>
+                    <span class="text-dark " id="clock">
+                      10 ngày : 12 tiếng : 15 phút
+                    </span><span style="display:inline-block; width: YOURWIDTH;"></span>trước khi <br> giao kèo hết hạn</h5>
+
+                    <!-- danh sách người tham gia -->
+                    {% if bet.party_multiplayers|length == 0 %}
+                    <!-- bet traditional -->
+                    <p class=" m-0 p-0 ml-3 ">
+                      <span class="text-secondary">Cửa trên:</span>
+                      {% for player_right in bet.party_right %}
+                        {% for player_render in players_to_show %}
+                          {% if player_render.username == player_right %}
+                      <span>
+                        <a href="/profile/{{ player_right }}">
+                            {% if player_render.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                            {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                            {% endif %}
+                          {{ player_render.name }}
+                        </a></span>
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+
+
+
+                      <span class="text-secondary">Cửa dưới:</span>
+                      {% for player_left in bet.party_left %}
+                        {% for player_render in players_to_show %}
+                          {% if player_render.username == player_left %}
+                      <span>
+                        <a href="/profile/{{ player_left }}">
+                            {% if player_render.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                            {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                            {% endif %}
+                          {{ player_render.name }}
+                        </a></span>
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+
+
+                    </p>
+                    <!-- bet traditional end_ -->
+                    {% else %}
+                    <!-- bet multipartry_ -->
+                    <p class=" m-0 p-0 ml-3 ">
+                      <span class="text-secondary">Các bên tham gia:</span>
+                      {% for player_multiparty in bet.party_multiplayers %}
+                        {% for player_render in players_to_show %}
+                          {% if player_render.username == player_multiparty %}
+                      <span>
+                        <a href="/profile/{{ player_multiparty }}">
+                            {% if player_render.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                            {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                            {% endif %}
+                          {{ player_render.name }}
+                        </a></span>
+                      <span>
+                          {%  endif %}
+                        {% endfor %}
+                      {% endfor %}
+                    </p>
+                      <!-- bet multiparty end_ -->
+                    {% endif %}
+
+
+                    <!-- danh sách người tham gia end_ -->
+
+                    <!-- danh sách pending -->
+
+                    {% if bet.party_right_pending|length != 0 or bet.party_left_pending|length != 0 or bet.party_multiplayers_pending|length != 0 %}
+                    <p class=" m-0 p-0 ml-3 ">
+                    <span class="text-secondary">Chờ xác nhận: </span>
+                    {% for player_right in bet.party_right_pending or bet.party_left_pending or bet.party_multiplayers_pending %}
+                      {% for player_render in players_to_show %}
+                        {% if player_render.username == player_right %}
+                    <span>
+                      <a href="/profile/{{ player_right }}">
+                          {% if player_render.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        {{ player_render.name }}
+                      </a></span>
+                    <span>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                    </p>
+                    {% endif %}
+
+                    <!-- danh sách pending end_ -->
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">
+
+                  <p class="card-text text-dark mb-0">
+                    {{  bet.contract_term }}
+                  </p>
+                  <p class="card-text text-dark mb-0">
+                    <span class="font-weight-bold text-danger"> Hình phạt cho bên thua: </span>
+                    <span>
+                      {{  bet.punishment }}
+                     </span>
+                  </p>
+                </div>
+                <div class="card-body text-left m-0 p-0 pl-4 pb-2">
+                  <a class="text-right text-secondary" href="contract/{{bet.id}}"><i class="fa fa-info" aria-hidden="true"></i> Xem chi tiết </a>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <a class="text-right text-success" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Tham gia</a>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <!-- claim_victory -->
+                  {% if username in bet.party_left or username in bet.party_right or username in bet.party_multiplayers %}
+                  <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}"><i class="fa fa-trophy" aria-hidden="true"></i> Claim victory</a>
+                  {% endif %}
+
+                  <span class=" font-weight-bold text-right float-right text-secondary mr-4"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình luận</span>
+                </div>
+
+                <div class="card-footer text-right font-weight-bold pr-3 pb-3 p-2">
+
+                  <div class="bg-white ml-4 mr-3 mb-2">
+                      ádsađâsdsa
+                  </div>
+                  <a href="#" class="btn btn-sm btn-success float-right mr-2">Gửi bình luận</a>
+                </div>
+              </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% endif%}
+            <!-- 1 display bet end_-->
+
+
+
+
+
+            <!--One of two columns end_-->
+
+            </div>
+          </div>
+        </div>
+
+
+
+  </body>
+</html>
