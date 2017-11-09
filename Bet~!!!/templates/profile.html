@@ -49,7 +49,7 @@
                     </button>
                     </form>
 
-
+                    <!-- cơ chế kết bạn -->
                     {% if username_url == username %}
                     <form class="col-md col-6 d-flex align-items-center mb-3 mx-auto d-block" action="/edit.profile/{{username_url}}" method="get">
                       <button class="btn btn-secondary btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -83,7 +83,7 @@
                     </form>
                       {% endif %}
                     {% endif %}
-
+                    <!-- cơ chế kết bạn end_ -->
                 </div>
 
                 <!--button end_ -->
@@ -152,13 +152,13 @@
 
               <!--One of two columns end_-->
             </div>
-
-
             <div class="col-sm bg-light text-light col-sm-7 rounded-top pl-2 pr-2">
             <!--One of two columns-->
             <div class="font-weight-bold text-success m-0 m-3 text-right">
               <h3 class="Montserrat font-weight-bold font-size-lg">Active bet</h3>
             </div>
+
+
 
 
             <!-- 1 display bet -->
@@ -207,10 +207,12 @@
                             {% endif %}
                           {{ player_render.name }}
                         </a></span>
-                      <span>
                           {% endif %}
                         {% endfor %}
                       {% endfor %}
+
+
+
                       <span class="text-secondary">Cửa dưới:</span>
                       {% for player_left in bet.party_left %}
                         {% for player_render in players_to_show %}
@@ -224,10 +226,11 @@
                             {% endif %}
                           {{ player_render.name }}
                         </a></span>
-                      <span>
                           {% endif %}
                         {% endfor %}
                       {% endfor %}
+
+
                     </p>
                     <!-- bet traditional end_ -->
                     {% else %}
@@ -250,11 +253,47 @@
                           {%  endif %}
                         {% endfor %}
                       {% endfor %}
+                    </p>
                       <!-- bet multiparty end_ -->
                     {% endif %}
-                    </p>
+
 
                     <!-- danh sách người tham gia end_ -->
+
+                    <!-- danh sách pending -->
+
+                    {% if bet.party_right_pending|length != 0 or bet.party_left_pending|length != 0 or bet.party_multiplayers_pending|length != 0 %}
+                    <p class=" m-0 p-0 ml-3 ">
+                    <span class="text-secondary">Chờ xác nhận: </span>
+                    {% for player_right in bet.party_right_pending or bet.party_left_pending or bet.party_multiplayers_pending %}
+                      {% for player_render in players_to_show %}
+                        {% if player_render.username == player_right %}
+                    <span>
+                      <a href="/profile/{{ player_right }}">
+                          {% if player_render.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        {{ player_render.name }}
+                      </a></span>
+                    <span>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                    </p>
+                    {% endif %}
+
+                    <!-- danh sách pending end_ -->
+
+
+
+
+
+
+
+
+
 
                 </div>
                 <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">
@@ -263,7 +302,7 @@
                     {{  bet.contract_term }}
                   </p>
                   <p class="card-text text-dark mb-0">
-                    <span class="font-weight-bold text-danger"> Điều kiện cho bên thua: </span>
+                    <span class="font-weight-bold text-danger"> Hình phạt cho bên thua: </span>
                     <span>
                       {{  bet.punishment }}
                      </span>
@@ -277,11 +316,11 @@
                   <span style="display:inline-block; width: YOURWIDTH;"></span>
                   <span style="display:inline-block; width: YOURWIDTH;"></span>
                   <!-- claim_victory -->
-                  {% if username in bet.party_left or username in bet.party_right or username in bet.multiparty %}
+                  {% if username in bet.party_left or username in bet.party_right or username in bet.party_multiplayers %}
                   <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}"><i class="fa fa-trophy" aria-hidden="true"></i> Claim victory</a>
                   {% endif %}
 
-                  <span class=" font-weight-bold text-right float-right text-secondary mr-4"><i class="fa fa-comments-o" aria-hidden="true"></i> Comment</span>
+                  <span class=" font-weight-bold text-right float-right text-secondary mr-4"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình luận</span>
                 </div>
 
                 <div class="card-footer text-right font-weight-bold pr-3 pb-3 p-2">
@@ -289,7 +328,7 @@
                   <div class="bg-white ml-4 mr-3 mb-2">
                       ádsađâsdsa
                   </div>
-                  <a href="#" class="btn btn-sm btn-success float-right mr-2">Bình luận</a>
+                  <a href="#" class="btn btn-sm btn-success float-right mr-2">Gửi bình luận</a>
                 </div>
               </div>
             </div>
@@ -298,54 +337,6 @@
             {% endif%}
             <!-- 1 display bet end_-->
 
-            <!-- 1 display bet -->
-            <div class="">
-              <div class="card m-0 p-0" >
-                <div class="card-body text-dark p-2 pb-0 mb-0">
-                  <h5 class="card-title text-secondary font-weight-bold m-0 ml-3 "><span class="text-success">Còn: <span style="display:inline-block; width: YOURWIDTH;"></span></span>
-                    <span class="text-dark" id="clock">
-                      10 ngày : 12 tiếng : 15 phút
-                    </span><span style="display:inline-block; width: YOURWIDTH;"></span> trước khi hết hạn</h5>
-                    <p class=" m-0 p-0 ml-3 ">
-                      <span class="text-secondary">Các bên tham gia:</span>
-                      <span><a href="#"><img src="https://www.w3schools.com/howto/img_avatar2.png" height="20px" width="20px" alt=""> stedfw sfdsf f. </a></span>
-                      <span><a href="#"><img src="http://www.andreas-wolters.com/img/avatar.png"  height="20px" width="20px" alt=""> dấđâsđá áđ ử.</a></span>
-                    </p>
-                </div>
-                <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">
-
-                  <p class="card-text text-dark mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  <p class="card-text text-dark mb-0">
-                    <span class="font-weight-bold text-danger"> Điều kiện cho bên thua: </span>
-                    <span> m sự từ một thành viên đã gắn bó y đầu tiên. Công ty chị làà một trong 2 công ty ủng hộ chúng tôi sớm nhất, với việc thuê tới 2 phòng làm </span>
-                  </p>
-                </div>
-                <div class="card-body text-left m-0 p-0 pl-4 pb-2">
-                  <a class="text-right text-secondary" href="#"><i class="fa fa-info" aria-hidden="true"></i> Xem chi tiết </a>
-                  <span style="display:inline-block; width: YOURWIDTH;"></span>
-                  <span style="display:inline-block; width: YOURWIDTH;"></span>
-                  <a class="text-right text-success" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Tham gia</a>
-
-
-                </div>
-
-
-                </div>
-
-
-
-
-                <div class="card-footer text-right font-weight-bold pr-3 pb-3 p-2">
-                  <p class="text-secondary mb-1 pr-3"><i class="fa fa-comments-o" aria-hidden="true"></i> Comment</p>
-                  <div class="bg-white ml-4 mr-3 mb-2">
-                      ádsađâsdsa
-                  </div>
-                  <a href="#" class="btn btn-sm btn-success float-right mr-2">Bình luận</a>
-                </div>
-              </div>
-            </div>
-            <br>
-            <!-- 1 display bet end_-->
 
 
 
@@ -355,22 +346,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

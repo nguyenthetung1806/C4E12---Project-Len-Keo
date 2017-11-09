@@ -87,9 +87,30 @@
                   <i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right rounded">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+
+
+                  {% if account.pending_bet|length != 0 or account.other_claiming_winner_bets|length != 0 %}
+                    {% for noti in account.pending_bet %}
+                  <span>
+                    <a class="dropdown-item" href="#">{{ noti }}</a>
+                  </span>
+                  <a href="/bet.request/accept/{ {noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/bet.request/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      {% endfor %}
+                      {% for noti in account.other_claiming_winner_bets %}
+                    <span>
+                      <a class="dropdown-item" href="#">Win claim {{ noti }}</a>
+                    </span>
+                    <a href="/bet.vote.victory/accept/{{ noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a href="/bet.vote.victory/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      {% endfor %}
+                    {% else %}
+                    <span class="col-12 " width= >Không có thông báo nào</span>
+                  {% endif %}
+
+
+
+
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="#">Separated link</a>
                 </div>
