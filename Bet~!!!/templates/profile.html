@@ -2,7 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>
+      {% if username_url == username %}
+      {{ account.name }}
+      {% else %}
+      {{ account_other.name }}
+      {% endif %}
+    </title>
   </head>
   <body>
     {% include 'include-template.html' %}
