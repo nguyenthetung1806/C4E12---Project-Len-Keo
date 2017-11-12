@@ -147,10 +147,11 @@ def profile(username_url):
 
 @app.route('/edit.profile/<username_url>', methods=['GET','POST'])
 def edit_profile(username_url):
-    hints = Account.objects()
+
 
     account = Account.objects.get(username = username_url)
     if request.method == "GET":
+        hints = Account.objects()
         return render_template('edit_profile.html', account = account, hints=hints)
     elif request.method == "POST":
         form = request.form
@@ -236,7 +237,6 @@ class Contract_type_1(Document):
 
 @app.route('/contract.type.1/<contract_class>', methods=['GET','POST'])
 def contract_type_1(contract_class):
-    hints = Account.objects()
 
     username = session['username']
     account = Account.objects.get(username = username)
@@ -245,6 +245,7 @@ def contract_type_1(contract_class):
     for friend in account.friendlist:
         friendlist_information.append(Account.objects().get(username = friend))
     if request.method == "GET":
+        hints = Account.objects()
         if contract_class == "traditional":
             return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information, hints=hints)
         elif contract_class == "multiparty":
