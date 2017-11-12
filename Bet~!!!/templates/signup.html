@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
   </head>
 
   <body>
@@ -57,38 +58,44 @@
       <div class="d-flex justify-content-center align-items-center">
         <div class="card col-md-7">
           <div class="card-body">
-            <form class="" action="" method="post">
+            <form name="frm" class="" action="" method="post">
               <div class="form-group font-weight-bold">
                 <label for="">Tên đăng nhập</label>
-                <input class="form-control" type="text" name="username" value="" required>
+                <input class="form-control" type="text" name="username" value="{{usn}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
                 <label for="">Mật khẩu</label>
-                <input class="form-control" type="password" name="password" value="" required>
+                <input class="form-control" type="password" name="password" value="{{psw}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
                 <label for="">Tên người dùng</label>
-                <input class="form-control" type="text" name="name" value="" required>
+                <input class="form-control" type="text" name="name" value="{{nm}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
                 <label for="">Email</label>
-                <input class="form-control" type="email" name="email" value="">
+                <input class="form-control" type="email" name="email" value="{{eml}}">
               </div>
 
               <div class="d-flex justify-content-end align-items-center mt-4 ">
                   <input class="btn btn-success btn-lg pl-4 pr-4 " type="submit" name="" value="Đăng ký">
               </div>
+              <input type="hidden" name="hid" value="{{prompt}}">
 
             </form>
           </div>
         </div>
+      </div>
     </div>
-</div>
 
 
+    <script type="text/javascript">
+      if (document.frm.hid.value=="1") {
+        alert("Tên đăng nhập đã tồn tại, vui lòng chọn tên khác");
+      }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
