@@ -20,7 +20,7 @@ class Account(Document):
     name = StringField()
     image = StringField()
     password = StringField()
-    email = StringField()
+    email = EmailField()
     phone = StringField()
     #friend system
     friendlist = ListField()
@@ -39,13 +39,11 @@ class Account(Document):
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method == "GET":
-        prompt=0
-        return render_template('signup.html',prompt=prompt,usn="",psw="",nm="",eml="")
+        return render_template('signup.html')
     elif request.method == "POST":
         form = request.form
         username = form['username']
-        password1=form['password']
-        password = sha256_crypt.encrypt(password1)
+        password = sha256_crypt.encrypt(form['password'])
         name = form['name']
         email = form['email']
         try:
@@ -57,16 +55,15 @@ def signup():
             account.save()
             return redirect('/login')
         else:
-            prompt=1
-            return render_template('signup.html',prompt=prompt,usn=username,psw=password1,nm=name,eml=email)
+            message = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác"
+            return render_template('message.html', message = message)
 
 
 
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
-        prompt=0
-        return render_template('login.html',prompt=prompt,usn="",psw="")
+        return render_template('login.html')
     elif request.method == "POST":
         form = request.form
         username = form['username']
@@ -76,18 +73,16 @@ def login():
         except Account.DoesNotExist:
             account = None
         if account is None:
-            prompt=1
-            # message = "Tài khoản không tồn tại"
-            return render_template('login.html', prompt = prompt,usn=username,psw=password)
+            message = "Tài khoản không tồn tại"
+            return render_template('message.html', message = message)
         else:
             if sha256_crypt.verify(password, account.password) == True:
                 session["username"] = account.username
                 url = "/profile/" + account.username
                 return redirect(url)
             else:
-                # message = "Sai mật khẩu"
-                prompt=2
-                return render_template('login.html', prompt = prompt,usn=username,psw=password)
+                message = "Sai mật khẩu"
+                return render_template('message.html', message = message)
 
 
 
@@ -139,10 +134,9 @@ def profile(username_url):
 
 @app.route('/edit.profile/<username_url>', methods=['GET','POST'])
 def edit_profile(username_url):
-
+    hints = Account.objects()
     account = Account.objects.get(username = username_url)
     if request.method == "GET":
-        hints = Account.objects()
         return render_template('edit_profile.html', account = account, hints = hints)
     elif request.method == "POST":
         form = request.form
@@ -248,11 +242,10 @@ def contract_type_1(contract_class):
     username = session['username']
     account = Account.objects.get(username = username)
     friendlist_information = []
-
+    hints = Account.objects()
     for friend in account.friendlist:
         friendlist_information.insert(0, Account.objects().get(username = friend))
     if request.method == "GET":
-        hints = Account.objects()
         if contract_class == "traditional":
             return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information, hints = hints)
         elif contract_class == "multiparty":
