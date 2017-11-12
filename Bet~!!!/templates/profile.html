@@ -29,10 +29,18 @@
                 </div>
                 <!--image -->
                 <div class="col-md-8 col-7 bg-light p-2 border border-success rounded centered mx-auto d-block" >
+                  {% if username_url == username %}
                   {% if account.image is none %}
                   <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
                   {% else %}
                   <img class=" img-responsive card-img-top" src="data:image/*;base64,{{account.image}}" height="220px" alt="Ảnh đại diện">
+                  {% endif %}
+                  {% else %}
+                  {% if account_other.image is none %}
+                  <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
+                  {% else %}
+                  <img class=" img-responsive card-img-top" src="data:image/*;base64,{{account_other.image}}" height="220px" alt="Ảnh đại diện">
+                  {% endif %}
                   {% endif %}
                 </div>
                 <!--image end_ -->
@@ -47,7 +55,7 @@
                       {{ account.name }}
                       {% else %}
                       {{ account_other.name }}
-                      {% endif%}
+                      {% endif %}
                     </h2>
               </div>
 
