@@ -414,7 +414,7 @@ def bet_vote_victory(method, bet_id):
                     bet.victory_claim = []
                     bet.accept_verification_accept = []
                     bet.accept_verification_decline = []
-        if bet.victory_claim[0] in bet.party_left:
+        elif bet.victory_claim[0] in bet.party_left:
             ### win condition
             if len(bet.accept_verification_accept) >= 2/3 * len(bet.party_right):
                 ### winner actions
@@ -432,7 +432,7 @@ def bet_vote_victory(method, bet_id):
                     clone.update(add_to_set__lost_bet = bet_id)
                     clone.update(add_to_set__bet_notification = bet_id)
             ### verification fail
-        elif len(bet.accept_verification_decline) >= 2/3 * len(bet.party_right):
+            elif len(bet.accept_verification_decline) >= 2/3 * len(bet.party_right):
                 for user_left in bet.party_left:
                     clone = Account.objects().get(username = user_left)
                     clone.update(pull__other_claiming_winner_bets = bet_id)
@@ -467,7 +467,7 @@ def active_bet(bet_id):
     players_to_show = []
     for username in users_involved_list:
         players_to_show.append(Account.objects().get(username = username))
-    return render_template('active_bet.html', account = account, players_to_show = players_to_show, bet = bet, hints = hints)
+    return render_template('active_bet.html', account = account, players_to_show = players_to_show, bet = bet, hints =hints)
 
 
 
