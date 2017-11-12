@@ -25,7 +25,39 @@
             document.getElementById(val + "1").disabled = false;
           }
         }
+      }
 
+      function _check_friend_state(val, party) {
+        if (party == "right") {
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "2").disabled == false) {
+            document.getElementById(val).disabled = true;
+            document.getElementById(val + "2").disabled = true;
+          }
+          else {
+            document.getElementById(val).disabled = false;
+            document.getElementById(val + "2").disabled = false;
+          }
+        }
+        else if (party == "spectator") {
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "1").disabled == false) {
+            document.getElementById(val + "1").disabled = true;
+            document.getElementById(val).disabled = true;
+          }
+          else {
+            document.getElementById(val + "1").disabled = false;
+            document.getElementById(val).disabled = false;
+          }
+        }
+        else {
+          if (document.getElementById(val + "1").disabled == false || document.getElementById(val + "2").disabled == false) {
+            document.getElementById(val + "1").disabled = true;
+            document.getElementById(val + "2").disabled = true;
+          }
+          else {
+            document.getElementById(val + "1").disabled = false;
+            document.getElementById(val + "2").disabled = false;
+          }
+        }
       }
 
     </script>
@@ -117,7 +149,7 @@
                       {% for friend in friendlist_information %}
                       <div class="m-0 p-0 pl-4 mr-4" >
                       <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
-                        <input id="{{friend.username}}1" type="checkbox" onclick="_check_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
+                        <input id="{{friend.username}}1" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
                         <span class="custom-control-indicator custom-control-success"></span>
                         <span>
                           {% if friend.image is none %}
@@ -164,7 +196,7 @@
                       {% for friend in friendlist_information %}
                       <div class="m-0 p-0 pl-4 mr-4" >
                       <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
-                        <input type="checkbox" id="{{friend.username}}" onclick="_check_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{friend.username}}">
+                        <input type="checkbox" id="{{friend.username}}" onclick="_check_friend_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{friend.username}}">
                         <span class="custom-control-indicator custom-control-success"></span>
                         <span>
                           {% if friend.image is none %}
@@ -202,7 +234,7 @@
 
                     <div class="m-0 p-0 pl-4 mr-4" >
                     <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
-                      <input type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
+                      <input id="{{friend.username}}2" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
                       <span class="custom-control-indicator custom-control-success"></span>
                       <span>
                         {% if friend.image is none %}
