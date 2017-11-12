@@ -80,7 +80,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <ul id="search_hint">
                         {% for hint in hints %}
-                          <li class="dropdown-item"><a href="/profile/{{hint['username']}}">{{hint['name']}}</a></li>
+                          <a class="text-dark" href="/profile/{{hint['username']}}"><li class="dropdown-item text-left">{{hint['name']}}</li></a>
                         {% endfor %}
                       </ul>
                     </div>
