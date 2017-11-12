@@ -18,44 +18,44 @@
           }
         }
         else {
-          if (document.getElementById(val + "1").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
+          if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
           }
           else {
-            document.getElementById(val + "1").disabled = false;
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
           }
         }
       }
 
       function _check_friend_state(val, party) {
         if (party == "right") {
-          if (document.getElementById(val).disabled == false || document.getElementById(val + "2").disabled == false) {
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
             document.getElementById(val).disabled = true;
-            document.getElementById(val + "2").disabled = true;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
           }
           else {
             document.getElementById(val).disabled = false;
-            document.getElementById(val + "2").disabled = false;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
           }
         }
-        else if (party == "spectator") {
-          if (document.getElementById(val).disabled == false || document.getElementById(val + "1").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
-            document.getElementById(val).disabled = true;
+        else if (party == "left") {
+          if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
           }
           else {
-            document.getElementById(val + "1").disabled = false;
-            document.getElementById(val).disabled = false;
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
           }
         }
         else {
-          if (document.getElementById(val + "1").disabled == false || document.getElementById(val + "2").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
-            document.getElementById(val + "2").disabled = true;
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+            document.getElementById(val).disabled = true;
           }
           else {
-            document.getElementById(val + "1").disabled = false;
-            document.getElementById(val + "2").disabled = false;
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+            document.getElementById(val).disabled = false;
           }
         }
       }
@@ -133,7 +133,7 @@
                     <div class="card-body pb-2 pt-2 border border-success bg-light border-top-0 rounded-bottom">
                       <div class="m-0 p-0 pl-4 mr-4" >
                       <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
-                        <input id="{{account.username}}1" type="checkbox" onclick="_check_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{account.username}}">
+                        <input id="{{account.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{account.username}}">
                         <span class="custom-control-indicator custom-control-success"></span>
                         <span>
                           {% if account.image is none %}
@@ -149,7 +149,7 @@
                       {% for friend in friendlist_information %}
                       <div class="m-0 p-0 pl-4 mr-4" >
                       <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
-                        <input id="{{friend.username}}1" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
+                        <input id="{{friend.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
                         <span class="custom-control-indicator custom-control-success"></span>
                         <span>
                           {% if friend.image is none %}
@@ -234,7 +234,7 @@
 
                     <div class="m-0 p-0 pl-4 mr-4" >
                     <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
-                      <input id="{{friend.username}}2" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
+                      <input id="{{friend.username}}2vưvbrytvbb87w87465vqb4v547" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
                       <span class="custom-control-indicator custom-control-success"></span>
                       <span>
                         {% if friend.image is none %}
