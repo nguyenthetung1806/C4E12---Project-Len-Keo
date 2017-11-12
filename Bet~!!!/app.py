@@ -177,7 +177,6 @@ def friend_request_method(method, username_url):
         account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(add_to_set__friendlist = account.username)
         account_other.update(pull__friend_request_sent = account.username)
-        url = '/profile/' + username
         return redirect(url)
     elif method == "send.request":
         account.update(add_to_set__friend_request_sent = account_other.username)
@@ -282,13 +281,11 @@ def contract_type_1(contract_class):
                 contract_type_1.update(add_to_set__party_right = username)
             account.update(add_to_set__active_bet = str(contract_type_1.id))
             for account_other in contract_type_1.party_right_pending:
-                if account_other != username:
-                    clone = Account.objects().get(username = account_other)
-                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                clone = Account.objects().get(username = account_other)
+                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_1 in contract_type_1.party_left_pending:
-                if account_other_1 != username:
-                    clone = Account.objects().get(username = account_other_1)
-                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                clone = Account.objects().get(username = account_other_1)
+                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))
@@ -313,9 +310,8 @@ def contract_type_1(contract_class):
             contract_type_1.update(add_to_set__party_multiplayers = username)
             account.update(add_to_set__active_bet = str(contract_type_1.id))
             for account_other in contract_type_1.party_multiplayers_pending:
-                if account_other != username:
-                    clone = Account.objects().get(username = account_other)
-                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                clone = Account.objects().get(username = account_other)
+                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))

@@ -329,16 +329,12 @@
                   <a class="text-right text-secondary" href="/active.bet/{{bet.id}}"><i class="fa fa-info" aria-hidden="true"></i> Xem chi tiết </a>
                   <span style="display:inline-block; width: YOURWIDTH;"></span>
                   <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <a class="text-right text-success" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Tham gia</a>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
                   <!-- claim_victory -->
                   {% if username in bet.party_left or username in bet.party_right or username in bet.party_multiplayers %}
-
-
-                  <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}">
-                    <i class="fa fa-trophy" aria-hidden="true"></i>
-                     Claim victory
-                  </a>
-
-
+                  <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}"><i class="fa fa-trophy" aria-hidden="true"></i> Claim victory</a>
                   {% endif %}
 
 
