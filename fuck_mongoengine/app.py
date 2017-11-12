@@ -96,6 +96,8 @@ def login():
 
 @app.route('/profile/<username_url>', methods=['GET','POST'])
 def profile(username_url):
+    hints = Account.objects()
+
     username = session['username']
     username_url = username_url
     account = Account.objects.get(username = username)
@@ -137,16 +139,19 @@ def profile(username_url):
                                             username = username,
                                             username_url = username_url,
                                             bets_to_show = bets_to_show,
-                                            players_to_show = players_to_show)
+                                            players_to_show = players_to_show,
+                                            hints=hints)
 
 
 
 
 @app.route('/edit.profile/<username_url>', methods=['GET','POST'])
 def edit_profile(username_url):
+    hints = Account.objects()
+
     account = Account.objects.get(username = username_url)
     if request.method == "GET":
-        return render_template('edit_profile.html', account = account)
+        return render_template('edit_profile.html', account = account, hints=hints)
     elif request.method == "POST":
         form = request.form
         name = form['name']
@@ -231,6 +236,8 @@ class Contract_type_1(Document):
 
 @app.route('/contract.type.1/<contract_class>', methods=['GET','POST'])
 def contract_type_1(contract_class):
+    hints = Account.objects()
+
     username = session['username']
     account = Account.objects.get(username = username)
 
@@ -239,9 +246,9 @@ def contract_type_1(contract_class):
         friendlist_information.append(Account.objects().get(username = friend))
     if request.method == "GET":
         if contract_class == "traditional":
-            return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information)
+            return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information, hints=hints)
         elif contract_class == "multiparty":
-            return render_template('contract_type_1_multiparty.html', account = account, friendlist_information = friendlist_information)
+            return render_template('contract_type_1_multiparty.html', account = account, friendlist_information = friendlist_information, hints=hints)
     elif request.method == "POST":
         form = request.form
         if contract_class == "traditional":
