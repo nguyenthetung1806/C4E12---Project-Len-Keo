@@ -2,9 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Thông tin tài khoản</title>
     <script type="text/javascript">
       function _submit(){
+        var a = document.getElementById('hidd');
+        a.value = "0";
+        document.frm.submit();
+      }
+      function _submit1(){
+        var a = document.getElementById('hidd');
+        a.value = "1";
         document.frm.submit();
       }
     </script>
@@ -13,51 +20,148 @@
 
     {% include 'include-template.html' %}
 
+            <div class="container mt-3 ">
+              <div class="row">
+                <!--One of two columns-->
+                <div class="text-light col-md-12 col-lg-4 pl-2 pr-2 d-block m-0">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-2 pr-1 pl-1">
+
+                    </div>
+                    <!--image -->
+                    <div class="col-md-4 col-lg-8 bg-light p-2 border border-success rounded centered mx-auto d-block" >
+
+                      {% if account_other.image is none %}
+                      <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
+                      {% else %}
+                      <img class=" img-responsive card-img-top" src="data:image/*;base64,{{account_other.image}}" height="220px" alt="Ảnh đại diện">
+                      {% endif %}
+
+                    </div>
+                    <!--image end_ -->
+
+                    <div class="col-md-4 col-lg-2 ">
+                    </div>
+
+                  </div>
+                  <div class="col p-0 m-0 mt-2 mb-3 align-middle text-center mx-auto d-block">
+                        <h2 class="text-dark font-weight-bold mb-3 ">
+                          {% if username_url == username %}                  <!--add account here -->
+                          {{ account.name }}
+                          {% else %}
+                          {{ account_other.name }}
+                          {% endif %}
+                        </h2>
+                  </div>
+
+                  <div class="col-md-5 col-lg-7 d-flex align-items-center mx-auto d-block mb-2">
+
+                    <form class="d-flex align-items-center mx-auto d-block btn-block" action="/contract.type.1/traditional" method="get">
+                      <button class="btn btn-success btn-block font-weight-bold btn-lg" type="submit" name="">
+                      <i class="fa fa-bookmark" aria-hidden="true"></i>
+                      Lên kèo
+                    </button>
+                    </form>
 
 
-    <div class="container mt-4">
-      <div class="row col-9 mx-auto d-block rounded border border-success pt-3 pb-3 pl-4 pr-4">
-        <div class="mx-auto d-block text-center ">
-          <h4 class="text-secondary font-weight-bold">Chỉnh sửa thông tin</h4>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="bg-light mt-3 p-3 pb-0 mb-2 border border-secondary rounded text-center text-dark font-weight-bold mx-auto d-block" >
-              {% if account.image is none %}
-              <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="215px" alt="Ảnh đại diện">
-              {% else %}
-              <img class=" img-responsive card-img-top " src="data:image/*;base64,{{account.image}}" height="215px" alt="Ảnh đại diện">
-              {% endif %}
-              <label class="pb-0 mt-3"for="">Ảnh đại diện</label>
+                    <!--button -->
+
+                  </div>
+
+                  <!--One of two columns end_-->
+                </div>
+                <div class="col-sm bg-light col-md-12 col-lg-7 rounded pl-3 pr-3 border border-muted">
+                <!--One of two columns-->
+
+
+                    <div class="row mt-2">
+                      <div class="col-md-3 col-5 m-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-bottom-0 p-0">
+                          <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4"
+                          href="/edit.profile/{{account_other.username}}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Thông tin
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                          <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                          href="/friend.list/{{account_other.username}}">
+                            <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Bạn bè
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                          <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                          href="/contract.type.1/traditional">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Kèo bet
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col m-0 pl-0 border border-success border-top-0 border-left-0 border-right-0 p-0 mr-3">
+
+                      </div>
+                    </div>
+
+
+                    <div class="p-0 pl-2 pr-2">
+
+                    {% if account.username == account_other.username %}
+                    <form name="frm" class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
+                      <div class="form-group font-weight-bold mt-2">
+                        <label class="mr-4 pr-3" for="">Thay ảnh</label>
+                        <!-- src="data:image/*;base64,{{image_base64}}" -->
+                        <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
+                      </div>
+
+                      <div class="form-group font-weight-bold">
+                        <label for="">Tên tài khoản</label>
+                      {% else %}
+
+                      <div class="form-group font-weight-bold mt-2">
+                        <label class="mr-4 pr-3" for="">Tên tài khoản</label>
+
+                      {% endif %}
+                        <input class="form-control" type="text" name="name" value="{{account.name}}" required>
+                      </div>
+                      <div class="form-group font-weight-bold">
+                        <label for="">Email</label>
+                        <input class="form-control" type="email" name="email" value="{{account.email}}" required>
+                      </div>
+                      <div class="form-group font-weight-bold">
+                        <label for="">Số điện thoại</label>
+                        <input class="form-control" type="text" name="phone" value="{{account.phone}}" required>
+                      </div>
+
+                      {% if account.username == account_other.username %}
+                      <div class="form-group mt-4 mx-auto">
+                        <input class=" btn btn-success" type="submit" name="" value="Thay đổi">
+                      </div>
+                      <input id="hidd" type="hidden" name="hidd" value="">
+                    </form>
+                    {% endif %}
+
+                  </div>
+
+
+
+
+                <!--One of two columns end_-->
+
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-8">
-            <form name="frm" class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
-              <div class="form-group font-weight-bold mt-2">
-                <label class="mr-4 pr-3" for="">Thay ảnh</label>
-                <!-- src="data:image/*;base64,{{image_base64}}" -->
-                <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Tên tài khoản</label>
-                <input class="form-control" type="text" name="name" value="{{account.name}}" required>
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Email</label>
-                <input class="form-control" type="email" name="email" value="{{account.email}}" required>
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Số điện thoại</label>
-                <input class="form-control" type="text" name="phone" value="{{account.phone}}" required>
-              </div>
-              <div class="form-group mt-4 mx-auto">
-                <input class=" btn btn-success" type="submit" name="" value="Submit">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+
+
+
+
 
 
 
