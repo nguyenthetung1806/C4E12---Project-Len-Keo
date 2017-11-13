@@ -15,7 +15,29 @@
 
 
 
-        <div class="container mt-3 ">
+        <div class="container">
+          {% if username_url == username %}
+          {% if account.background is none %}
+          <div class="row col-12 mx-auto d-block pb-3 pl-4 pr-4" style="background-image: url('http://via.placeholder.com/350x150'); position: absolute; background-size:80%; background-repeat:no-repeat; background-position:left center;  z-index:-1">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
+          {% else %}
+          <div class="row col-12 mx-auto d-block pb-3 pl-4 pr-4" style="background-image: url(data:image/*;base64,{{account.background}}); position: absolute; background-size:80%; background-repeat:no-repeat; background-position:left center;  z-index:-1">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
+          {% endif %}
+          {% else %}
+          {% if account_other.background is none %}
+          <div class="row col-12 mx-auto d-block pb-3 pl-4 pr-4" style="background-image: url('http://via.placeholder.com/350x150'); position: absolute; background-size:80%; background-repeat:no-repeat; background-position:left center;  z-index:-1">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
+          {% else %}
+          <div class="row col-12 mx-auto d-block pb-3 pl-4 pr-4" style="background-image: url(data:image/*;base64,{{account_other.background}}); position: absolute; background-size:80%; background-repeat:no-repeat; background-position:left center;  z-index:-1">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          </div>
+          {% endif %}
+          {% endif %}
+          <br><br><br><br><br><br><br><br><br>
           <div class="row">
 
             <div class="text-light col-sm-4 pl-2 pr-2">

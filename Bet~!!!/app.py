@@ -19,6 +19,7 @@ class Account(Document):
     username = StringField()
     name = StringField()
     image = StringField()
+    background = StringField()
     password = StringField()
     email = StringField()
     phone = StringField()
@@ -149,12 +150,19 @@ def edit_profile(username_url):
         name = form['name']
         email = form['email']
         phone = form['phone']
-        image = request.files['image']
-        image = b64encode(image.read()).decode("utf-8")
-        account.update(name = name, image = image, email = email, phone = phone)
+        hidd = form['hidd']
+        if hidd == "0":
+            image = request.files['image']
+            image = b64encode(image.read()).decode("utf-8")
+            account.update(name = name, image = image, email = email, phone = phone)
+        elif hidd == "1":
+            background = request.files['background']
+            background = b64encode(background.read()).decode("utf-8")
+            account.update(name = name, background=background, email = email, phone = phone)
+        else:
+            account.update(name = name, email = email, phone = phone)
         url = '/edit.profile/' + username_url
         return redirect(url)
-
 
 
 

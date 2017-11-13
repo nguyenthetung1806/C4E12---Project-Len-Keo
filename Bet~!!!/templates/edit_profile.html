@@ -5,6 +5,13 @@
     <title>Thông tin tài khoản</title>
     <script type="text/javascript">
       function _submit(){
+        var a = document.getElementById('hidd');
+        a.value = "0";
+        document.frm.submit();
+      }
+      function _submit1(){
+        var a = document.getElementById('hidd');
+        a.value = "1";
         document.frm.submit();
       }
     </script>
@@ -15,45 +22,82 @@
 
 
 
-    <div class="container mt-4">
-      <div class="row col-9 mx-auto d-block rounded border border-success pt-3 pb-3 pl-4 pr-4">
-        <div class="mx-auto d-block text-center ">
-          <h4 class="text-secondary font-weight-bold">Chỉnh sửa thông tin</h4>
+    <div class="container">
+      {% if account.background is none %}
+      <div class="col-md-10 col-7 p-2 rounded centered mx-auto d-block" style="position: absolute; z-index:-1">
+        <img src="http://via.placeholder.com/350x150" width="100%" height="330px" alt="">
+      </div>
+      {% else %}
+      <div class="col-md-10 col-7 p-2 rounded centered mx-auto d-block" style="position: absolute; z-index:-1">
+        <img src="data:image/*;base64,{{account.background}}" width="100%" height="330px" alt="">
+      </div>
+      {% endif %}
+
+      <div class="row col-10 mx-auto d-block pb-3 pl-4 pr-4 mt-3" style="position: absolute;  z-index:-1">
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <ul class="nav nav-tabs">
+          <li class="text-white"><h3>djbkjfgbkdjfhhbdb</h3></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h3>Thông tin</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h3>Bạn bè</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h3>Danh sách kèo</h3></a>
+          </li>
+        </ul>
+      </div>
+      <br><br><br><br><br><br><br><br>
+
+
+      <div class="col-sm-4">
+        <div class="col-md-8 col-7 bg-light p-2 border border-success rounded centered mx-auto d-block" >
+          {% if account.image is none %}
+          <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="200px" alt="Ảnh đại diện">
+          {% else %}
+          <img class=" img-responsive card-img-top " src="data:image/*;base64,{{account.image}}" height="200px" alt="Ảnh đại diện">
+          {% endif %}
         </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="bg-light mt-3 p-3 pb-0 mb-2 border border-secondary rounded text-center text-dark font-weight-bold mx-auto d-block" >
-              {% if account.image is none %}
-              <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="215px" alt="Ảnh đại diện">
-              {% else %}
-              <img class=" img-responsive card-img-top " src="data:image/*;base64,{{account.image}}" height="215px" alt="Ảnh đại diện">
-              {% endif %}
-              <label class="pb-0 mt-3"for="">Ảnh đại diện</label>
+      </div>
+
+      <div class="row col-12 mx-auto d-block pb-3 pl-4 pr-4">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+
             </div>
-          </div>
-          <div class="col-sm-8">
-            <form name="frm" class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
-              <div class="form-group font-weight-bold mt-2">
-                <label class="mr-4 pr-3" for="">Thay ảnh</label>
-                <!-- src="data:image/*;base64,{{image_base64}}" -->
-                <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Tên tài khoản</label>
-                <input class="form-control" type="text" name="name" value="{{account.name}}" required>
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Email</label>
-                <input class="form-control" type="email" name="email" value="{{account.email}}" required>
-              </div>
-              <div class="form-group font-weight-bold">
-                <label for="">Số điện thoại</label>
-                <input class="form-control" type="text" name="phone" value="{{account.phone}}" required>
-              </div>
-              <div class="form-group mt-4 mx-auto">
-                <input class=" btn btn-success" type="submit" name="" value="Submit">
-              </div>
-            </form>
+            <div class="col-sm-8">
+              <form name="frm" class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
+                <div class="form-group font-weight-bold mt-2">
+                  <label class="mr-4 pr-3" for="">Thay ảnh</label>
+                  <!-- src="data:image/*;base64,{{image_base64}}" -->
+                  <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
+                </div>
+                <div class="form-group font-weight-bold mt-2">
+                  <label class="mr-4 pr-3" for="">Thay ảnh nền</label>
+                  <!-- src="data:image/*;base64,{{image_base64}}" -->
+                  <input class="btn pl-0" type="file" onchange="_submit1()" accept="image/*" name="background" value="">
+                </div>
+                <div class="form-group font-weight-bold">
+                  <label for="">Tên tài khoản</label>
+                  <input class="form-control" type="text" name="name" value="{{account.name}}" required>
+                </div>
+                <div class="form-group font-weight-bold">
+                  <label for="">Email</label>
+                  <input class="form-control" type="email" name="email" value="{{account.email}}" required>
+                </div>
+                <div class="form-group font-weight-bold">
+                  <label for="">Số điện thoại</label>
+                  <input class="form-control" type="text" name="phone" value="{{account.phone}}" required>
+                </div>
+                <div class="form-group mt-4 mx-auto">
+                  <input class=" btn btn-success" type="submit" name="" value="Submit">
+                </div>
+                <input id="hidd" type="hidden" name="hidd" value="">
+              </form>
+            </div>
           </div>
         </div>
       </div>
