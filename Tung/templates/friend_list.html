@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thông tin tài khoản</title>
+
+  </head>
+  <body>
+
+
+    {% include 'include-template.html' %}
+
+            <div class="container mt-3 ">
+              <div class="row">
+                <!--One of two columns-->
+                <div class="text-light col-md-12 col-lg-4 pl-2 pr-2 d-block m-0">
+                  <div class="row">
+                    <div class="col-md-4 col-lg-2 pr-1 pl-1">
+
+                    </div>
+                    <!--image -->
+                    <div class="col-md-4 col-lg-8 bg-light p-2 border border-success rounded centered mx-auto d-block" >
+
+                      {% if account_other.image is none %}
+                      <img class=" img-responsive card-img-top " src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
+                      {% else %}
+                      <img class=" img-responsive card-img-top" src="data:image/*;base64,{{account_other.image}}" height="220px" alt="Ảnh đại diện">
+                      {% endif %}
+
+                    </div>
+                    <!--image end_ -->
+
+                    <div class="col-md-4 col-lg-2 ">
+                    </div>
+
+                  </div>
+                  <div class="col p-0 m-0 mt-2 mb-3 align-middle text-center mx-auto d-block">
+                        <h2 class="text-dark font-weight-bold mb-3 ">
+                          {% if username_url == username %}                  <!--add account here -->
+                          {{ account.name }}
+                          {% else %}
+                          {{ account_other.name }}
+                          {% endif %}
+                        </h2>
+                  </div>
+
+                  <div class="col-md-5 col-lg-7 d-flex align-items-center mx-auto d-block mb-2">
+
+                    <form class="d-flex align-items-center mx-auto d-block btn-block" action="/contract.type.1/traditional" method="get">
+                      <button class="btn btn-success btn-block font-weight-bold btn-lg" type="submit" name="">
+                      <i class="fa fa-bookmark" aria-hidden="true"></i>
+                      Lên kèo
+                    </button>
+                    </form>
+
+
+                    <!--button -->
+
+                  </div>
+
+                  <!--One of two columns end_-->
+                </div>
+                <div class="col-sm bg-light col-md-12 col-lg-7 rounded pl-3 pr-3 border border-muted">
+                <!--One of two columns-->
+
+
+                    <div class="row mt-2">
+                      <div class="col-md-3 col-5 m-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                          <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                          href="/edit.profile/{{account_other.username}}">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Thông tin
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-bottom-0 p-0">
+                          <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4"
+                          href="/friend.list/{{account_other.username}}">
+                            <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Bạn bè
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+                        <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                          <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                          href="/contract.type.1/traditional">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                            <span style="display:inline-block; width: YOURWIDTH;"></span>
+                            Kèo bet
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col m-0 pl-0 border border-success border-top-0 border-left-0 border-right-0 p-0 mr-3">
+
+                      </div>
+                    </div>
+                    <div class=" mt-4 p-0 pl-2 pr-2">
+                    {% if account.username == account_other.username %}
+                    {% if account.friend_accept_pending|length != 0 %}
+                    <div class=" text-left mt-3 mb-1 pl-4  text-success pr-4 col-12"><h5 class=" font-weight-bold p-0 m-0">
+                      <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                      <span style="display:inline-block; width: YOURWIDTH;"></span>
+                      Bạn có lời mời kết bạn: </h5></div>
+                      {% for request in account.friend_accept_pending %}
+                      {% for hint in hints %}
+                      {% if request == hint.username %}
+                      <div class="row">
+                        <div class="col-10">
+                      <span>
+                        <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
+                          {% if hint.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                          {{ hint.name }}</span>
+                          <p class="m-0">đã gửi lời mời kết bạn.
+                          <span class="text-primary">Xem trang cá nhân</span></p></a>
+                      </span>
+                      </div>
+                      <div class=" col-1 p-0 text-left">
+                    <a data-toggle="tooltip" data-placement="top" title="Chấp nhận" class="col m-0 p-0 btn btn-success font-weight-bold text-success mr-1" href="/friend.request/accept/{{request}}">
+                      <i class="text-white fa fa-check" aria-hidden="true"></i></a>
+                    <a data-toggle="tooltip" data-placement="top" title="Từ chối" class="col m-0 p-0 btn btn-danger font-weight-bold text-success mr-1" href="/friend.request/decline/{{request}}">
+                      <i class="text-white fa fa-times" aria-hidden="true"></i></a>
+                      </div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                      {% endfor %}
+                    {% endif %}
+                    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+                    <div class=" text-left pl-4 mt-2 mb-1  text-success pr-4 col-12"><h5 class=" font-weight-bold p-0 m-0">
+                       <i class="fa fa-users" aria-hidden="true"></i>
+                       <span style="display:inline-block; width: YOURWIDTH;"></span>
+                       Danh sách bạn bè: </h5></div>
+
+                      {% if account_other.friendlist|length == 0 %}
+                        <div class="text-dark text-right pr-4 col-12">
+                          {% if account.username != account_other.username %}
+                          Hiện tại tài khoản này không có bạn bè nào. Trở thành người bạn đầu tiên của họ?
+                          {% else %}
+                          Hiện tại bạn chưa có người bạn nào.
+                          {% endif %}
+                        </div>
+                      {% else %}
+                        {% for friend in account_other.friendlist %}
+                        {% for hint in hints %}
+                        {% if friend == hint.username %}
+                        <div class="row">
+                          <div class="col-10">
+                        <span>
+                          <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
+                            {% if hint.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                            {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                            {% endif %}
+                            {{ hint.name }}</span>
+                            <p class="m-0">đã trở thành bạn của
+                        {% if account.username == account_other.username %}
+                              bạn
+                        {% else %}
+                              người này
+                        {% endif %}
+                            <span class="text-primary">Thăm trang cá nhân</span></p></a>
+                        </span>
+                        </div>
+                        <div class=" col-1 p-0 text-left">
+                      <a data-toggle="tooltip" data-placement="top" title="Thăm trang cá nhân" class="col m-0 p-0 btn btn-success font-weight-bold text-success mr-1" href="/profile/{{hint.username}}">
+                        <i  class="text-white fa fa-sign-in" aria-hidden="true"></i></a>
+                        {% if account.username == account_other.username %}
+                      <a data-toggle="tooltip" data-placement="top" title="Hủy kết bạn" class="col m-0 p-0 btn btn-danger font-weight-bold text-success mr-1" href="/friend.request/delete.friend/{{hint.username}}">
+                        <i class="text-white fa fa-trash-o" aria-hidden="true"></i></a>
+                        {% endif %}
+                        </div>
+                        </div>
+
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                        {% endif %}
+
+
+
+
+                  </div>
+
+
+
+
+                <!--One of two columns end_-->
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
