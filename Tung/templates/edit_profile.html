@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script type="text/javascript">
+      function _submit(){
+        document.frm.submit();
+      }
+    </script>
   </head>
   <body>
 
@@ -27,11 +32,11 @@
             </div>
           </div>
           <div class="col-sm-8">
-            <form class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
+            <form name="frm" class="" action="/edit.profile/{{ account.username }}" enctype="multipart/form-data" method="post">
               <div class="form-group font-weight-bold mt-2">
                 <label class="mr-4 pr-3" for="">Thay ảnh</label>
                 <!-- src="data:image/*;base64,{{image_base64}}" -->
-                <input class="btn pl-0" type="file" accept="image/*" name="image" value="">
+                <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
               </div>
               <div class="form-group font-weight-bold">
                 <label for="">Tên tài khoản</label>
