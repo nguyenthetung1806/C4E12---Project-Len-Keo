@@ -71,7 +71,7 @@
 
 
 
-      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto col-xs-0 ">
           <li class="nav-item active mr-auto pl-4 ml-4">
             <form class="form-inline my-2 my-lg-0 mr-auto">
@@ -95,73 +95,38 @@
                 </div>
 
 
-              <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i></button>
+              <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto col-xs-0 ">
 
-            <li class="nav-item active rounded p-0 mr-4 pt-1">
-              <a class="align-middle" href="/profile/{{account.username}}">
-                {% if account.image is none %}
-              <img class="mx-auto d-block rounded" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="35px" width="35px" alt="">
-                {% else %}
-              <img class="mx-auto d-block rounded" src="data:image/*;base64,{{account.image}}" height="35px" width="35px" alt="">
-                {% endif %}
-              </a>
-            </li>
 
-            <li class="nav-item rounded p-0">
+
+            <li class="nav-item active rounded  p-0 ">
               <div class="btn-group rounded p-0 m-0" >
                 <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"><i class="fa fa-user-plus
-                      {% if account.friend_accept_pending|length == 0 %}
-                      text-secondary
-                      {% else %}
-                      text-white
-                      {% endif %}
-
-
-                     " aria-hidden="true"></i></h5>
+                  <h5 class="m-0"><i class="fa fa-user-plus" aria-hidden="true"></i></h5>
                 </button>
-                <div class="dropdown-menu dropdown-menu-right rounded pb-1 pt-1" >
+                <div class="dropdown-menu dropdown-menu-right ">
 
 
                   {% if account.friend_accept_pending|length == 0 %}
-                    <div class="text-dark text-right pr-4 col-12">Không có lời mời nào</div>
+                    <span class="col-12 " width= >Không có lời mời kết bạn nào</span>
                   {% else %}
                     {% for request in account.friend_accept_pending %}
-                    {% for hint in hints %}
-                    {% if request == hint.username %}
-                    <div class="row">
-                      <div class="col-10">
-                    <span>
-                      <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
-                        {% if hint.image is none %}
-                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                        {% else %}
-                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                        {% endif %}
-                        {{ hint.name }}</span>
-                        <p class="m-0">đã gửi lời mời kết bạn.
-                        <span class="text-primary">Xem trang cá nhân</span></p></a>
-                    </span>
-                    </div>
-                    <div class=" col-2 p-0 text-left">
-                  <a class="text-lg font-weight-bold text-success mr-1" href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                  <a class="text-lg font-weight-bold text-danger" href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
+                  <span>
+                    <a class="dropdown-item" href="#">{{ request }}</a>
+                  </span>
+                  <a href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
                     {% endfor %}
                   {% endif %}
 
 
 
-                  <div class="dropdown-divider m-0"></div>
-                  <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="/friend.list/{{account.username}}">Xem chi tiết</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Xem chi tiết</a>
                 </div>
               </div>
 
@@ -171,79 +136,35 @@
             <li class="nav-item active rounded p-0 mr-4">
               <div class="btn-group rounded p-0 m-0" >
                 <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"> <i class="fa fa-bookmark font-size-lg
-                    {% if notification|length == 0 %}
-                    text-secondary
-                    {% else %}
-                    text-white
-                    {% endif %}
-                    " aria-hidden="true"></i></h5>
+                  <h5 class="m-0"><i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i></h5>
                 </button>
-                <div class="dropdown-menu dropdown-menu-right rounded  pb-1 pt-1" >
+                <div class="dropdown-menu dropdown-menu-right rounded">
 
 
-                  {% if notification|length != 0 %}
-                  {% for noti in notification %}
-                  {% for hint in hints %}
-                  {% if noti.contract_maker[-1] == hint.username %}
-                  <div class="row">
-                    <div class="col-10">
+                  {% if account.pending_bet|length != 0 or account.other_claiming_winner_bets|length != 0 %}
+                    {% for noti in account.pending_bet %}
                   <span>
-                    <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
-                      {% if hint.image is none %}
-                    <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                      {% else %}
-                    <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                      {% endif %}
-
-
-
-                      {{ hint.name }}</span>
-                      <p class="m-0">mời bạn tham gia một giao kèo.
-                      <span class="text-primary">Chi tiết</span></p></a>
-                      </span>
-                  </div>
-                  <div class=" col-2 p-0 text-left">
-                    <a class="text-lg font-weight-bold text-success mr-1" class="text-success" href="/bet.request/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                    <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                  </div>
-                  </div>
-                  {% endif %}
-                  {% endfor %}
-                  {% endfor %}
-                      {% for noti in notification %}
-                      {% for hint in hints %}
-                      {% if noti.victory_claim[-1] == hint.username %}
-                      <div class="col-10">
+                    <a class="dropdown-item" href="#">{{ noti }}</a>
+                  </span>
+                  <a href="/bet.request/accept/{{ noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/bet.request/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      {% endfor %}
+                      {% for noti in account.other_claiming_winner_bets %}
                     <span>
-                      <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
-                        {% if hint.image is none %}
-                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                        {% else %}
-                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                        {% endif %}
-                        {{ hint.name }}</span>
-                      <p class="m-0">tuyên bố đã chiến thắng 1 kèo mà bạn tham gia.
-                      <span class="text-primary">Chi tiết</span></p></a>
-                      </span>
-                    </div>
-                    <div class=" col-2 p-0 text-left">
-                    <a class="text-lg font-weight-bold text-success mr-1" href="/bet.vote.victory/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                    <a class="text-lg font-weight-bold text-danger" href="/bet.vote.victory/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </div>
-                    </div>
-                      {% endif %}
+                      <a class="dropdown-item" href="#">Win claim {{ noti }}</a>
+                    </span>
+                    <a href="/bet.vote.victory/accept/{{ noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a href="/bet.vote.victory/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                       {% endfor %}
-                      {% endfor %}
-
-                  {% else %}
-
-                      <div class="text-dark text-right pr-4">Không có thông báo nào</div>
-
+                    {% else %}
+                    <span class="col-12 " width= >Không có thông báo nào</span>
                   {% endif %}
 
-                  <div class="dropdown-divider m-0"></div>
-                  <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="#">Xem toàn bộ</a>
+
+
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
                 </div>
               </div>
             </li>
@@ -251,8 +172,8 @@
 
 
 
-            <li class="nav-item mr-2">
-              <a class="nav-link disabled" href="">Về chúng tôi<span class="sr-only"></span></a>
+            <li class="nav-item active mr-2">
+              <a class="nav-link" href="/information">Về chúng tôi<span class="sr-only"></span></a>
             </li>
 
 
@@ -262,10 +183,13 @@
                 <span style="display:inline-block; width: YOURWIDTH;"></span>
                 <i class="fa fa-tasks" aria-hidden="true"></i>
               </a>
-              <div class="dropdown-menu dropdown-menu-right rounded pt-1 pb-0 text-right " aria-labelledby="navbarDropdown">
-                <a class="dropdown-item pt-0" href="#">Cài đặt</a>
-                <div class="dropdown-divider m-0"></div>
-                <a class="dropdown-item text-right font-weight-bold text-dark bg-info pb-1" href="/logout"><span class="nav-item text-light">Đăng xuất</span></a>
+              <div class="dropdown-menu dropdown-menu-right rounded  text-right " aria-labelledby="navbarDropdown">
+                <br>
+                <a class="dropdown-item" href="#">Cài đặt</a>
+
+                <br>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout"><span class="nav-item text-dark">Đăng xuất</span></a>
               </div>
             </li>
 

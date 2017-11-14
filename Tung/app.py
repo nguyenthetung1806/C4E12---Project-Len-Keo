@@ -20,7 +20,7 @@ class Account(Document):
     name = StringField()
     image = StringField()
     password = StringField()
-    email = StringField()
+    email = EmailField()
     phone = StringField()
     #friend system
     friendlist = ListField()
@@ -39,13 +39,11 @@ class Account(Document):
 @app.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method == "GET":
-        prompt=0
-        return render_template('signup.html',prompt=prompt,usn="",psw="",nm="",eml="")
+        return render_template('signup.html')
     elif request.method == "POST":
         form = request.form
         username = form['username']
-        password1=form['password']
-        password = sha256_crypt.encrypt(password1)
+        password = sha256_crypt.encrypt(form['password'])
         name = form['name']
         email = form['email']
         try:
@@ -57,16 +55,15 @@ def signup():
             account.save()
             return redirect('/login')
         else:
-            prompt=1
-            return render_template('signup.html',prompt=prompt,usn=username,psw=password1,nm=name,eml=email)
+            message = "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác"
+            return render_template('message.html', message = message)
 
 
 
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "GET":
-        prompt=0
-        return render_template('login.html',prompt=prompt,usn="",psw="")
+        return render_template('login.html')
     elif request.method == "POST":
         form = request.form
         username = form['username']
@@ -76,36 +73,30 @@ def login():
         except Account.DoesNotExist:
             account = None
         if account is None:
-            prompt=1
-            # message = "Tài khoản không tồn tại"
-            return render_template('login.html', prompt = prompt,usn=username,psw=password)
+            message = "Tài khoản không tồn tại"
+            return render_template('message.html', message = message)
         else:
             if sha256_crypt.verify(password, account.password) == True:
                 session["username"] = account.username
                 url = "/profile/" + account.username
                 return redirect(url)
             else:
-                # message = "Sai mật khẩu"
-                prompt=2
-                return render_template('login.html', prompt = prompt,usn=username,psw=password)
+                message = "Sai mật khẩu"
+                return render_template('message.html', message = message)
 
 
 
 
 @app.route('/profile/<username_url>', methods=['GET','POST'])
 def profile(username_url):
+    # if session['username'] is None:
+    #     return redicect('/login')
+    # else:
     hints = Account.objects()
     username = session['username']
     account = Account.objects.get(username = username)
     account_other = Account.objects.get(username = username_url)
     bets_to_show = []
-
-    notification =[]
-    for each in account.pending_bet:
-        notification.insert(0, Contract_type_1.objects().with_id(each))
-    for each in account.other_claiming_winner_bets:
-        notification.insert(0, Contract_type_1.objects().with_id(each))
-
     for bet in account_other.active_bet:
         bets_to_show.insert(0, Contract_type_1.objects().with_id(bet))
 
@@ -134,8 +125,7 @@ def profile(username_url):
                                             players_to_show = players_to_show,
                                             lost_bets_to_show = lost_bets_to_show,
                                             win_bets_to_show = win_bets_to_show,
-                                            hints = hints,
-                                            notification = notification)
+                                            hints = hints)
 
 
 
@@ -144,47 +134,20 @@ def profile(username_url):
 
 @app.route('/edit.profile/<username_url>', methods=['GET','POST'])
 def edit_profile(username_url):
-    username = session['username']
-    account = Account.objects.get(username = username)
-    account_other = Account.objects.get(username = username_url)
+    hints = Account.objects()
+    account = Account.objects.get(username = username_url)
     if request.method == "GET":
-        hints = Account.objects()
-        return render_template('edit_profile.html', account = account, hints = hints, account_other = account_other)
+        return render_template('edit_profile.html', account = account, hints = hints)
     elif request.method == "POST":
         form = request.form
         name = form['name']
         email = form['email']
         phone = form['phone']
-        hidd = form['hidd']
-        if hidd == "0":
-            image = request.files['image']
-            image = b64encode(image.read()).decode("utf-8")
-            account.update(name = name, image = image, email = email, phone = phone)
-        elif hidd == "1":
-            background = request.files['background']
-            background = b64encode(background.read()).decode("utf-8")
-            account.update(name = name, background=background, email = email, phone = phone)
-        else:
-            account.update(name = name, email = email, phone = phone)
+        image = request.files['image']
+        image = b64encode(image.read()).decode("utf-8")
+        account.update(name = name, image = image, email = email, phone = phone)
         url = '/edit.profile/' + username_url
         return redirect(url)
-
-
-
-@app.route('/friend.list/<username_url>', methods=['GET','POST'])
-def friend_list(username_url):
-    username = session['username']
-    account = Account.objects.get(username = username)
-    account_other = Account.objects.get(username = username_url)
-    hints = Account.objects()
-    return render_template('friend_list.html', account = account, hints = hints, account_other = account_other)
-
-
-
-
-
-
-
 
 
 
@@ -208,6 +171,7 @@ def friend_request_method(method, username_url):
         account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(add_to_set__friendlist = account.username)
         account_other.update(pull__friend_request_sent = account.username)
+        url = '/profile/' + username
         return redirect(url)
     elif method == "send.request":
         account.update(add_to_set__friend_request_sent = account_other.username)
@@ -278,11 +242,10 @@ def contract_type_1(contract_class):
     username = session['username']
     account = Account.objects.get(username = username)
     friendlist_information = []
-
+    hints = Account.objects()
     for friend in account.friendlist:
         friendlist_information.insert(0, Account.objects().get(username = friend))
     if request.method == "GET":
-        hints = Account.objects()
         if contract_class == "traditional":
             return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information, hints = hints)
         elif contract_class == "multiparty":
@@ -312,11 +275,13 @@ def contract_type_1(contract_class):
                 contract_type_1.update(add_to_set__party_right = username)
             account.update(add_to_set__active_bet = str(contract_type_1.id))
             for account_other in contract_type_1.party_right_pending:
-                clone = Account.objects().get(username = account_other)
-                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                if account_other != username:
+                    clone = Account.objects().get(username = account_other)
+                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_1 in contract_type_1.party_left_pending:
-                clone = Account.objects().get(username = account_other_1)
-                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                if account_other_1 != username:
+                    clone = Account.objects().get(username = account_other_1)
+                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))
@@ -341,8 +306,9 @@ def contract_type_1(contract_class):
             contract_type_1.update(add_to_set__party_multiplayers = username)
             account.update(add_to_set__active_bet = str(contract_type_1.id))
             for account_other in contract_type_1.party_multiplayers_pending:
-                clone = Account.objects().get(username = account_other)
-                clone.update(add_to_set__pending_bet = str(contract_type_1.id))
+                if account_other != username:
+                    clone = Account.objects().get(username = account_other)
+                    clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))
@@ -408,7 +374,7 @@ def claim_victory(username, bet_id):
             bet.update(add_to_set__victory_claim = {'username' : account.username,
                                                     'vote_count_accept' : [],
                                                     'vote_count_decline' : []})
-            for name_2 in bet.party_multiplayers:
+            for name_2 in bet.party_left:
                 clone = Account.objects().get(username = name_2)
                 clone.update(add_to_set__other_claiming_winner_bets = str(bet_id))
         url = '/profile/' + username
