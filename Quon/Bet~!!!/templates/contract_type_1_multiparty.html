@@ -138,9 +138,15 @@
           <div data-toggle="collapse" class="p-2 text-center bg-success text-light btn-block rounded-top" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
           Thời gian diễn ra kèo
           </div>
-          <input type="date" id="myDate"  name = "dates" required>
-
-          <input type = "time" id="myTime" type="time"  step="2" name = "times" width="300" required>
+          <br>
+          <label for="">Nhập năm
+          <input type="number"  name="year" placeholder="Nhap nam"  class = "form-control" list="year-list"></label><br>
+          <label for="">Nhập tháng
+          <input type="number"  name="month" placeholder="Nhap thang"  class = "form-control" list="month-list"></label><br>
+          <label for="">Nhập ngày
+          <input type="number"  name="day" placeholder="Nhap ngay"  class = "form-control" list="day-list"></label><br>
+          <label for="">Nhập thời gian
+          <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" class="form-control"></label>
 
         <!-- Khán giả -->
         <div class="form-group">
