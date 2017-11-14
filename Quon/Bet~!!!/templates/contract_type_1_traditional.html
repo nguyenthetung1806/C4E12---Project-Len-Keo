@@ -171,12 +171,13 @@
         Thời gian diễn ra kèo
         </div>
         <br>
-        <label for="">Nhập năm
-        <input type="number"  name="year" placeholder="Nhap nam"  class = "form-control" list="year-list"></label><br>
-        <label for="">Nhập tháng
-        <input type="number"  name="month" placeholder="Nhap thang"  class = "form-control" list="month-list"></label><br>
         <label for="">Nhập ngày
-        <input type="number"  name="day" placeholder="Nhap ngay"  class = "form-control" list="day-list"></label><br>
+        <input type="number"  name="day" placeholder="Nhap ngay"  class = "form-control" list="day-list" min="1"></label><br>
+        <label for="">Nhập tháng
+        <input type="number"  name="month" placeholder="Nhap thang"  class = "form-control" list="month-list" min="1"></label><br>
+        <label for="">Nhập năm
+        <input type="number"  name="year" placeholder="Nhap nam"  class = "form-control" list="year-list" min="2017"></label><br>
+
         <label for="">Nhập thời gian
         <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" class="form-control"></label>
         <datalist id="month-list">
