@@ -16,14 +16,18 @@
     <!-- search_friend -->
     <script type="text/javascript">
 
-      // Kích hoạt sự kiện click của button:
-      function _click(){
-        var but = document.getElementById('dropdownMenuButton');
-        but.click();
+      function _focus(){
+        var check = document.getElementById('check_but');
+        check.value = "1";
       }
 
       function _search(){
-
+        var check = document.getElementById('check_but');
+        if (check.value == "1") {
+          var but = document.getElementById('dropdownMenuButton');
+          but.click();
+          check.value = "0";
+        }
         // Tìm kiếm phần tử:
         var input, filter, ul, li, a, i;
         input = document.getElementById('search_input');
@@ -32,15 +36,26 @@
         li = ul.getElementsByTagName('li');
 
         // Xóa toàn bộ gợi ý không phù hợp
+        var limit = document.getElementById('limit');
         for (i = 0; i < li.length; i++) {
           a = li[i].getElementsByTagName("a")[0];
           if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
+            var limit1 = Number(limit.value);
+            if (limit1 <= 10) {
+              li[i].style.display = "";
+              limit1++;
+              limit.value = limit1.toString();
+            }
+            else {
+              li[i].style.display = "none";
+            }
+
           }
           else {
             li[i].style.display = "none";
           }
         }
+        limit.value = "0";
       }
     </script>
     <!-- search_friend_end -->
@@ -77,7 +92,7 @@
             <form class="form-inline my-2 my-lg-0 mr-auto">
                 <div class="dropdown">
                   <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
-                  <input class="form-control mr-sm-2" id="search_input" onfocus="_click()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
+                  <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <ul id="search_hint" class="p-0">
                       {% for hint in hints %}
@@ -93,7 +108,8 @@
                     </ul>
                   </div>
                 </div>
-
+                <input type="hidden" id="check_but" name="" value="1">
+                <input type="hidden" id="limit" name="" value="0">
 
               <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
