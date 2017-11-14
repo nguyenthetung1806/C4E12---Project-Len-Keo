@@ -12,39 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <!-- import links _end -->
-
-    <!-- search_friend -->
-    <script type="text/javascript">
-
-      // Kích hoạt sự kiện click của button:
-      function _click(){
-        var but = document.getElementById('dropdownMenuButton');
-        but.click();
-      }
-
-      function _search(){
-
-        // Tìm kiếm phần tử:
-        var input, filter, ul, li, a, i;
-        input = document.getElementById('search_input');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("search_hint");
-        li = ul.getElementsByTagName('li');
-
-        // Xóa toàn bộ gợi ý không phù hợp
-        for (i = 0; i < li.length; i++) {
-          a = li[i].getElementsByTagName("a")[0];
-          if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-          }
-          else {
-            li[i].style.display = "none";
-          }
-        }
-      }
-    </script>
-    <!-- search_friend_end -->
-
   </head>
 
   <body>
@@ -71,42 +38,23 @@
 
 
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto col-xs-0 ">
-          <li class="nav-item active mr-auto pl-4 ml-4">
-            <form class="form-inline my-2 my-lg-0 mr-auto">
-                <div class="dropdown">
-                  <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
-                  <input class="form-control mr-sm-2" id="search_input" onfocus="_click()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <ul id="search_hint" class="p-0">
-                      {% for hint in hints %}
-                        <li class="dropdown-item" class="pl-3 pr-3"><a href="/profile/{{hint['username']}}" ><div class="text-dark text-left">
-                          {% if hint.image is none %}
-                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-
-                          {{hint['name']}}</div></a></li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-
-
-              <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </form>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto col-xs-0 ">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto col-xs-0 ">
+            <li class="nav-item active mr-auto pl-4 ml-4">
+              <form class="form-inline my-2 my-lg-0 mr-auto ">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit">Search</button>
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto col-xs-0 ">
 
 
 
             <li class="nav-item active rounded  p-0 ">
               <div class="btn-group rounded p-0 m-0" >
                 <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"><i class="fa fa-user-plus" aria-hidden="true"></i></h5>
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right ">
 
@@ -133,10 +81,10 @@
             </li>
 
 
-            <li class="nav-item active rounded p-0 mr-4">
+            <li class="nav-item active rounded p-0">
               <div class="btn-group rounded p-0 m-0" >
                 <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"><i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i></h5>
+                  <i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right rounded">
 
@@ -146,7 +94,7 @@
                   <span>
                     <a class="dropdown-item" href="#">{{ noti }}</a>
                   </span>
-                  <a href="/bet.request/accept/{{ noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/bet.request/accept/{ {noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
                   <a href="/bet.request/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                       {% endfor %}
                       {% for noti in account.other_claiming_winner_bets %}
@@ -172,7 +120,7 @@
 
 
 
-            <li class="nav-item active mr-2">
+            <li class="ml-4 nav-item active mr-2">
               <a class="nav-link" href="/information">Về chúng tôi<span class="sr-only"></span></a>
             </li>
 
@@ -191,21 +139,18 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/logout"><span class="nav-item text-dark">Đăng xuất</span></a>
               </div>
+
+
+
             </li>
-
-          <li class=""></li>
-
-          </ul >
-            <div class="invisible ">
-              1234566627
-            </div>
-
+          </ul>
+            <br>
           </ul>
         </div>
         </div>
     </nav>
     <!-- nav _end -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 invisible ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
       <a class="navbar-brand ml-2" href="http://127.0.0.1:5000/">
         Lên kèo
       </a>
