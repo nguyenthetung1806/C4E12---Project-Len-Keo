@@ -1,0 +1,57 @@
+
+.carousel-caption {
+    top: 32%;
+    left:20%;
+}
+
+.navbar-brand{
+      font-family: 'Pacifico';
+      font-size: 2.2rem;
+}
+.nav-link{
+      font-size: 0.9rem;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+}
+#Varela_1{
+        font-size: 2.2rem;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+}
+#Varela_1_1{
+        font-size: 1.9rem;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+}
+#Varela_2{
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+}
+button {
+        font-weight: 200;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+}
+*{
+        font-family: 'Montserrat', sans-serif;
+}
+#Montserrat{
+        font-weight: 400;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+}
+#clock{
+        font-weight: 400;
+        font-weight: bold;
+        font-size: 30px;
+}
+#footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+}
+
+img{
+  object-fit: cover;
+}

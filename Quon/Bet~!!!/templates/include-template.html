@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- import links -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- import links _end -->
+  </head>
+
+  <body>
+
+
+
+
+
+    <!-- nav -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
+
+
+      <div class="container">
+        <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
+          Lên kèo
+        </a>
+
+
+
+      <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto col-xs-0 ">
+            <li class="nav-item active mr-auto pl-4 ml-4">
+              <form class="form-inline my-2 my-lg-0 mr-auto ">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit">Search</button>
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto col-xs-0 ">
+
+
+
+            <li class="nav-item active rounded  p-0 ">
+              <div class="btn-group rounded p-0 m-0" >
+                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right ">
+
+
+                  {% if account.friend_accept_pending|length == 0 %}
+                    <span class="col-12 " width= >Không có lời mời kết bạn nào</span>
+                  {% else %}
+                    {% for request in account.friend_accept_pending %}
+                  <span>
+                    <a class="dropdown-item" href="#">{{ request }}</a>
+                  </span>
+                  <a href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                    {% endfor %}
+                  {% endif %}
+
+
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Xem chi tiết</a>
+                </div>
+              </div>
+
+            </li>
+
+
+            <li class="nav-item active rounded p-0">
+              <div class="btn-group rounded p-0 m-0" >
+                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-bookmark font-size-lg" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right rounded">
+
+
+                  {% if account.pending_bet|length != 0 or account.other_claiming_winner_bets|length != 0 %}
+                    {% for noti in account.pending_bet %}
+                  <span>
+                    <a class="dropdown-item" href="#">{{ noti }}</a>
+                  </span>
+                  <a href="/bet.request/accept/{ {noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a href="/bet.request/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      {% endfor %}
+                      {% for noti in account.other_claiming_winner_bets %}
+                    <span>
+                      <a class="dropdown-item" href="#">Win claim {{ noti }}</a>
+                    </span>
+                    <a href="/bet.vote.victory/accept/{{ noti }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                    <a href="/bet.vote.victory/decline/{{ noti }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      {% endfor %}
+                    {% else %}
+                    <span class="col-12 " width= >Không có thông báo nào</span>
+                  {% endif %}
+
+
+
+
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </div>
+            </li>
+
+
+
+
+            <li class="ml-4 nav-item active mr-2">
+              <a class="nav-link" href="/information">Về chúng tôi<span class="sr-only"></span></a>
+            </li>
+
+
+            <li class="nav-item active dropdown font-size-lg">
+              <a class="nav-link dropdown-toggle" href="/profile/{{account.username}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Thao tác
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right rounded  text-right " aria-labelledby="navbarDropdown">
+                <br>
+                <a class="dropdown-item" href="#">Cài đặt</a>
+
+                <br>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout"><span class="nav-item text-dark">Đăng xuất</span></a>
+              </div>
+
+
+
+            </li>
+          </ul>
+            <br>
+          </ul>
+        </div>
+        </div>
+    </nav>
+    <!-- nav _end -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
+      <a class="navbar-brand ml-2" href="http://127.0.0.1:5000/">
+        Lên kèo
+      </a>
+    </nav>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+  </body>
+
+
+
+</html>
