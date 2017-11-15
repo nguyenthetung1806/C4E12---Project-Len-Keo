@@ -109,7 +109,6 @@ def profile(username_url):
 
     for bet in account_other.active_bet:
         bets_to_show.insert(0, Contract_type_1.objects().with_id(bet))
-
     # dùng để nhét các document player tham gia kèo vào player_to_show []
     users_involved_list = []
     for bet in bets_to_show:
@@ -148,9 +147,14 @@ def edit_profile(username_url):
     username = session['username']
     account = Account.objects.get(username = username)
     account_other = Account.objects.get(username = username_url)
+    notification =[]
+    for each in account.pending_bet:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
+    for each in account.other_claiming_winner_bets:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
     if request.method == "GET":
         hints = Account.objects()
-        return render_template('edit_profile.html', account = account, hints = hints, account_other = account_other)
+        return render_template('edit_profile.html', account = account, hints = hints, account_other = account_other, notification = notification)
     elif request.method == "POST":
         form = request.form
         name = form['name']
@@ -177,8 +181,13 @@ def friend_list(username_url):
     username = session['username']
     account = Account.objects.get(username = username)
     account_other = Account.objects.get(username = username_url)
+    notification =[]
+    for each in account.pending_bet:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
+    for each in account.other_claiming_winner_bets:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
     hints = Account.objects()
-    return render_template('friend_list.html', account = account, hints = hints, account_other = account_other)
+    return render_template('friend_list.html', account = account, hints = hints, account_other = account_other, notification = notification)
 
 
 
@@ -232,6 +241,7 @@ def friend_request_method(method, username_url):
 class Contract_type_1(Document):
     contract_maker = ListField()
     contract_term = StringField()
+    contract_name = StringField()
     #traditional\
     party_left = ListField()
     party_right = ListField()
@@ -287,18 +297,31 @@ def contract_type_1(contract_class):
     account = Account.objects.get(username = username)
     friendlist_information = []
 
+    notification =[]
+    for each in account.pending_bet:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
+    for each in account.other_claiming_winner_bets:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
+
     for friend in account.friendlist:
         friendlist_information.insert(0, Account.objects().get(username = friend))
     if request.method == "GET":
         hints = Account.objects()
         if contract_class == "traditional":
-            return render_template('contract_type_1_traditional.html', account = account, friendlist_information = friendlist_information, hints = hints)
+            return render_template('contract_type_1_traditional.html',  account = account,
+                                                                        friendlist_information = friendlist_information,
+                                                                        hints = hints,
+                                                                        notification = notification)
         elif contract_class == "multiparty":
-            return render_template('contract_type_1_multiparty.html', account = account, friendlist_information = friendlist_information, hints = hints)
+            return render_template('contract_type_1_multiparty.html',   account = account,
+                                                                        friendlist_information = friendlist_information,
+                                                                        hints = hints,
+                                                                        notification = notification)
     elif request.method == "POST":
         form = request.form
         if contract_class == "traditional":
             contract_maker = []
+            contract_name = form['contract_name']
             contract_maker.append(username)
             contract_term = form['contract_term']
             party_right_pending = form.getlist('party_right')
@@ -318,28 +341,31 @@ def contract_type_1(contract_class):
                                                 spectator = spectator,
                                                 punishment = punishment,
                                                 dates = dates,
-                                                times = times)
+                                                times = times,
+                                                contract_name = contract_name)
             contract_type_1.save()
-            if username in party_left_pending:
-                contract_type_1.update(pull__party_left_pending = username)
-                contract_type_1.update(add_to_set__party_left = username)
-            elif username in party_right_pending:
-                contract_type_1.update(pull__party_right_pending = username)
-                contract_type_1.update(add_to_set__party_right = username)
             account.update(add_to_set__active_bet = str(contract_type_1.id))
             for account_other in contract_type_1.party_right_pending:
+                if username in party_right_pending:
+                    contract_type_1.update(pull__party_right_pending = username)
+                    contract_type_1.update(add_to_set__party_right = username)
                 clone = Account.objects().get(username = account_other)
                 clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_1 in contract_type_1.party_left_pending:
+                if username in party_left_pending:
+                    contract_type_1.update(pull__party_left_pending = username)
+                    contract_type_1.update(add_to_set__party_left = username)
                 clone = Account.objects().get(username = account_other_1)
                 clone.update(add_to_set__pending_bet = str(contract_type_1.id))
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))
+            account.update(pull__pending_bet = str(contract_type_1.id))
             url = '/profile/' + username
             return redirect(url)
         elif contract_class == "multiparty":
             contract_maker = []
+            contract_name = form['contract_name']
             contract_maker.append(username)
             contract_term = form['contract_term']
             party_multiplayers_pending = form.getlist('party_multiplayers')
@@ -359,7 +385,8 @@ def contract_type_1(contract_class):
                                                 spectator = spectator,
                                                 punishment = punishment,
                                                 dates = dates,
-                                                times = times)
+                                                times = times,
+                                                contract_name = contract_name)
             contract_type_1.save()
             contract_type_1.update(pull__party_multiplayers_pending = username)
             contract_type_1.update(add_to_set__party_multiplayers = username)
@@ -370,6 +397,7 @@ def contract_type_1(contract_class):
             for account_other_spec in contract_type_1.spectator:
                 clone = Account.objects().get(username = account_other_spec)
                 clone.update(add_to_set__bet_notification = str(contract_type_1.id))
+            account.update(pull__pending_bet = str(contract_type_1.id))
             url = '/profile/' + username
             return redirect(url)
         #
@@ -587,6 +615,11 @@ def active_bet(bet_id):
     account = Account.objects.get(username = username)
     bet = Contract_type_1.objects().with_id(bet_id)
     hints = hints
+    notification =[]
+    for each in account.pending_bet:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
+    for each in account.other_claiming_winner_bets:
+        notification.insert(0, Contract_type_1.objects().with_id(each))
     # nhồi tên
     users_involved_list = []
     clone_user_information(bet, users_involved_list)
@@ -594,7 +627,7 @@ def active_bet(bet_id):
     players_to_show = []
     for username in users_involved_list:
         players_to_show.append(Account.objects().get(username = username))
-    return render_template('active_bet.html', account = account, players_to_show = players_to_show, bet = bet, hints =hints)
+    return render_template('active_bet.html', account = account, players_to_show = players_to_show, bet = bet, hints =hints, notification = notification)
 
 
 
@@ -608,28 +641,6 @@ def comments(bet_id, username_url):
     bet.update(add_to_set__comments = {'username': username,
                                         'comment': comment})
     return redirect(url)
-
-
-# class Contract_type_1(Document):
-#     contract_maker = StringField()
-#     contract_term = StringField()
-#     #traditional\
-#     party_left = ListField()
-#     party_right = ListField()
-#     party_left_pending = ListField()####
-#     party_right_pending = ListField()####
-#     #multiparty
-#     party_multiplayers = ListField()
-#     party_multiplayers_pending = ListField()####
-#     number_of_winner = StringField()
-#     #
-#     spectator = ListField()
-#     punishment = StringField()
-#     #claim victory
-#     victory_claim = ListField()
-#     accept_verification = ListField()
-#     winner = ListField()
-#     loser  = ListField()
 
 
 @app.route('/logout', methods = ['GET'])

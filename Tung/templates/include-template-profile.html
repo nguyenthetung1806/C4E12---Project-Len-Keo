@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!--One of two columns-->
+      <!-- row top -->
+      <div class="col row rounded-left border border-right-0 border-secondary pt-2 pb-2 pr-1 pl-1 m-0">
+        <div class="col-lg-4 col-xl-2 pr-2 pl-2 pt-2">
+          <a data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" href="/friend.list/{{account_other.username}}">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+              <p class="m-0" data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" >
+                <i class="fa fa-address-book-o" aria-hidden="true"></i>
+              </p>
+            </div>
+          </a>
+          <a  data-toggle="tooltip" data-placement="top" title="Danh sách Kèo bet" href="#">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+              <p class="m-0" >
+                <i class="fa fa-list" aria-hidden="true">
+                </i>
+              </p>
+            </div>
+          </a>
+          {% if account.username != account_other.username %}
+          <a  data-toggle="tooltip" data-placement="top" title="Thông tin cá nhân" href="/edit.profile/{{account_other.username}}">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+              <p class="m-0" >
+                <i class="fa fa-eye" aria-hidden="true">
+                </i>
+              </p>
+            </div>
+          </a>
+          {% else %}
+          <a  data-toggle="tooltip" data-placement="top" title="chỉnh sửa thông tin" href="/edit.profile/{{username_url}}">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+            <p class="m-0" >
+              <i class="fa fa-pencil-square-o" aria-hidden="true">
+              </i>
+            </p>
+          </div>
+        </a>
+          {% endif %}
+        </div>
+        <!--image -->
+        <div class="col-lg col-xl rounded-left mx-auto d-block p-0 m-0" >
+          {% if username_url == username %}
+          {% if account.image is none %}
+          <img class="rounded-left card-img-top p-0 m-0" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
+          {% else %}
+          <img class="rounded-left card-img-top p-0 m-0" src="data:image/*;base64,{{account.image}}" height="220px" alt="Ảnh đại diện">
+          {% endif %}
+          {% else %}
+          {% if account_other.image is none %}
+          <img class="rounded-left card-img-top p-0 m-0" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
+          {% else %}
+          <img class="rounded-left card-img-top p-0 m-0" src="data:image/*;base64,{{account_other.image}}" height="220px" alt="Ảnh đại diện">
+          {% endif %}
+          {% endif %}
+        </div>
+        <!--image end_ -->
+      </div>
+      <!-- row top end_ -->
+      <!-- username -->
+      <div class="col p-0 m-0 mt-2 align-middle text-center mx-auto d-block">
+            <h2 class="text-dark font-weight-bold mb-1 ">
+              {% if username_url == username %}                  <!--add account here -->
+              {{ account.name }}
+              {% else %}
+              {{ account_other.name }}
+              {% endif %}
+            </h2>
+      </div>
+      <!-- username end_ -->
+      <!-- nút lên kèo & kết bạn -->
+      {% if username_url == username %}
+      <div class="col-9 d-flex align-items-center mx-auto d-block mb-2">
+        <form class="d-flex align-items-center mx-auto d-block btn-block
+        " action="/contract.type.1/traditional" method="get">
+          <button class="btn btn-success btn-block font-weight-bold btn-lg pt-2 pb-2" type="submit" name="">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            Lên kèo
+          </button>
+        </form>
+      </div>
+      {% else %}
+        {% if username_url in account.friendlist %}
+      <div class="col-9 d-flex align-items-center mx-auto d-block mb-2">
+        <form class="d-flex align-items-center mx-auto d-block btn-block
+        " action="/contract.type.1/traditional" method="get">
+          <button class="btn btn-success btn-block font-weight-bold btn-lg pt-2 pb-2" type="submit" name="">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            Lên kèo
+          </button>
+        </form>
+      </div>
+        {% elif username_url in account.friend_request_sent %}
+      <div class="col-9 d-flex align-items-center mx-auto d-block mb-2">
+        <form class="d-flex align-items-center mx-auto d-block btn-block
+        " action="/friend.request/cancel/{{username_url}}" method="get">
+          <button class="btn btn-success btn-block font-weight-bold btn-lg pt-2 pb-2" type="submit" name="">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            Hủy lời mời
+          </button>
+        </form>
+      </div>
+        {% elif username_url in account.friend_accept_pending %}
+      <div class="col-9 d-flex align-items-center mx-auto d-block mb-2">
+        <form class="d-flex align-items-center mx-auto d-block btn-block
+        " action="/friend.request/accept/{{username_url}}" method="get">
+          <button class="btn btn-success btn-block font-weight-bold btn-lg pt-2 pb-2" type="submit" name="">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            Chấp nhận
+          </button>
+        </form>
+      </div>
+        {% else %}
+      <div class="col-9 d-flex align-items-center mx-auto d-block mb-2">
+        <form class="d-flex align-items-center mx-auto d-block btn-block
+        " action="/friend.request/send.request/{{username_url}}" method="get">
+          <button class="btn btn-success btn-block font-weight-bold btn-lg pt-2 pb-2" type="submit" name="">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            Kết bạn
+          </button>
+        </form>
+      </div>
+        {% endif %}
+      {% endif %}
+      <!-- nút lên kèo end_ & kết bạn -->
+      <!-- block -->
+      <div class="col- d-flex align-items-center mx-auto d-block mb-3 p-0">
+        <!--button -->
+        <div class="col p-0 m-0">
+          <!-- cơ chế hủy kết bạn -->
+          {% if username_url in account.friendlist %}
+          <form class="col-md col-6 d-flex align-items-center m-0 mx-auto d-block" action="/friend.request/delete.friend/{{username_url}}" method="post">
+            <button class="btn btn-danger btn-block " type="submit" name="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              Hủy kết bạn
+            </button>
+          </form>
+          {% endif %}
+            <!-- cơ chế hủy kết bạn end_ -->
+        </div>
+        <!--button end_ -->
+      </div>
+      <!-- block end_ -->
+      <!-- badges -->
+      <div class="p-0 pr-2 m-0">
+        <div class="col row rounded-left border border-right-0 border-secondary m-0 p-2 bg-secondary mb-3">
+          <div class="col row m-0 p-0">
+            <div class="col-8 text-center">
+              <h6 class="m-0 p-0 font-weight-bold">
+                Số lần thắng:
+              </h6>
+            </div>
+            <div class="col-4 text-center border border-light font-weight-bold border-top-0 border-bottom-0 border-right-0">
+              <h5 class="m-0 p-0 font-weight-bold">
+                {{ account_other.win_bet|length }}
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col row rounded-left border border-right-0 border-danger m-0 p-2 bg-danger">
+          <div class="col row m-0 p-0">
+            <div class="col-8 text-center">
+              <h6 class="m-0 p-0 font-weight-bold">
+                Số lần thua:
+              </h6>
+            </div>
+            <div class="col-4 text-center border border-light font-weight-bold border-top-0 border-bottom-0 border-right-0">
+              <h5 class="m-0 p-0 font-weight-bold">
+                {{ account_other.lost_bet|length }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- badges end_ -->
+    </div>
+    <!--One of two columns end_-->
+
+  </body>
+</html>

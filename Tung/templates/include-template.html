@@ -11,13 +11,12 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/bootstrap-datepicker.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="static/js/bootstrap-datepicker.min.js"></script>
     <!-- import links _end -->
-
     <!-- search_friend -->
+
+
     <script type="text/javascript">
 
       function _focus(){
@@ -56,7 +55,6 @@
             else {
               li[i].style.display = "none";
             }
-
           }
           else {
             li[i].style.display = "none";
@@ -72,7 +70,6 @@
         }
         nonresult.value = "0";
       }
-
     </script>
     <!-- search_friend_end -->
 
@@ -85,10 +82,12 @@
 
 
     <!-- nav -->
-    <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-success p-2 pl-4 ">
-      <div class="col-md-0 col-xl-2 invisible hidden-lg-down ">
+    <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark p-0 ">
+      <div class="col-md-0 col-xl-1 invisible hidden-lg-down ">
       </div>
       <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+          <span style="display:inline-block; width: YOURWIDTH;"></span>
         Lên kèo
       </a>
       <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +99,7 @@
             <form class="form-inline my-2 my-lg-0 mr-auto">
               <div class="dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
-                <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Nhập để Tìm bạn" aria-label="Search">
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <ul id="search_hint" class="p-0">
                   {% for hint in hints %}
@@ -129,8 +128,10 @@
             </form>
           </li>
         </ul>
+
         <ul class="navbar-nav ml-auto col-xs-0 ">
-          <li class="nav-item active rounded p-0 mr-4 ">
+
+          <li class="nav-item active rounded align-middle p-0 mr-3 ">
             <a class="text-left" href="/profile/{{account.username}}">
             {% if account.image is none %}
               <img class=" rounded" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="35px" width="35px" alt="">
@@ -140,9 +141,11 @@
             </a>
           </li>
 
+
+
           <li class="nav-item rounded p-0">
             <div class="btn-group rounded p-0 m-0" >
-              <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 class="m-0"><i class="fa fa-user-plus
                       {% if account.friend_accept_pending|length == 0 %}
                         text-secondary
@@ -163,9 +166,9 @@
                       <span>
                         <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
                           {% if hint.image is none %}
-                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="15px" width="15px" alt="">
                           {% else %}
-                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="15px" width="15px" alt="">
                           {% endif %}
                           {{ hint.name }}</span>
                           <p class="m-0">đã gửi lời mời kết bạn.
@@ -188,9 +191,9 @@
           </li>
 
 
-          <li class="nav-item active rounded p-0 mr-4">
+          <li class="nav-item active rounded p-0 mr-5">
             <div class="btn-group rounded p-0 m-0" >
-              <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 class="m-0"> <i class="fa fa-bookmark font-size-lg
                   {% if notification|length == 0 %}
                   text-secondary
@@ -266,11 +269,11 @@
                 </div>
             </li>
 
-
-
-
-            <li class="nav-item mr-2">
-              <a class="nav-link disabled" href="">Về chúng tôi<span class="sr-only"></span></a>
+            <li class="nav-item active rounded mr-4 p-0 pb-1 pt-1">
+                  <a href="/contract.type.1/traditional" class="rounded pt-0 pb-1 pr-4 pl-4 btn btn-light btn-block font-weight-bold"  name="">
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    Lên kèo
+                  </a>
             </li>
 
 
@@ -289,7 +292,7 @@
 
           <li class="">
             <div class=" clearfix invisible hidden-lg-down ">
-              12345666271233333333333333333333
+              1235666271233333333333333333333
             </div>
           </li>
 
@@ -298,7 +301,7 @@
 
 </nav>
     <!-- nav _end -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 invisible ">
+    <nav class="navbar navbar-expand-xl navbar-dark bg-success p-0 invisible ">
       <a class="navbar-brand ml-2" >
         Lên kèo
       </a>

@@ -109,10 +109,31 @@
 
       <!-- form để người dùng lên kèo -->
       <!-- nhớ phải có frm là tên của from -->
-      <form name="frm" class="" action="" method="post">
+
+
+
+
+
+
+      <form name="frm" class="" action="" method="post" >
+
+        <div class="form-group">
+          <div class="row m-0 p-0">
+            <div class="col-4 col-xl-2  p-0">
+              <label class="ml-3" for=""><strong>Tên kèo</strong></label>
+            </div>
+            <div class="col p-0">
+              <input class="form-control" name="contract_name" required
+              placeholder="Bạn muốn lập kèo về ?">
+            </div>
+          </div>
+
+
+        </div>
+
         <div class="form-group">
           <label class="ml-3" for=""><strong>Điều khoản</strong></label>
-          <textarea class="form-control" name="contract_term"
+          <textarea class="form-control" name="contract_term" required
           placeholder="Kèo truyền thống phù hợp với các kiểu cá độ đơn giản, với cửa trên và cửa dưới ......" rows="5" cols="160"></textarea>
         </div>
 
@@ -226,11 +247,11 @@
         </div>
         <br>
         <label for="">Nhập ngày
-        <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
+        <input type="number"  name="day"    list="day-list" min="1" max="31"></label>
         <label for="">Nhập tháng
-        <input type="number"  name="month"   list="month-list" min="1"  max="12" required></label>
+        <input type="number"  name="month"   list="month-list" min="1"  max="12"></label>
         <label for="">Nhập năm
-        <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br>
+        <input type="number"  name="year"  list="year-list" min="2017" max="4000"></label><br>
 
         <label for="">Nhập thời gian
         <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" ></label>
@@ -280,9 +301,8 @@
           <option value="29">
           <option value="30">
           <option value="31">
-
         </datalist>
-
+        <!-- Thời gian end_ -->
 
 
 
@@ -326,7 +346,8 @@
         <!-- Hình phạt -->
         <div class="form-group">
           <label class="ml-3" for=""><strong>Hình phạt</strong></label>
-          <textarea class="form-control" name="punishment" rows="3" cols="160" placeholder="Hình phạt dành cho bên thua cuộc ......"></textarea>
+          <textarea class="form-control" name="punishment" rows="3" cols="160" required placeholder="Hình phạt dành cho bên thua cuộc ......">
+          </textarea>
         </div>
 
 
