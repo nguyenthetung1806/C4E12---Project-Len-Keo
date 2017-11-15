@@ -86,204 +86,184 @@
 
     <!-- nav -->
     <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-success p-2 pl-4 ">
-
       <div class="col-md-0 col-xl-2 invisible hidden-lg-down ">
       </div>
-          <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
-            Lên kèo
-          </a>
-
-
-
-
-
-
+      <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
+        Lên kèo
+      </a>
       <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-
-
-
       <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto col-xs-0 ">
           <li class="nav-item active mr-auto pl-4 ml-4">
             <form class="form-inline my-2 my-lg-0 mr-auto">
-                <div class="dropdown">
-                  <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
-                  <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <ul id="search_hint" class="p-0">
-                      {% for hint in hints %}
-                        <li class="dropdown-item" class="pl-3 pr-3"><a href="/profile/{{hint['username']}}" ><div class="row text-dark text-left">
-                          <div class="col-md-1">
-                          {% if hint.image is none %}
-                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-                        </div>
-                        <div class="col-md-8">
-                          <p>{{hint['name']}}</p></div></div></a></li>
-                      {% endfor %}
-                    </ul>
-                    <p class="dropdown-item pl-3 pr-3" id="no_result">Không tìm thấy</p>
-                  </div>
+              <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
+                <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Search" aria-label="Search">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <ul id="search_hint" class="p-0">
+                  {% for hint in hints %}
+                    <li class="dropdown-item" class="pl-3 pr-3">
+                      <a href="/profile/{{hint['username']}}" ><div class="row text-dark text-left">
+                      <div class="col-md-1">
+                    {% if hint.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                    {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                    {% endif %}
+                      </div>
+                      <div class="col-md-8">
+                        <p>{{hint['name']}}</p></div>
+                      </div></a>
+                    </li>
+                  {% endfor %}
+                  </ul>
+                  <p class="dropdown-item pl-3 pr-3" id="no_result">Không tìm thấy</p>
                 </div>
-                <input type="hidden" id="check_but" name="" value="1">
-                <input type="hidden" id="limit" name="" value="0">
-                <input type="hidden" id="result" name="" value="0">
-
+              </div>
+              <input type="hidden" id="check_but" name="" value="1">
+              <input type="hidden" id="limit" name="" value="0">
+              <input type="hidden" id="result" name="" value="0">
               <button class="btn btn-outline-light my-2 my-sm-0 font-weight-bold" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto col-xs-0 ">
-
-            <li class="nav-item active rounded p-0 mr-4 ">
-              <a class="text-left" href="/profile/{{account.username}}">
-                {% if account.image is none %}
+          <li class="nav-item active rounded p-0 mr-4 ">
+            <a class="text-left" href="/profile/{{account.username}}">
+            {% if account.image is none %}
               <img class=" rounded" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="35px" width="35px" alt="">
-                {% else %}
+            {% else %}
               <img class=" rounded" src="data:image/*;base64,{{account.image}}" height="35px" width="35px" alt="">
-                {% endif %}
-              </a>
-            </li>
+            {% endif %}
+            </a>
+          </li>
 
-            <li class="nav-item rounded p-0">
-              <div class="btn-group rounded p-0 m-0" >
-                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"><i class="fa fa-user-plus
+          <li class="nav-item rounded p-0">
+            <div class="btn-group rounded p-0 m-0" >
+              <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5 class="m-0"><i class="fa fa-user-plus
                       {% if account.friend_accept_pending|length == 0 %}
-                      text-secondary
+                        text-secondary
                       {% else %}
-                      text-white
+                        text-white
                       {% endif %}
-
-
                      " aria-hidden="true"></i></h5>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right rounded pb-1 pt-1" >
-
-
-                  {% if account.friend_accept_pending|length == 0 %}
-                    <div class="text-dark text-right pr-4 col-12">Không có lời mời nào</div>
-                  {% else %}
-                    {% for request in account.friend_accept_pending %}
+              </button>
+              <div class="dropdown-menu dropdown-menu-right rounded pb-1 pt-1" >
+                {% if account.friend_accept_pending|length == 0 %}
+                  <div class="text-dark text-right pr-4 col-12">Không có lời mời nào</div>
+                {% else %}
+                  {% for request in account.friend_accept_pending %}
                     {% for hint in hints %}
-                    {% if request == hint.username %}
-                    <div class="row">
-                      <div class="col-10">
-                    <span>
-                      <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
-                        {% if hint.image is none %}
-                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                        {% else %}
-                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                        {% endif %}
-                        {{ hint.name }}</span>
-                        <p class="m-0">đã gửi lời mời kết bạn.
-                        <span class="text-primary">Xem trang cá nhân</span></p></a>
-                    </span>
-                    </div>
-                    <div class=" col-2 p-0 text-left">
-                  <a class="text-lg font-weight-bold text-success mr-1" href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                  <a class="text-lg font-weight-bold text-danger" href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                    {% endfor %}
-                  {% endif %}
-
-
-
-                  <div class="dropdown-divider m-0"></div>
-                  <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="/friend.list/{{account.username}}">Xem chi tiết</a>
-                </div>
-              </div>
-
-            </li>
-
-
-            <li class="nav-item active rounded p-0 mr-4">
-              <div class="btn-group rounded p-0 m-0" >
-                <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <h5 class="m-0"> <i class="fa fa-bookmark font-size-lg
-                    {% if notification|length == 0 %}
-                    text-secondary
-                    {% else %}
-                    text-white
-                    {% endif %}
-                    " aria-hidden="true"></i></h5>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right rounded  pb-1 pt-1" >
-
-
-                  {% if notification|length != 0 %}
-                  {% for noti in notification %}
-                  {% for hint in hints %}
-                  {% if noti.contract_maker[-1] == hint.username %}
+                      {% if request == hint.username %}
                   <div class="row">
                     <div class="col-10">
-                  <span>
-                    <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
-                      {% if hint.image is none %}
-                    <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                      {% else %}
-                    <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                      {% endif %}
-
-
-
-                      {{ hint.name }}</span>
-                      <p class="m-0">mời bạn tham gia một giao kèo.
-                      <span class="text-primary">Chi tiết</span></p></a>
-                      </span>
-                  </div>
-                  <div class=" col-2 p-0 text-left">
-                    <a class="text-lg font-weight-bold text-success mr-1" class="text-success" href="/bet.request/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                    <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                  </div>
-                  </div>
-                  {% endif %}
-                  {% endfor %}
-                  {% endfor %}
-                      {% for noti in notification %}
-                      {% for hint in hints %}
-                      {% if noti.victory_claim[-1] == hint.username %}
-                      <div class="col-10">
-                    <span>
-                      <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
-                        {% if hint.image is none %}
-                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                        {% else %}
-                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                        {% endif %}
-                        {{ hint.name }}</span>
-                      <p class="m-0">tuyên bố đã chiến thắng 1 kèo mà bạn tham gia.
-                      <span class="text-primary">Chi tiết</span></p></a>
+                      <span>
+                        <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
+                          {% if hint.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                          {{ hint.name }}</span>
+                          <p class="m-0">đã gửi lời mời kết bạn.
+                          <span class="text-primary">Xem trang cá nhân</span></p></a>
                       </span>
                     </div>
                     <div class=" col-2 p-0 text-left">
-                    <a class="text-lg font-weight-bold text-success mr-1" href="/bet.vote.victory/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                    <a class="text-lg font-weight-bold text-danger" href="/bet.vote.victory/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      <a class="text-lg font-weight-bold text-success mr-1" href="/friend.request/accept/{{request}}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                      <a class="text-lg font-weight-bold text-danger" href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
                     </div>
                     </div>
                       {% endif %}
-                      {% endfor %}
-                      {% endfor %}
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+                    <div class="dropdown-divider m-0"></div>
+                    <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="/friend.list/{{account.username}}">Xem chi tiết</a>
+              </div>
+            </div>
+          </li>
 
+
+          <li class="nav-item active rounded p-0 mr-4">
+            <div class="btn-group rounded p-0 m-0" >
+              <button type="button" class="rounded btn btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h5 class="m-0"> <i class="fa fa-bookmark font-size-lg
+                  {% if notification|length == 0 %}
+                  text-secondary
                   {% else %}
-
-                      <div class="text-dark text-right pr-4">Không có thông báo nào</div>
-
+                  text-white
                   {% endif %}
+                  " aria-hidden="true"></i></h5>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right rounded  pb-1 pt-1" >
+              {% if notification|length != 0 %}
+                {% for noti in notification %}
+                  {% for hint in hints %}
+                    {% if noti.contract_maker[-1] == hint.username %}
+              <div class="row">
+                <div class="col-10">
+                  <span>
+                    <a class="dropdown-item pb-2" href="#">
+                      <span class=" font-weight-bold text-success">
+                        {% if hint.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
 
+
+
+                          {{ hint.name }}
+                      </span>
+                      <p class="m-0">mời bạn tham gia một giao kèo.
+                      <span class="text-primary">Chi tiết
+                      </span>
+                    </p>
+                    </a>
+                    </span>
+                </div>
+                <div class=" col-2 p-0 text-left">
+                  <a class="text-lg font-weight-bold text-success mr-1" class="text-success" href="/bet.request/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+              </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+              {% for noti in notification %}
+                {% for hint in hints %}
+                  {% if noti.victory_claim[-1] == hint.username %}
+              <div class="col-10">
+                <span>
+                  <a class="dropdown-item pb-2" href="#"><span class=" font-weight-bold text-success">
+                    {% if hint.image is none %}
+                  <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                    {% else %}
+                  <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                    {% endif %}
+                      {{ hint.name }}</span>
+                  <p class="m-0">tuyên bố đã chiến thắng 1 kèo mà bạn tham gia.
+                    <span class="text-primary">Chi tiết</span></p></a>
+                </span>
+              </div>
+                <div class=" col-2 p-0 text-left">
+                  <a class="text-lg font-weight-bold text-success mr-1" href="/bet.vote.victory/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                  <a class="text-lg font-weight-bold text-danger" href="/bet.vote.victory/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+              </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% else %}
+                      <div class="text-dark text-right pr-4">Không có thông báo nào</div>
+          {% endif %}
                   <div class="dropdown-divider m-0"></div>
                   <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="#">Xem toàn bộ</a>
                 </div>
-              </div>
             </li>
 
 
@@ -307,15 +287,16 @@
               </div>
             </li>
 
-          <li class=""></li>
-
-          </ul >
+          <li class="">
             <div class=" clearfix invisible hidden-lg-down ">
               12345666271233333333333333333333
+            </div>
+          </li>
+
 
           </ul>
-        </div>
-    </nav>
+
+</nav>
     <!-- nav _end -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 invisible ">
       <a class="navbar-brand ml-2" >

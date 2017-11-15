@@ -36,7 +36,7 @@
                   </div>
                   <div class="col p-0 m-0 mt-2 mb-3 align-middle text-center mx-auto d-block">
                         <h2 class="text-dark font-weight-bold mb-3 ">
-                          {% if username_url == username %}                  <!--add account here -->
+                          {% if account.username == account_other.username %}                  <!--add account here -->
                           {{ account.name }}
                           {% else %}
                           {{ account_other.name }}
@@ -46,7 +46,13 @@
 
                   <div class="col-md-5 col-lg-7 d-flex align-items-center mx-auto d-block mb-2">
 
-                    <form class="d-flex align-items-center mx-auto d-block btn-block" action="/contract.type.1/traditional" method="get">
+                    <form class="d-flex align-items-center mx-auto d-block btn-block
+                          {% if account_other.username == account.username or account_other.username in account.friendlist %}
+                          {% else %}
+                            invisible
+                          {% endif %}
+
+                    " action="/contract.type.1/traditional" method="get">
                       <button class="btn btn-success btn-block font-weight-bold btn-lg" type="submit" name="">
                       <i class="fa fa-bookmark" aria-hidden="true"></i>
                       Lên kèo
@@ -112,7 +118,7 @@
                       <div class="row">
                         <div class="col-10">
                       <span>
-                        <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
+                        <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
                           {% if hint.image is none %}
                         <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
                           {% else %}
@@ -166,7 +172,7 @@
                         <div class="row">
                           <div class="col-10">
                         <span>
-                          <a class="dropdown-item pb-2" href="#"> <span class=" font-weight-bold text-success">
+                          <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
                             {% if hint.image is none %}
                           <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
                             {% else %}
