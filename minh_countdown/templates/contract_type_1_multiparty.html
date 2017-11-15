@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Đặt kèo</title>
+  </head>
+  <script type="text/javascript">
+    function _check_state(val, party) {
+      if (party == "right") {
+        if (document.getElementById(val).disabled == false) {
+          document.getElementById(val).disabled = true;
+        }
+        else {
+          document.getElementById(val).disabled = false;
+        }
+      }
+      else {
+        if (document.getElementById(val + "1").disabled == false) {
+          document.getElementById(val + "1").disabled = true;
+        }
+        else {
+          document.getElementById(val + "1").disabled = false;
+        }
+      }
+    }
+  </script>
+  <body>
+
+    <!-- navbar -->
+
+    {% include 'include-template.html' %}
+
+
+
+    <div class="container col-md-6 col-11 p-0 mt-3 ">
+
+        <div class="row">
+          <div class="col-md-3 col-5 m-0 pr-0 ">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+              <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4" href="/contract.type.1/traditional">
+                <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                Classic
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0">
+              <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4" href="/contract.type.1/multiparty">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                Nhiều bên
+              </a>
+            </div>
+          </div>
+          <div class="col m-0 pl-0 border border-success border-top-0 border-left-0 border-right-0 p-0 mr-3">
+
+          </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="container col-md-6 col-11 p-0">
+    <div class="container  rounded-bottom border border-success border-top-0 pl-4 pr-4">
+      <br>
+      <!-- Tabs để chọn loại kèo -->
+
+
+      <!-- form để người dùng lên kèo -->
+      <form class="" action="" method="post">
+        <div class="form-group">
+          <label class="ml-3" for=""><strong>Điều khoản</strong></label>
+          <textarea class="form-control" name="contract_term"
+          placeholder="Kèo nhiều bên phù hợp với các kiểu cá độ theo nhóm, như 'đứa nào có bạn trai/gái trước', 'ai trong nhóm sẽ cưới vợ/chồng trước', ...... Loại kèo này cũng phù hợp để lên kèo đi chơi, khiến cho mấy đứa hay bùng kèo giờ không thể bùng 'một cách hợp pháp' nữa ......" rows="5" cols="160"></textarea>
+        </div>
+
+
+        <!-- Các cửa -->
+        <div class="form-group">
+          <div class="row">
+            <!-- cửa trên -->
+            <div class="col-md-12">
+              <div id="accordion" role="tablist">
+                  <div class="card-tittle">
+                    <div data-toggle="collapse" class="p-2 text-center bg-success text-light btn-block rounded-top" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    Các bên tham gia
+                    </div>
+                  </div>
+                  <div id="collapse1" class="collapse show " role="tabpanel" aria-labelledby="heading1" data-parent="#accordion">
+                    <div class="card-body pb-2 pt-2 border border-success bg-light border-top-0 rounded-bottom">
+                      <div class="m-0 p-0 pl-4 mr-4" >
+                      <label multiple name="party_multiplayers" class="custom-control custom-checkbox mb-0">
+                        <input type="checkbox" class="custom-control-input" name="party_multiplayers" value="{{account.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if account.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{account.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{account.username}}">{{account.name}}</option></span>
+                      </label>
+                      </div>
+                      {% for friend in friendlist_information %}
+                      <div class="m-0 p-0 pl-4 mr-4" >
+                      <label multiple name="party_multiplayers" class="custom-control custom-checkbox mb-0">
+                        <input type="checkbox" id="{{friend.username}}1" onclick="_check_state(this.value,'right')" class="custom-control-input" name="party_multiplayers" value="{{friend.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if friend.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
+                      </label>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+            <div class="row mt-3">
+              <div class="col-md-4 col -  ">
+                <label class="ml-3 " for=""><strong>Số người thắng tối đa</strong></label>
+              </div>
+              <div class="col-md-1 text-center">
+                  <select name="number_of_winner" class="form-control-sm" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>Không giới hạn</option>
+                  </select>
+              </div>
+              <div class="col-md-9">
+                <label class=" invisible" for=""><strong>1</strong></label>
+              </div>
+
+
+            <!-- cửa trên end_ -->
+          </div>
+
+          <!-- Thời gian -->
+          <div data-toggle="collapse" class="p-2 text-center bg-success text-light btn-block rounded-top" href="#collapsex" aria-expanded="true" aria-controls="collapse3">
+          Thời hạn cho giao kèo
+          </div>
+          <br>
+          <label for="">Nhập ngày
+          <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
+          <label for="">Nhập tháng
+          <input type="number"  name="month"   list="month-list" min="1"  max="12" required></label>
+          <label for="">Nhập năm
+          <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br>
+
+          <label for="">Nhập thời gian
+          <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" ></label>
+          <datalist id="month-list">
+            <option value="01">
+            <option value="02">
+            <option value="03">
+            <option value="04">
+            <option value="05">
+            <option value="06">
+            <option value="07">
+            <option value="08">
+            <option value="09">
+            <option value="10">
+            <option value="11">
+            <option value="12">
+          </datalist>
+          <datalist id="day-list">
+            <option value="01">
+            <option value="02">
+            <option value="03">
+            <option value="04">
+            <option value="05">
+            <option value="06">
+            <option value="07">
+            <option value="08">
+            <option value="09">
+            <option value="10">
+            <option value="11">
+            <option value="12">
+            <option value="13">
+            <option value="14">
+            <option value="15">
+            <option value="16">
+            <option value="17">
+            <option value="18">
+            <option value="19">
+            <option value="20">
+            <option value="21">
+            <option value="22">
+            <option value="23">
+            <option value="24">
+            <option value="25">
+            <option value="26">
+            <option value="27">
+            <option value="28">
+            <option value="29">
+            <option value="30">
+            <option value="31">
+
+          </datalist>
+
+
+
+
+
+        <!-- Khán giả -->
+        <div class="form-group">
+          <label class="ml-3" for=""><strong>Khán giả</strong></label>
+          <div class="mt-1" id="accordion" role="tablist">
+              <div class="card-tittle">
+                <div data-toggle="collapse" class="p-2 text-center bg-success text-light btn-block rounded-top" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                Thông báo tới một vài người bạn của bạn về kèo này
+                </div>
+              </div>
+              <div id="collapse3" class="collapse" role="tabpane3" aria-labelledby="heading3" data-parent="#accordion">
+                <div class="card-body pb-2 pt-2 border border-success bg-light border-top-0 rounded-bottom">
+
+                  {% for friend in friendlist_information %}
+
+                    <div class="m-0 p-0 pl-4 mr-4" >
+                    <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
+                      <input onclick="_check_state(this.value,'left')" id="{{friend.username}}" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
+                      <span class="custom-control-indicator custom-control-success"></span>
+                      <span>
+                        {% if friend.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                      </span>
+                      <span style="display:inline-block; width: YOURWIDTH;"></span>
+                      <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
+                    </label>
+                    </div>
+
+                  {% endfor %}
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <!-- Hình phạt -->
+        <div class="form-group">
+          <label class="ml-3" for=""><strong>Hình phạt</strong></label>
+          <textarea class="form-control" name="punishment" rows="3" cols="160" placeholder="Hình phạt dành cho bên thua cuộc ......"></textarea>
+        </div>
+
+
+
+        <input type="hidden" name="_id" value="{{id}}">
+        <div class="text-right mb-2">
+          <input class="text-center btn btn-success btn-lg" type="submit" name="" value="Tạo kèo">
+        </div>
+
+      </form>
+    </div>
+  </body>
+</html>
