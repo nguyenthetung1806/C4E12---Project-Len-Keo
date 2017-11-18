@@ -83,9 +83,9 @@
 
     <!-- nav -->
     <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark p-0 ">
-      <div class="col-md-0 col-xl-1 invisible hidden-lg-down ">
-      </div>
-      <a class="navbar-brand ml-2" href="/profile/{{account.username}}">
+      <div class="container">
+
+      <a class="navbar-brand ml-2 mr-0" href="/profile/{{account.username}}">
         <i class="fa fa-user-secret" aria-hidden="true"></i>
           <span style="display:inline-block; width: YOURWIDTH;"></span>
         Lên kèo
@@ -94,8 +94,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto col-xs-0 ">
-          <li class="nav-item active mr-auto pl-4 ml-4">
+        <ul class="navbar-nav ml-0 col-xs-0 ">
+          <li class="nav-item active pl-0 ml-4 ml-0">
             <form class="form-inline my-2 my-lg-0 mr-auto">
               <div class="dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
@@ -144,7 +144,7 @@
 
 
           <li class="nav-item rounded p-0">
-            <div class="btn-group rounded p-0 m-0" >
+            <div data-toggle="tooltip" data-placement="bottom" title="Lời mời kết bạn" class="btn-group rounded p-0 m-0" >
               <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 class="m-0"><i class="fa fa-user-plus
                       {% if account.friend_accept_pending|length == 0 %}
@@ -191,16 +191,14 @@
           </li>
 
 
-          <li class="nav-item active rounded p-0 mr-5">
-            <div class="btn-group rounded p-0 m-0" >
+          <li class="nav-item active rounded p-0 mr-3">
+            <div data-toggle="tooltip" data-placement="bottom" title="Thông báo" class="btn-group rounded p-0 m-0" >
               <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h5 class="m-0"> <i class="fa fa-bookmark font-size-lg
-                  {% if notification|length == 0 %}
-                  text-secondary
-                  {% else %}
-                  text-white
-                  {% endif %}
-                  " aria-hidden="true"></i></h5>
+                {% if notification|length == 0 %}
+                <h5 class="m-0"><i class="fa fa-envelope font-size-lg text-secondary" aria-hidden="true"></i></h5>
+                {% else %}
+                <h5 class="m-0"><i class="fa fa-envelope-open font-size-lg text-white" aria-hidden="true"></i></h5>
+                {% endif %}
               </button>
               <div class="dropdown-menu dropdown-menu-right rounded  pb-1 pt-1" >
               {% if notification|length != 0 %}
@@ -210,7 +208,7 @@
               <div class="row">
                 <div class="col-10">
                   <span>
-                    <a class="dropdown-item pb-2" href="#">
+                    <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}">
                       <span class=" font-weight-bold text-success">
                         {% if hint.image is none %}
                       <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
@@ -242,7 +240,7 @@
                   {% if noti.victory_claim[-1] == hint.username %}
               <div class="col-10">
                 <span>
-                  <a class="dropdown-item pb-2" href="#"><span class=" font-weight-bold text-success">
+                  <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}"><span class=" font-weight-bold text-success">
                     {% if hint.image is none %}
                   <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
                     {% else %}
@@ -269,7 +267,7 @@
                 </div>
             </li>
 
-            <li class="nav-item active rounded mr-4 p-0 pb-1 pt-1">
+            <li class="nav-item active rounded mr-3 p-0 pb-1 pt-1">
                   <a href="/contract.type.1/traditional" class="rounded pt-0 pb-1 pr-4 pl-4 btn btn-light btn-block font-weight-bold"  name="">
                     <i class="fa fa-bookmark" aria-hidden="true"></i>
                     Lên kèo
@@ -290,21 +288,21 @@
               </div>
             </li>
 
-          <li class="">
-            <div class=" clearfix invisible hidden-lg-down ">
-              1235666271233333333333333333333
-            </div>
-          </li>
+
 
 
           </ul>
+          <div class="col-0 col-xl-1">
 
+</div>
+      </div>
 </nav>
     <!-- nav _end -->
     <nav class="navbar navbar-expand-xl navbar-dark bg-success p-0 invisible ">
       <a class="navbar-brand ml-2" >
         Lên kèo
       </a>
+
     </nav>
 
 

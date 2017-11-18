@@ -2,210 +2,346 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>
+      Active.Bet.{{ bet.contract_name }}
+    </title>
   </head>
   <body>
     {% include 'include-template.html' %}
+    <div class="container mt-3 p-0">
+      <div class="row col-lg-12 col-xl-11 mr-1 ml-1 ">
 
 
+          <!-- collumn thẻ bet -->
+          <div class="col-lg-12 col-xl-8 pl-3 pr-3 pb-3 pt-1 mx-auto d-block" id="met_vl">
+            <div class="card m-0 p-0 mb-4 border-secondary rounded-right" >
+              <!-- card top -->
+              <div class="card-body text-dark p-2 pb-0 mb-0">
 
-        <div class="container mt-4 ">
-          <div class="container col-md-8 mt-4">
-
-
-
-            <div class="bg-light text-light rounded-top pl-3 pr-3 border border-success ">
-            <!--One of two columns-->
-            <div class="font-weight-bold text-secondary m-0 mt-4 mb-2 text-left">
-              <span>
-                  {% for player_render in players_to_show %}
-                    {% if player_render.username == bet.contract_maker %}
-
-                    <span>
-                      <a href="/profile/{{ player_right }}"><h3 class="mb-0 text-success font-weigth-bold">
-                          {% if player_render.image is none %}
-                        <img class=" rounded border border-dark" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+              <!-- bet name -->
+              <div class="card-body text-dark p-2 pb-0 mb-0">
+                <div class="card-title  m-0 ml-3 ">
+                  <h6 class="text-success m-0">
+                    <span class="text-dark font-weight-bold">Tạo bởi: </span>
+                      {% for hint in hints %}
+                        {% if hint.username == bet.contract_maker[0] %}
+                      <span>
+                        <a href="/profile/{{ hint.username }}">
+                          {% if hint.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
                           {% else %}
-                        <img class=" rounded border border-dark" src="data:image/*;base64,{{player_render.image}}" height="45px" width="50px" alt="">
+                          <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
                           {% endif %}
-                        <span style="display:inline-block; width: YOURWIDTH;"></span>
-                        {{ player_render.name }}</h3>
-                      </a> <span class="text-secondary">đã lập kèo:</span> </span>
-
-                    {% endif %}
-                  {% endfor %}
-
-              </span>
-            </div>
-
-
-
-
-
-            <div class="">
-              <div class="card m-0 p-0 mb-4 border-success" >
-                <div class="card-body text-dark p-2 pb-0 mb-0">
-                  <h5 class="card-title text-secondary font-weight-bold m-0 mb-1 ml-3 "><span class="text-success">Còn: <span style="display:inline-block; width: YOURWIDTH;"></span></span>
-                    <span class="text-dark " id="clock">
-                      10 ngày : 12 tiếng : 15 phút
-                    </span><span style="display:inline-block; width: YOURWIDTH;"></span>trước khi <br> giao kèo hết hạn</h5>
-
-                    <!-- danh sách người tham gia -->
-                    {% if bet.party_multiplayers|length == 0 %}
-                    <!-- bet traditional -->
-                    <p class=" m-0 p-0 ml-3 ">
-                      <span class="text-secondary">Cửa trên:</span>
-                      {% for player_right in bet.party_right %}
-                        {% for player_render in players_to_show %}
-                          {% if player_render.username == player_right %}
-                      <span>
-                        <a href="/profile/{{ player_right }}">
-                            {% if player_render.image is none %}
-                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                            {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
-                            {% endif %}
-                          {{ player_render.name }}
-                        </a></span>
-                          {% endif %}
-                        {% endfor %}
-                      {% endfor %}
-
-
-
-                      <span class="text-secondary">Cửa dưới:</span>
-                      {% for player_left in bet.party_left %}
-                        {% for player_render in players_to_show %}
-                          {% if player_render.username == player_left %}
-                      <span>
-                        <a href="/profile/{{ player_left }}">
-                            {% if player_render.image is none %}
-                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                            {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
-                            {% endif %}
-                          {{ player_render.name }}
-                        </a></span>
-                          {% endif %}
-                        {% endfor %}
-                      {% endfor %}
-
-
-                    </p>
-                    <!-- bet traditional end_ -->
-                    {% else %}
-                    <!-- bet multipartry_ -->
-                    <p class=" m-0 p-0 ml-3 ">
-                      <span class="text-secondary">Các bên tham gia:</span>
-                      {% for player_multiparty in bet.party_multiplayers %}
-                        {% for player_render in players_to_show %}
-                          {% if player_render.username == player_multiparty %}
-                      <span>
-                        <a href="/profile/{{ player_multiparty }}">
-                            {% if player_render.image is none %}
-                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                            {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
-                            {% endif %}
-                          {{ player_render.name }}
-                        </a></span>
-                      <span>
-                          {%  endif %}
-                        {% endfor %}
-                      {% endfor %}
-                    </p>
-                      <!-- bet multiparty end_ -->
-                    {% endif %}
-
-
-                    <!-- danh sách người tham gia end_ -->
-
-                    <!-- danh sách pending -->
-
-                    {% if bet.party_right_pending|length != 0 or bet.party_left_pending|length != 0 or bet.party_multiplayers_pending|length != 0 %}
-                    <p class=" m-0 p-0 ml-3 ">
-                    <span class="text-secondary">Chờ xác nhận: </span>
-                    {% for player_right in bet.party_right_pending or bet.party_left_pending or bet.party_multiplayers_pending %}
-                      {% for player_render in players_to_show %}
-                        {% if player_render.username == player_right %}
-                    <span>
-                      <a href="/profile/{{ player_right }}">
-                          {% if player_render.image is none %}
-                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                        <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-                        {{ player_render.name }}
-                      </a></span>
-                    <span>
+                          {{ hint.name }}
+                        </a>
+                      </span>
                         {% endif %}
                       {% endfor %}
-                    {% endfor %}
-                    </p>
-                    {% endif %}
-
-                    <!-- danh sách pending end_ -->
-
-
+                  </h6>
                 </div>
-                <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">
-
-                  <p class="card-text text-dark mb-0">
-                    {{  bet.contract_term }}
-                  </p>
-                  <p class="card-text text-dark mb-0">
-                    <span class="font-weight-bold text-danger"> Hình phạt cho bên thua: </span>
+                <!-- bet name end_ -->
+                <!-- đồng hồ -->
+                <div class="card-title text-secondary font-weight-bold m-0 ml-3 ">
+                    <span class="text-dark" id="clock">
+                      <span  class="just_the_fuckin_clock" id="{{bet.times}}">
+                        <h6 style="display:none;" id="{{bet.dates}}">
+                        </h6>
+                        <span style="font-size: 25px" id="{{bet.id}}"></span>
+                      </span>
+                    </span>
+                </div>
+                <!-- đồng hồ end_ -->
+                <div class="card-title  m-0 ml-3 ">
+                  <h2 class="text-success font-weight-bold m-0">{{ bet.contract_name }}</h2>
+                </div>
+                <!-- danh sách người tham gia -->
+              {% if bet.party_multiplayers|length == 0 %}
+                <!-- bet traditional -->
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
+                  <!-- các cửa -->
+                  <span class="text-dark font-weight-bold">Cửa trên:</span>
+                  {% for player_right in bet.party_right %}
+                    {% for player_render in players_to_show %}
+                      {% if player_render.username == player_right %}
                     <span>
-                      {{  bet.punishment }}
-                     </span>
-                  </p>
-                </div>
-                <div class="card-body text-left m-0 p-0 pl-4 pb-2">
-                  <a class="text-right text-success" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Tham gia</a>
-                  <span style="display:inline-block; width: YOURWIDTH;"></span>
-                  <span style="display:inline-block; width: YOURWIDTH;"></span>
-                  <!-- claim_victory -->
-                  {% if username in bet.party_left or username in bet.party_right or username in bet.party_multiplayers %}
-                  <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}"><i class="fa fa-trophy" aria-hidden="true"></i> Claim victory</a>
+                      <a href="/profile/{{ player_right }}">
+                        {% if player_render.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                        {{ player_render.name }}
+                      </a>
+                    </span>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  <span class="text-dark font-weight-bold">Cửa dưới:</span>
+                  {% for player_left in bet.party_left %}
+                    {% for player_render in players_to_show %}
+                      {% if player_render.username == player_left %}
+                    <span>
+                      <a href="/profile/{{ player_left }}">
+                        {% if player_render.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                        {{ player_render.name }}
+                      </a>
+                    </span>
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                </p>
+                <!-- các cửa end_ -->
+                <!-- bet traditional end_ -->
+                {% else %}
+                <!-- bet multipartry_ -->
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
+                  <span class="text-dark font-weight-bold">Các bên tham gia:</span>
+                {% for player_multiparty in bet.party_multiplayers %}
+                  {% for player_render in players_to_show %}
+                    {% if player_render.username == player_multiparty %}
+                  <span>
+                    <a href="/profile/{{ player_multiparty }}">
+                        {% if player_render.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                        {{ player_render.name }}
+                    </a>
+                  </span>
+                    {%  endif %}
+                  {% endfor %}
+                {% endfor %}
+                </p>
+              <!-- bet multiparty end_ -->
+              {% endif %}
+              <!-- danh sách người tham gia end_ -->
+              <!-- danh sách pending -->
+              {% if bet.party_right_pending|length != 0 or bet.party_left_pending|length != 0 or bet.party_multiplayers_pending|length != 0 %}
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
+                  <span class="text-secondary">Chờ xác nhận: </span>
+                {% for player in bet.party_right_pending or bet.party_left_pending or bet.party_multiplayers_pending %}
+                  {% for player_render in players_to_show %}
+                    {% if player_render.username == player %}
+                  <span>
+                    <a href="/profile/{{ player }}">
+                      {% if player_render.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                      {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                      {% endif %}
+                      {{ player_render.name }}
+                    </a>
+                  </span>
+                <span>
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+                </p>
+              {% endif %}
+              <!-- danh sách pending end_ -->
+            </div>
+            <!-- card top end_ -->
+
+
+            <!-- card mid -->
+            <div class="card-body border border-secondary border-right-0 border-left-0 mr-4 ml-4 mb-1 p-0 pt-1 pb-1">
+              <p class="card-text text-dark mb-0">
+                {{  bet.contract_term }}
+              </p>
+              <p class="card-text text-dark mb-0">
+                <span class="font-weight-bold text-danger">
+                  Hình phạt cho bên thua:
+                </span>
+                <span>
+                  {{  bet.punishment }}
+                </span>
+              </p>
+            </div>
+            <!-- card mid end_ -->
+            <!-- card bot -->
+            <div class="card-body text-left m-0 p-0 pl-4 pb-2">
+              <!-- claim_victory logic -->
+              {% if account.username in bet.party_left or account.username in bet.party_right or account.username in bet.party_multiplayers %}
+                {% if bet.party_multiplayers|length == 0 %}
+                  {% if bet.party_left_pending|length * 2 <= bet.party_left|length and bet.party_right_pending|length * 2 <= bet.party_right|length %}
+                    {% if bet.victory_claim|length == 0 %}
+              <span data-toggle="tooltip" data-placement="top" title="Tuyên bố với những người chơi khác là bạn đã thắng cuộc">
+                <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}">
+                  <i  class="fa fa-trophy" aria-hidden="true"></i>
+                   Thắng cuộc
+                 </a>
+              </span>
+                    {% else %}
+              <span class="text-info" data-toggle="tooltip" data-placement="top" title="Một người nào đó đã tuyên bố chiến thắng và đang đợi xác nhận">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                 Đang xác nhận
+                </a>
+              </span>
+                    {% endif %}
+                  {% else %}
+              <span data-toggle="tooltip" data-placement="top" title="Đang chờ những người chơi khác nhận lời mời tham gia kèo" class="text-info">
+                <i class="fa fa-question-circle-o" aria-hidden="true"></i></i> Chờ nhận lời </a></span>
                   {% endif %}
+                {% else %}
+                  {% if bet.party_multiplayers_pending|length <= bet.party_multiplayers|length %}
+                    {% if bet.victory_claim|length == 0 %}
+              <span data-toggle="tooltip" data-placement="top" title="Tuyên bố với những người chơi khác là bạn đã thắng cuộc">
+                <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}">
+                  <i  class="fa fa-trophy" aria-hidden="true">
+                  </i> Thắng cuộc ( {{ bet.winner|length }} / {{ bet.number_of_winner }} )
+                </a>
+              </span>
+                    {% else %}
+              <span class="text-info" data-toggle="tooltip" data-placement="top" title="Một người nào đó đã tuyên bố chiến thắng và đang đợi xác nhận">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                  Đang xác nhận
+              </span>
+                    {% endif %}
+                  {% else %}
+              <span data-toggle="tooltip" data-placement="top" title="Đang chờ những người chơi khác nhận lời mời tham gia kèo" class="text-info">
+                <i class="fa fa-question-circle-o" aria-hidden="true"></i></i> Chờ nhận lời </a>
+              </span>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            </div>
+            <!-- card bot end_ -->
+            {% if bet.winner|length != 0 %}
+            <div class="card-body text-left m-0 p-0 pl-4 pb-2">
+              <span class="font-weight-bold text-dark">Bên thắng: </span>
+              {% for player_winner in bet.winner %}
+                {% for player_render in players_to_show %}
+                  {% if player_render.username == player_winner %}
+                <span>
+                  <a href="/profile/{{ player_multiparty }}">
+                      {% if player_render.image is none %}
+                    <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                      {% else %}
+                    <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                      {% endif %}
+                      {{ player_render.name }}
+                  </a>
+                </span>
+                  {%  endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if bet.loser|length != 0 %}
+            <div class="card-body text-left m-0 p-0 pl-4 pb-2">
+              <span class="font-weight-bold text-dark">Bên thua: </span>
+              {% for player_loser in bet.loser %}
+                {% for player_render in players_to_show %}
+                  {% if player_render.username == player_loser %}
+                <span>
+                  <a href="/profile/{{ player_multiparty }}">
+                      {% if player_render.image is none %}
+                    <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                      {% else %}
+                    <img class=" rounded-circle" src="data:image/*;base64,{{player_render.image}}" height="20px" width="20px" alt="">
+                      {% endif %}
+                      {{ player_render.name }}
+                  </a>
+                </span>
+                  {%  endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+            {% endif %}
 
-                  <span class=" font-weight-bold text-right float-right text-secondary mr-4"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình luận</span>
-                </div>
-
-                <div class="card-footer text-right font-weight-bold p-0 pr-1 pt-1">
-
-                  <!-- bình luận -->
 
 
 
-
-                    <form class="" action="/comment/{{bet.id}}" method="post">
-                      <div class="bg-white ml-4 mr-3 mb-2">
-                        <textarea name="comment"class="form-control" rows="2" placeholder="Nhập bình luận .."></textarea>
-
-                          <input class="mt-1 mb-1 btn btn-sm btn-success float-right" type="submit" name="comment" value="Bình luận">
-                    </form>
-                  </div>
-                  <!-- bình luận end_ -->
-
-
+            <!-- card bình luận -->
+            <div class="card-footer text-right  p-0 pr-1 pt-1">
+              <div class="col-12 font-weight-bold text-right text-secondary pr-4 mb-1">
+                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                Bình luận
               </div>
+              <!-- render bình luận -->
+              {% if bet.comments|length != 0 %}
+              <div class="border border-muted rounded mr-3 ml-4 mb-1 pb-1 pt-2 bg-white text-dark">
+                {% for player_comment in bet.comments %}
+                  {% for player_render in players_to_show %}
+                    {% if player_render.username == player_comment['username'] %}
+                <div class="row m-0 p-0 pl-2 pr-1">
+                  <div class="col-1 p-0 mt-1">
+                    <a  href="/profile/{{ player_left }}">
+                        {% if player_render.image is none %}
+                      <img class=" rounded-circle border-success" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="40px" width="40px" alt="">
+                        {% else %}
+                      <img class=" rounded-circle border-success" src="data:image/*;base64,{{player_render.image}}" height="40px" width="40px" alt="">
+                        {% endif %}
+                    </a>
+                  </div>
+                <div class="col-11 pl-3">
+                  <div class="text-left rounded border bg-light border-success m-0 mb-1 pl-3 pr-3">
+                    <a class="font-weight-bold text-dark" href="/profile/{{ player_left }}"> {{ player_render.name }} </a>
+                    <p class="p-0 m-0">{{ player_comment['comment'] }}</p>
+                  </div>
+                </div>
+              </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
             </div>
-            <br>
-
-            <!-- 1 display bet end_-->
-
-
-
-
-
-            <!--One of two columns end_-->
-
-            </div>
+            {% endif %}
+            <!-- render bình luận end_ -->
+            <form class="" action="/comment/{{bet.id}}/{{account.username}}/active.bet" method="post">
+              <div class=" ml-4 mr-3 mb-2">
+                <textarea name="comment"class="form-control" rows="2" required placeholder="Nhập bình luận .."></textarea>
+                  <input href ="/comment/{{bet.id}}/{{account.username}}" class="mt-1 mb-1 btn btn-sm btn-success float-right" type="submit" name="" value="Bình luận">
+              </div>
+            </form>
           </div>
+          <!--card bình luận end_ -->
         </div>
-      </div>
 
 
+
+
+    </div>
+  </div>
+  </div>
+
+<script>
+var sp2, sp;
+sp = document.getElementById("met_vl");
+sp2 = sp.getElementsByClassName('just_the_fuckin_clock');
+var x = setInterval(function() {
+for (var i = 0; i < sp2.length; i++) {
+  var sp1 = sp2[i].getElementsByTagName('span')[0];
+  var h51 = sp2[i].id;
+  var h52 = sp2[i].getElementsByTagName('h6')[0];
+  h52 = h52.id;
+  // h52 = h52.toDateString();
+  // Set the date we're counting down to
+  var countDownDate = new Date(h52 + h51).getTime();
+  // Update the count down every 1 second
+  // Get todays date and time
+  var now = new Date().getTime();
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  // Output the result in an element with id="demo"
+  if (distance >= 0) {
+    sp1.innerHTML = "Còn: " + days + " ngày " + hours + " giờ "+ minutes + " phút " + seconds + " giây";
+  }
+  // If the count down is over, write some text
+  else if (distance < 0) {
+      sp1.innerHTML = "HẾT HẠN";
+        }
+      }
+    }, 1000);
+</script>
   </body>
 </html>

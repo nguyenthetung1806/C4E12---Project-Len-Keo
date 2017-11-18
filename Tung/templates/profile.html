@@ -13,14 +13,30 @@
   <body>
     {% include 'include-template.html' %}
     <div class="container mt-3 p-0">
-      <div class="row">
+      <div class="row mr-1 ml-1">
         <div class="text-light col-lg-12 col-xl-4 p-0 ">
         {% include 'include-template-profile.html' %}
+        </div>
+        <!--One of two columns end_-->
         <!--One of two columns-->
-        <div class="col-sm col-md-12 col-lg-7 rounded-right border border-dark p-0">
-        {% if username_url == username or username_url in account.friendlist %}
+        <div class="col-sm col-lg-12 col-xl-7 rounded-right border
+          {% if account_other.username == account.username %}
+          border-dark
+          bg-dark
+          {% else %}
+          border-success
+          bg-light
+          {% endif %}
+          p-0">
+        {% if account_other.username == account.username or account_other.username in account.friendlist %}
           <div class="font-weight-bold text-white m-0 text-right mt-2">
-            <h3 class="Montserrat font-weight-bold text-success font-size-lg m-0 mr-4">Các kèo đang hoạt động</h3>
+            <h3 class="Montserrat font-weight-bold
+              {% if account_other.username == account.username %}
+              text-light
+              {% else %}
+              text-success
+              {% endif %}
+             font-size-lg m-0 mr-4">Các kèo đang hoạt động</h3>
           </div>
 
       <!-- ádasssssssssssssssssssssssssssssssssssssssssss -->
@@ -29,13 +45,44 @@
           {% if bets_to_show|length == 0 %}
             {% if username == username_url %}
           <br><br>
-          <div class="">
-            <div class="card m-0 p-0 mb-4" >
-              <div class="card-body text-dark p-2 pb-0 mb-0 text-center">
-                <p class="mb-1">Hiện tại bạn không có kèo nào đang hoạt động.</p> <a class="text-success" href="/contract.type.1/traditional"><h5 class="font-weight-bold mb-0">Lên kèo????</h5></a>
-              </div>
-            </div>
+          <div class="text-center">
+            <p class="mb-1 text-white">Hiện tại bạn không có kèo nào đang hoạt động.</p>
+            <a class="text-success" href="/contract.type.1/traditional">
+              <h5 class="btn btn-lg font-weight-bold mb-0">Lên kèo????</h5>
+            </a>
           </div>
+
+<!-- search bar -->
+<div class="container col-9 text-white text-center">
+Nhưng trước hết, hãy bắt đầu bằng việc tìm kiếm một vài người bạn ....
+{% if account.friendlist|length == 0%}
+<div class="dropdown">
+  <button class="dropdown-toggle" type="button" id="dropdownMenuButtonSpecial" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
+  <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Nhập để tìm kiếm" aria-label="Search">
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonSpecial">
+    <ul id="search_hint" class="p-0">
+    {% for hint in hints %}
+      <li class="dropdown-item" class="pl-3 pr-3">
+        <a href="/profile/{{hint['username']}}" ><div class="row text-dark text-left">
+        <div class="col-md-1">
+      {% if hint.image is none %}
+        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+      {% else %}
+        <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+      {% endif %}
+        </div>
+        <div class="col-md-8">
+          <p>{{hint['name']}}</p></div>
+        </div></a>
+      </li>
+    {% endfor %}
+    </ul>
+    <p class="dropdown-item pl-3 pr-3" id="no_result">Không tìm thấy</p>
+  </div>
+</div>
+</div>
+{% endif %}
+<!-- search bar -->
             {% else %}
           <br><br>
           <div class="">
@@ -50,6 +97,13 @@
           <!-- collumn thẻ bet -->
           <div class=" pl-3 pr-3 pb-3 pt-1" id="met_vl">
             {% for bet in bets_to_show %}
+            {% if account.username in bet.party_left or
+                  account.username in bet.party_right or
+                  account.username in bet.party_left_pending or
+                  account.username in bet.party_right_pending or
+                  account.username in bet.party_multiplayers or
+                  account.username in bet.party_multiplayers_pending or
+                  account.username in bet.spectator %}
             <div class="card m-0 p-0 mb-4 border-secondary rounded-right" >
               <!-- card top -->
               <!-- bet name -->
@@ -61,10 +115,10 @@
                 <!-- đồng hồ -->
                 <div class="card-title text-secondary font-weight-bold m-0 ml-3 ">
                     <span class="text-dark" id="clock">
-                      <span class="just_the_fuckin_clock" id="{{bet.times}}">
-                        <h6 id="{{bet.dates}}">
+                      <span  class="just_the_fuckin_clock" id="{{bet.times}}">
+                        <h6 style="display:none;" id="{{bet.dates}}">
                         </h6>
-                        <span id="{{bet.id}}"></span>
+                        <span style="font-size: 25px" id="{{bet.id}}"></span>
                       </span>
                     </span>
                 </div>
@@ -72,9 +126,9 @@
                 <!-- danh sách người tham gia -->
               {% if bet.party_multiplayers|length == 0 %}
                 <!-- bet traditional -->
-                <p class=" m-0 p-0 ml-3 ">
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
                   <!-- các cửa -->
-                  <span class="text-secondary">Cửa trên:</span>
+                  <span class="text-dark font-weight-bold">Cửa trên:</span>
                   {% for player_right in bet.party_right %}
                     {% for player_render in players_to_show %}
                       {% if player_render.username == player_right %}
@@ -91,7 +145,7 @@
                       {% endif %}
                     {% endfor %}
                   {% endfor %}
-                  <span class="text-secondary">Cửa dưới:</span>
+                  <span class="text-dark font-weight-bold">Cửa dưới:</span>
                   {% for player_left in bet.party_left %}
                     {% for player_render in players_to_show %}
                       {% if player_render.username == player_left %}
@@ -113,8 +167,8 @@
                 <!-- bet traditional end_ -->
                 {% else %}
                 <!-- bet multipartry_ -->
-                <p class=" m-0 p-0 ml-3 ">
-                  <span class="text-secondary">Các bên tham gia:</span>
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
+                  <span class="text-dark font-weight-bold">Các bên tham gia:</span>
                 {% for player_multiparty in bet.party_multiplayers %}
                   {% for player_render in players_to_show %}
                     {% if player_render.username == player_multiparty %}
@@ -137,7 +191,7 @@
               <!-- danh sách người tham gia end_ -->
               <!-- danh sách pending -->
               {% if bet.party_right_pending|length != 0 or bet.party_left_pending|length != 0 or bet.party_multiplayers_pending|length != 0 %}
-                <p class=" m-0 p-0 ml-3 ">
+                <p style="font-size: 15px" class=" m-0 p-0 ml-3 ">
                   <span class="text-secondary">Chờ xác nhận: </span>
                 {% for player in bet.party_right_pending or bet.party_left_pending or bet.party_multiplayers_pending %}
                   {% for player_render in players_to_show %}
@@ -182,7 +236,7 @@
             <div class="card-body text-left m-0 p-0 pl-4 pb-2">
               <a class="text-right text-secondary" href="/active.bet/{{bet.id}}">
                 <i class="fa fa-info" aria-hidden="true"></i>
-                Xem chi tiết
+                Chi tiết
               </a>
               <span style="display:inline-block; width: YOURWIDTH;"></span>
               <span style="display:inline-block; width: YOURWIDTH;"></span>
@@ -194,7 +248,7 @@
               <span data-toggle="tooltip" data-placement="top" title="Tuyên bố với những người chơi khác là bạn đã thắng cuộc">
                 <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}">
                   <i  class="fa fa-trophy" aria-hidden="true"></i>
-                   Tuyên bố chiến thắng
+                   Thắng cuộc
                  </a>
               </span>
                     {% else %}
@@ -214,7 +268,7 @@
               <span data-toggle="tooltip" data-placement="top" title="Tuyên bố với những người chơi khác là bạn đã thắng cuộc">
                 <a class="text-success" href="/claim.victory/{{account.username}}/{{bet.id}}">
                   <i  class="fa fa-trophy" aria-hidden="true">
-                  </i> Tuyên bố chiến thắng ( {{ bet.winner|length }} / {{ bet.number_of_winner }} )
+                  </i> Thắng cuộc ( {{ bet.winner|length }} / {{ bet.number_of_winner }} )
                 </a>
               </span>
                     {% else %}
@@ -230,7 +284,6 @@
                   {% endif %}
                 {% endif %}
               {% endif %}
-              <!-- claim_victory logic end_ -->
             </div>
             <!-- card bot end_ -->
             <!-- card bình luận -->
@@ -268,7 +321,7 @@
             </div>
             {% endif %}
             <!-- render bình luận end_ -->
-            <form class="" action="/comment/{{bet.id}}/{{account_other.username}}" method="post">
+            <form class="" action="/comment/{{bet.id}}/{{account_other.username}}/profile" method="post">
               <div class="bg-white ml-4 mr-3 mb-2">
                 <textarea name="comment"class="form-control" rows="2" required placeholder="Nhập bình luận .."></textarea>
                   <input href ="/comment/{{bet.id}}/{{account_other.username}}" class="mt-1 mb-1 btn btn-sm btn-success float-right" type="submit" name="" value="Bình luận">
@@ -278,8 +331,10 @@
           <!--card bình luận end_ -->
         </div>
         <br>
+        {% endif%}
         {% endfor %}
         {% endif%}
+
         <!-- 1 display bet end_-->
       </div>
       <!-- collumn thẻ bet end_ -->
@@ -291,12 +346,16 @@
       </div>
       {% endif %}
       </div>
+      <!--One of two columns end_-->
+
+      <!--One of two columns-->
+
+      <!--One of two columns end_-->
+
+
+
     </div>
-    <!--One of two columns end_-->
-
-
   </div>
-
 
 
 
@@ -326,7 +385,7 @@ for (var i = 0; i < sp2.length; i++) {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
   // Output the result in an element with id="demo"
   if (distance >= 0) {
-    sp1.innerHTML = days + " ngày " + hours + " giờ "+ minutes + " phút " + seconds + " giây";
+    sp1.innerHTML = "Còn: " + days + " ngày " + hours + " giờ "+ minutes + " phút " + seconds + " giây";
   }
   // If the count down is over, write some text
   else if (distance < 0) {

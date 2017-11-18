@@ -14,14 +14,13 @@
   </head>
 
   <body>
-
-
-
-
-
     <!-- nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
-      <a class="navbar-brand ml-2" href="http://127.0.0.1:5000/">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 pl-4 ">
+      <div class="container">
+
+      <a class="navbar-brand ml-2 mr-0" href="/">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+          <span style="display:inline-block; width: YOURWIDTH;"></span>
         Lên kèo
       </a>
       <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,51 +38,87 @@
             <li class="nav-item active">
               <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/login">Đăng nhập<span class="sr-only"></span></a>
 
+
+
+
+
+
+
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Đăng nhập
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <form action="/login" method="post" class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="exampleDropdownFormEmail1">Tên đăng nhập</label>
+                      <input type="text" class="form-control" id="navbarDropdown" name="username" value="{{usn}}" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleDropdownFormPassword1">Mật khẩu</label>
+                      <input type="password" class="form-control" id="navbarDropdown" name="password" value="{{psw}}" placeholder="mật khẩu">
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Remember me
+                      </label>
+                    </div>
+                    <button type="submit" class="allign-right btn btn-sm font-weight-bold btn-success">Đăng nhập</button>
+                                  <input type="hidden" name="hid" value="{{prompt}}">
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/signup">Chưa có tài khoản? Đăng ký</a>
+                  <a class="dropdown-item" href="#">Quên mật khẩu?</a>
+              </div>
             </li>
+            <br>
           </ul>
-                      <br>
         </div>
+      </div>
     </nav>
     <!-- nav _end -->
 
 
 
-
-    <br><br><br>
+    <br><br>
 
     <div class="container">
       <div class="d-flex justify-content-center align-items-center">
-        <div class="card col-md-7">
+        <div class="card border-dark col-xl-6 col-lg-11">
           <div class="card-body">
             <form name="frm" class="" action="" method="post">
-              <div class="form-group font-weight-bold">
-                <label for="">Tên đăng nhập</label>
+              <div class="form-group font-weight-bold text-success">
+                <label class="m-0" for="">Tên đăng nhập</label>
                 <input class="form-control" type="text" name="username" value="{{usn}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
-                <label for="">Mật khẩu</label>
+                <label class="m-0" for="">Mật khẩu</label>
                 <input class="form-control" type="password" name="password" value="{{psw}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
-                <label for="">Tên người dùng</label>
-                <input class="form-control" type="text" name="name" value="{{nm}}" required>
+                <label class="m-0" for="">Kiểm tra mật khẩu</label>
+                <input class="form-control" type="password_check" name="password_check" value="{{psw}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
-                <label for="">Email</label>
+                <label class="m-0" for="">Email</label>
                 <input class="form-control" type="email" name="email" value="{{eml}}">
               </div>
 
+              <div class="form-group font-weight-bold text-success">
+                <label class="m-0" for="">Tên người dùng</label>
+                <input class="form-control" type="text" name="name" value="{{nm}}" required>
+              </div>
+
               <div class="d-flex justify-content-end align-items-center mt-4 ">
-                  <input class="btn btn-success btn-lg pl-4 pr-4 " type="submit" name="" value="Đăng ký">
+                  <input class="btn btn-success btn-lg pl-5 pr-5 pt-1 pb-1 font-weight-bold" type="submit" name="" value="Đăng ký">
               </div>
               <input type="hidden" name="hid" value="{{prompt}}">
-
+<br>
             </form>
           </div>
         </div>

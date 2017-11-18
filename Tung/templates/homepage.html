@@ -13,10 +13,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   </head>
 
-  <body
+  <body>
     <!-- nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success p-2 pl-4 ">
-      <a class="navbar-brand ml-2" href="http://127.0.0.1:5000/">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 pl-4 ">
+      <div class="container">
+
+      <a class="navbar-brand ml-2 mr-0" href="/">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+          <span style="display:inline-block; width: YOURWIDTH;"></span>
         Lên kèo
       </a>
       <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +38,45 @@
             <li class="nav-item active">
               <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/login">Đăng nhập<span class="sr-only"></span></a>
 
+
+
+
+
+
+
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Đăng nhập
+              </a>
+              <div class="dropdown-menu dropdown-menu-right show " aria-labelledby="navbarDropdown">
+                  <form action="/login" method="post" class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="exampleDropdownFormEmail1">Tên đăng nhập</label>
+                      <input type="text" class="form-control" id="navbarDropdown" name="username" value="{{usn}}" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleDropdownFormPassword1">Mật khẩu</label>
+                      <input type="password" class="form-control" id="navbarDropdown" name="password" value="{{psw}}" placeholder="mật khẩu">
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Remember me
+                      </label>
+                    </div>
+                    <button type="submit" class="allign-right btn btn-sm font-weight-bold btn-success">Đăng nhập</button>
+                                  <input type="hidden" name="hid" value="{{prompt}}">
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/signup">Chưa có tài khoản? Đăng ký</a>
+                  <a class="dropdown-item" href="#">Quên mật khẩu?</a>
+              </div>
             </li>
-                        <br>
+            <br>
           </ul>
         </div>
+      </div>
     </nav>
     <!-- nav _end -->
 
@@ -54,5 +90,15 @@
       </a>
     </div>
 
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   </body>
 </html>
