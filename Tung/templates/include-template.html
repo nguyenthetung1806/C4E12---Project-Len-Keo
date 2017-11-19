@@ -148,7 +148,7 @@
             <div data-toggle="tooltip" data-placement="bottom" title="Lời mời kết bạn" class="btn-group rounded p-0 m-0" >
               <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 class="m-0"><i class="fa
-                      {% if account.friend_accept_pending|length == 0 or account.friend_accepted|length == 0 %}
+                      {% if account.friend_accept_pending|length == 0 and account.friend_accepted|length == 0 %}
                       fa-user
                       text-secondary
                       {% else %}
@@ -158,7 +158,7 @@
                      " aria-hidden="true"></i></h5>
               </button>
               <div class="dropdown-menu dropdown-menu-right rounded pb-1 pt-1" >
-                {% if account.friend_accept_pending|length == 0 or account.friend_accepted|length == 0 %}
+                {% if account.friend_accept_pending|length == 0 and account.friend_accepted|length == 0 %}
                   <div class="text-dark text-right pr-4 col-12">Không có lời mời nào</div>
                 {% else %}
 
@@ -169,7 +169,7 @@
                 <div class="row">
                   <div class="col-10">
                     <span>
-                      <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
+                      <a class="dropdown-item pb-2" href="/friend.request/clear/{{request}}"> <span class=" font-weight-bold text-success">
                         {% if hint.image is none %}
                       <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="15px" width="15px" alt="">
                         {% else %}
@@ -177,7 +177,7 @@
                         {% endif %}
                         {{ hint.name }}</span>
                         <p class="m-0">đã chấp nhận lời mời kết bạn của bạn
-                        <span class="text-primary">Xem trang cá nhân</span></p></a>
+                        <span class="text-primary">Xem trang</span></p></a>
                     </span>
                   </div>
                   <div class=" col-2 p-0 text-left">
@@ -211,7 +211,7 @@
                           {% endif %}
                           {{ hint.name }}</span>
                           <p class="m-0">đã gửi lời mời kết bạn.
-                          <span class="text-primary">Xem trang cá nhân</span></p></a>
+                          <span class="text-primary">Xem trang</span></p></a>
                       </span>
                     </div>
                     <div class=" col-2 p-0 text-left">

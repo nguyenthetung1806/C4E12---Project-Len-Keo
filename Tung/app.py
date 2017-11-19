@@ -251,8 +251,8 @@ def friend_request_method(method, username_url):
         account_other.update(pull__friend_request_sent = account.username)
         return redirect(url)
     elif method == "clear":
-        account.update(pull__friend_friend_accepted = account_other.username)
-        return redirect(url_self)
+        account.update(pull__friend_accepted = account_other.username)
+        return redirect(url)
 
     # friendlist = ListField()
     # friend_request_sent = ListField()
