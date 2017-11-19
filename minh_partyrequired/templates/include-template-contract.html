@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css.map">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+
+    <script type="text/javascript" src="../static/js/bootstrap-datetimepicker.min.js"></script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+
+    <script type="text/javascript">
+
+      // Hàm để disable và enable, không cho một người một lúc hai cửa
+      // Ngoài cái javascript này ra thì em chỉ thay đổi ở các dòng: 79, 103, 119, 150 và 166 thôi
+      // Nhớ là viết KHÔNG SAI MỘT CHỮ!!!
+
+      
+    </script>
+  </head>
+  <body>
+
+
+
+
+      <div class="form-group mt-1 mb-2">
+        <label class="ml-1 mb-1" for=""><strong>Tên kèo</strong></label>
+        <input class="form-control" name="contract_name" required
+        placeholder="Bạn muốn lập kèo về ?">
+      </div>
+
+
+
+
+
+      <div class="form-group mt-1 mb-2">
+        <label class="ml-1 mb-1 text-success" for=""><strong>Điều khoản</strong></label>
+        <textarea class="form-control" name="contract_term"
+        placeholder="Kèo nhiều bên phù hợp với các kiểu cá độ theo nhóm, như 'đứa nào có bạn trai/gái trước', 'ai trong nhóm sẽ cưới vợ/chồng trước', ...... Loại kèo này cũng phù hợp để lên kèo đi chơi, khiến cho mấy đứa hay bùng kèo giờ không thể bùng 'một cách hợp pháp' nữa ......" rows="4" cols="160"></textarea>
+      </div>
+
+
+      <!-- Hình phạt -->
+
+      <div class="row m-0 p-0">
+        <div class="col-4 col-xl-2  p-0">
+          <label class="ml-1" for=""><strong>Hình phạt</strong></label>
+        </div>
+        <div class="col p-0">
+          <textarea class="form-control" name="punishment" rows="3" cols="160" placeholder="Hình phạt dành cho bên thua cuộc ......"></textarea>
+        </div>
+      </div>
+
+
+
+        <!-- Thời gian -->
+
+        <div class="row m-0 mt-2 p-0">
+          <div class="col-4 col-xl-6  p-0">
+            <label class="ml-1" for=""><strong>Thời hạn cho giao kèo (Tùy chỉnh)</strong></label>
+          </div>
+            <div class="col p-0">
+              <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                  <input id="dates" name="dates" type='text' placeholder="mm/dd/yyyy h:m(AM/PM)" class="form-control" required/>
+                    <span class="input-group-addon">
+                      <span class="fa fa-calendar" id="pick_"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+                  <script type="text/javascript">
+                      $(function () {
+                          $('#datetimepicker1').datetimepicker();
+
+                      });
+                  </script>
+
+
+  </body>
+</html>

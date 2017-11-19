@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Đặt kèo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+
+      // Hàm để disable và enable, không cho một người một lúc hai cửa
+      // Ngoài cái javascript này ra thì em chỉ thay đổi ở các dòng: 79, 103, 119, 150 và 166 thôi
+      // Nhớ là viết KHÔNG SAI MỘT CHỮ!!!
+      function _check_state(val, party) {
+        if (party == "right") {
+          if (document.getElementById(val).disabled == false) {
+            document.getElementById(val).disabled = true;
+          }
+          else {
+            document.getElementById(val).disabled = false;
+          }
+        }
+        else {
+          if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+          }
+          else {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+          }
+        }
+      }
+
+      function _check_friend_state(val, party) {
+        if (party == "right") {
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
+            document.getElementById(val).disabled = true;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
+          }
+          else {
+            document.getElementById(val).disabled = false;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
+          }
+        }
+        else if (party == "left") {
+          if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
+          }
+          else {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+            document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
+          }
+        }
+        else {
+          if (document.getElementById(val).disabled == false || document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+            document.getElementById(val).disabled = true;
+          }
+          else {
+            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+            document.getElementById(val).disabled = false;
+          }
+        }
+      }
+
+      function _checkTime(){
+        var datetime = document.getElementById('dates').value;
+        var date = new Date(datetime).getTime();
+        var now = new Date().getTime();
+        var distance = date - now;
+        if (distance <= 0) {
+          alert("Không được phép chọn thời gian trước thời điểm hiện tại!");
+          return false;
+        }
+        if (distance > 0) {
+          var right = document.getElementById('right_div');
+          var left = document.getElementById('left_div');
+          var input_right = right.getElementsByTagName('input');
+          var input_left = left.getElementsByTagName('input');
+          var hid_right = document.getElementById('hid_right');
+          var hid_left = document.getElementById('hid_left');
+          for (var i = 0; i < input_left.length; i++) {
+            if (input_right[i].disabled == true) {
+              var hidright = Number(hid_right.value);
+              hidright += 1;
+              hid_right.value = hidright.toString();
+            }
+            // else if (input_right[i].disabled == false) {
+            //
+            // }
+            if (input_left[i].disabled == true) {
+              var hidleft = Number(hid_left.value);
+              hidleft += 1;
+              hid_left.value = hidleft.toString();
+            }
+            else if (input_left[i].disabled == false) {
+              var left_id = input_left[i].id + "1gdfg34t3g3gege6en6n";
+              if (document.getElementById(left_id).disabled == false) {
+                var hidright = Number(hid_right.value);
+                hidright += 1;
+                hid_right.value = hidright.toString();
+                var hidleft = Number(hid_left.value);
+                hidleft += 1;
+                hid_left.value = hidleft.toString();
+              }
+            }
+          }
+          hid_right = document.getElementById('hid_right');
+          var hidright = Number(hid_right.value);
+          hid_left = document.getElementById('hid_left');
+          var hidleft = Number(hid_left.value);
+          if (hidright >= input_left.length) {
+            alert("Cửa trên không được để trống!");
+            return false;
+          }
+          if (hidleft >= input_left.length) {
+            alert("Cửa dưới không được để trống!");
+            return false;
+          }
+          if (hidright < input_left.length || hidleft < input_left.length) {
+            return true;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+
+    <!-- navbar -->
+
+    {% include 'include-template.html' %}
+
+
+
+    <div class="container col-xl-6 col-lg-11 p-0 mt-3 ">
+
+        <div class="row">
+          <div class="col-md-3 col-5 m-0 pr-0 ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0  ">
+              <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4" href="/contract.type.1/traditional">
+                <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                Classic
+              </a>
+            </div>
+          </div>
+          <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+            <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
+              <a data-toggle="tooltip" data-placement="top" title="Đang trong quá trình phát triển"
+               class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4" href="#">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span style="display:inline-block; width: YOURWIDTH;"></span>
+                Nhiều bên
+              </a>
+            </div>
+          </div>
+          <div class="col m-0 pl-0 border border-success border-top-0 border-left-0 border-right-0 p-0 mr-3">
+          </div>
+        </div>
+    </div>
+    <div class="container col-xl-6 col-lg-11  p-0">
+    <div class="container  rounded-bottom border border-success border-top-0 pl-4 pr-4">
+      <br>
+      <!-- Tabs để chọn loại kèo -->
+
+
+      <!-- form để người dùng lên kèo -->
+      <!-- nhớ phải có frm là tên của from -->
+
+
+      <form name="frm" onsubmit="return(_checkTime())" class="" action="" method="post" >
+
+
+    {% include 'include-template-contract.html' %}
+
+
+
+        <!-- Các cửa -->
+        <div class="form-group">
+          <label class="ml-1" for=""><strong>Các bên tham gia</strong></label>
+          <div class="row">
+            <!-- cửa trên -->
+            <div class="col-md-6 mt-1" id="right_div">
+              <div id="accordion" role="tablist">
+                  <div class="card-tittle">
+                    <div data-toggle="collapse" class="p-1 text-center bg-dark text-light btn-block rounded-top" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                    Cửa trên
+                    </div>
+                  </div>
+                  <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion">
+                    <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
+                      <div class="m-0 p-0 pl-4 mr-4">
+                      <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
+                        <input id="{{account.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{account.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if account.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{account.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{account.username}}">{{account.name}}</option></span>
+                      </label>
+                      </div>
+                      {% for friend in friendlist_information %}
+                      <div class="m-0 p-0 pl-4 mr-4">
+                      <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
+                        <input id="{{friend.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if friend.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
+                      </label>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            <input type="hidden" id="hid_right" value="0">
+            <!-- cửa trên end_ -->
+            <!-- cửa dưới -->
+            <div class="col-md-6 mt-1" id="left_div">
+              <div id="accordion" role="tablist">
+                  <div class="card-tittle">
+                    <div data-toggle="collapse" class="p-1 text-center bg-dark text-light btn-block rounded-top" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                      Cửa dưới
+                    </div>
+                  </div>
+                  <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion">
+                    <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
+                      <div class="m-0 p-0 pl-4 mr-4" >
+                      <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
+                        <input id="{{account.username}}" type="checkbox" onclick="_check_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{account.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if account.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{account.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{account.username}}">{{account.name}}</option></span>
+                      </label>
+                      </div>
+                      {% for friend in friendlist_information %}
+                      <div class="m-0 p-0 pl-4 mr-4" >
+                      <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
+                        <input type="checkbox" id="{{friend.username}}" onclick="_check_friend_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{friend.username}}">
+                        <span class="custom-control-indicator custom-control-success"></span>
+                        <span>
+                          {% if friend.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                          {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
+                          {% endif %}
+                        </span>
+                        <span style="display:inline-block; width: YOURWIDTH;"></span>
+                        <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
+                      </label>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            <input type="hidden" id="hid_left" value="0">
+            <!-- cửa dưới end_ -->
+          </div>
+        </div>
+
+        <!-- Khán giả -->
+        <div class="form-group">
+          <label class="ml-1 mb-1" for=""><strong>Khán giả</strong></label>
+          <div class="mt-1" id="accordion" role="tablist">
+              <div class="card-tittle">
+                <div data-toggle="collapse" class="p-1 text-center bg-dark text-light btn-block rounded-top" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                Thông báo tới một vài người bạn của bạn về kèo này
+                </div>
+              </div>
+              <div id="collapse3" class="collapse" role="tabpane3" aria-labelledby="heading3" data-parent="#accordion">
+                <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
+
+                  {% for friend in friendlist_information %}
+
+                    <div class="m-0 p-0 pl-4 mr-4" >
+                    <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
+                      <input id="{{friend.username}}2vưvbrytvbb87w87465vqb4v547" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
+                      <span class="custom-control-indicator custom-control-success"></span>
+                      <span>
+                        {% if friend.image is none %}
+                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                        {% else %}
+                        <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                      </span>
+                      <span style="display:inline-block; width: YOURWIDTH;"></span>
+                      <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
+                    </label>
+                    </div>
+
+                  {% endfor %}
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+
+
+        <input type="hidden" name="_id" value="{{id}}">
+        <div class="text-right mb-2">
+          <input class="text-center btn btn-success btn-lg" type="submit" name="" value="Tạo kèo">
+        </div>
+
+      </form>
+    </div>
+  </body>
+</html>

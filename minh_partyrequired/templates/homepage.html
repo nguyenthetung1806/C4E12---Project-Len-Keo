@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lên kèo</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- nav -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 ">
+      <div class="container">
+
+      <a class="navbar-brand ml-2 mr-0" href="/">
+        <i class="fa fa-user-secret" aria-hidden="true"></i>
+          <span style="display:inline-block; width: YOURWIDTH;"></span>
+        Lên kèo
+      </a>
+      <button class="navbar-toggler navbar-success" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto col-xs-0">
+            <li class="nav-item active  ">
+              <br>
+            </li>
+            <li class="nav-item active  ">
+              <a class="nav-link" href="#">Về chúng tôi<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">Đăng ký<span class="sr-only"></span></a>
+            </li>
+
+
+
+
+
+
+
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Đăng nhập
+              </a>
+              <div class="dropdown-menu dropdown-menu-right show " aria-labelledby="navbarDropdown">
+                  <form action="/login" method="post" class="px-4 py-3">
+                    <div class="form-group">
+                      <label for="exampleDropdownFormEmail1">Tên đăng nhập</label>
+                      <input type="text" class="form-control" id="navbarDropdown" name="username" value="{{usn}}" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleDropdownFormPassword1">Mật khẩu</label>
+                      <input type="password" class="form-control" id="navbarDropdown" name="password" value="{{psw}}" placeholder="mật khẩu">
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Remember me
+                      </label>
+                    </div>
+                    <button type="submit" class="allign-right btn btn-sm font-weight-bold btn-success">Đăng nhập</button>
+                                  <input type="hidden" name="hid" value="{{prompt}}">
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/signup">Chưa có tài khoản? Đăng ký</a>
+                  <a class="dropdown-item" href="#">Quên mật khẩu?</a>
+              </div>
+            </li>
+            <br>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- nav _end -->
+
+
+    <img id="first_page" class="d-block w-100 h-80" src="https://www.walldevil.com/wallpapers/a89/money-success-fame-fortune-glory-waterslide.jpg" alt="First slide">
+    <div class="carousel-caption col-md-7 col-sm-1s" >
+      <h3 style="font-family: 'Montserrat', sans-serif;" class=" text-right c-heading text-left text-light">
+        Bạn muốn lên kèo với các anh em mà không phải lo chúng nó bùng?
+      </h3>
+      <h3 style="font-family: 'Montserrat', sans-serif;" class="text-right c-heading text-left text-light">
+        Bạn muốn kiếm một nơi để thể làm đủ trò bẩn bựa mà chỉ các chiến hữu với nhau mới thấy được?
+      </h3>
+      <h3 style="font-family: 'Montserrat', sans-serif;" class="font-weight-bold text-right c-heading text-left text-success text-right">
+        Hãy đến với chúng tôi, mạng không-xã-hội dành riêng cho chiến hữu
+      </h3>
+      <a class="rounded mx-auto d-block float-right" href="/login">
+        <button style="font-weight: bold; font-family: 'Montserrat', sans-serif;"class='rounded mx-auto d-block align-middle btn btn-success float-left btn-lg pl-5 pr-5 pt-1 pb-1' type="button" name="button">Tham gia!!!</button>
+      </a>
+    </div>
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

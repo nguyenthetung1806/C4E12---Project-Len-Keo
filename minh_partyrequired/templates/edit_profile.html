@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thông tin tài khoản</title>
+    <script type="text/javascript">
+      function _submit(){
+        var a = document.getElementById('hidd');
+        a.value = "0";
+        document.frm.submit();
+      }
+      function _submit1(){
+        var a = document.getElementById('hidd');
+        a.value = "1";
+        document.frm.submit();
+      }
+    </script>
+  </head>
+  <body>
+    {% include 'include-template.html' %}
+    <div class="container mt-3 p-0">
+      <div class="row mr-1 ml-1">
+        <div class="text-light col-lg-12 col-xl-4 p-0 ">
+        {% include 'include-template-profile.html' %}
+        </div>
+        <!--One of two columns end_-->
+        <!--One of two columns-->
+        <div class="col-sm col-md-12 col-lg-7 rounded-right border border-dark p-0 pl-3 pr-3">
+
+          <!-- Cơ chế -->
+          <!-- Thẻ bài -->
+          <div class="row mt-2">
+            <div class="col-md-3 col-5 m-0 pr-0 ">
+              <div class="container rounded-top border border-success border-bottom-0 p-0">
+                <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4"
+                href="/edit.profile/{{account_other.username}}">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  Thông tin
+                </a>
+              </div>
+            </div>
+            <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+              <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                href="/friend.list/{{account_other.username}}">
+                  <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  Bạn bè
+                </a>
+              </div>
+            </div>
+            <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
+              <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0 ">
+                <a class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4"
+                href="/contract.list/{{account_other.username}}">
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                  Kèo bet
+                </a>
+              </div>
+            </div>
+            <div class="col m-0 pl-0 border border-success border-top-0 border-left-0 border-right-0 p-0 mr-3">
+            </div>
+          </div>
+          <!-- Thẻ bài end_-->
+          <!-- display -->
+          <div class="p-0 pl-2 pr-2">
+          {% if account.username == account_other.username %}
+            <form name="frm" class="" action="/edit.profile/{{ account_other.username }}" enctype="multipart/form-data" method="post">
+              <div class="form-group font-weight-bold mt-2">
+                <label class="mr-4 pr-3" for="">Thay ảnh</label>
+                <!-- src="data:image/*;base64,{{image_base64}}" -->
+                <input class="btn pl-0" type="file" onchange="_submit()" accept="image/*" name="image" value="">
+              </div>
+              <div class="form-group font-weight-bold">
+                <label for="">Tên tài khoản</label>
+              </div>
+          {% else %}
+              <div class="form-group font-weight-bold mt-2">
+              <label class="mr-4 pr-3" for="">Tên tài khoản</label>
+              </div>
+          {% endif %}
+              <input class="form-control" type="text" name="name" value="{{account_other.name}}" required>
+              <div class="form-group font-weight-bold">
+              <label for="">Email</label>
+              <input class="form-control" type="email" name="email" value="{{account_other.email}}" required>
+              </div>
+              <div class="form-group font-weight-bold">
+                <label for="">Số điện thoại</label>
+                <input class="form-control" type="text" name="phone" value="{{account_other.phone}}" required>
+              </div>
+          {% if account.username == account_other.username %}
+              <div class="form-group mt-4 text-right">
+                <input class=" btn btn-success font-weight-bold" type="submit" name="" value="Thay đổi">
+              </div>
+              <input id="hidd" type="hidden" name="hidd" value="">
+            </form>
+          {% endif %}
+          </div>
+        </div>
+        <!-- display end_ -->
+        <!-- Cơ chế -->
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
