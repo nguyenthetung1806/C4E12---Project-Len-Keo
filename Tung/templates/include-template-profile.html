@@ -46,7 +46,7 @@
         </div>
         <!--image -->
         <div class="col-lg col-xl rounded-left mx-auto d-block p-0 m-0" >
-          {% if username_url == username %}
+          {% if account_other.username == account.username %}
           {% if account.image is none %}
           <img class="rounded-left card-img-top p-0 m-0" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="220px" alt="Ảnh đại diện">
           {% else %}
@@ -66,7 +66,7 @@
       <!-- username -->
       <div class="col p-0 m-0 mt-2 align-middle text-center mx-auto d-block">
             <h2 class="text-dark font-weight-bold mb-1 ">
-              {% if username_url == username %}                  <!--add account here -->
+              {% if account_other.username == account.username %}                  <!--add account here -->
               {{ account.name }}
               {% else %}
               {{ account_other.name }}
