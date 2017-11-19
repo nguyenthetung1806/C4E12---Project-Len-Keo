@@ -1,12 +1,19 @@
 #first_page{
-
   width: 200px;
-  height: 740px;
+  height: 770px;
   overflow: hidden;
-
 }
+
+#background_ {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+}
+
+
 .carousel-caption {
-    top: 15%;
+    top: 17%;
     left:10%;
 }
 

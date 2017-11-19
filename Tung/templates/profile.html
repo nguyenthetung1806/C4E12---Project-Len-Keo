@@ -53,9 +53,9 @@
           </div>
 
 <!-- search bar -->
+{% if account.friendlist|length == 0%}
 <div class="container col-9 text-white text-center">
 Nhưng trước hết, hãy bắt đầu bằng việc tìm kiếm một vài người bạn ....
-{% if account.friendlist|length == 0%}
 <div class="dropdown">
   <button class="dropdown-toggle" type="button" id="dropdownMenuButtonSpecial" data-toggle="dropdown" aria-haspopup="true" style="display: none;" aria-expanded="false"></button>
   <input class="form-control mr-sm-2" id="search_input" onfocus="_focus()" onkeyup="_search()" type="search" placeholder="Nhập để tìm kiếm" aria-label="Search">

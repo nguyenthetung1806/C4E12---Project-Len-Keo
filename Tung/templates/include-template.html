@@ -78,6 +78,7 @@
   <body>
 
 
+    <img style="position: absolute; z-index:-1;" class=" w-100 h-80" src="" alt="First slide">
 
 
 
@@ -146,11 +147,13 @@
           <li class="nav-item rounded p-0">
             <div data-toggle="tooltip" data-placement="bottom" title="Lời mời kết bạn" class="btn-group rounded p-0 m-0" >
               <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <h5 class="m-0"><i class="fa fa-user-plus
+                <h5 class="m-0"><i class="fa
                       {% if account.friend_accept_pending|length == 0 %}
-                        text-secondary
+                      fa-user
+                      text-secondary
                       {% else %}
-                        text-white
+                      fa-user-plus
+                      text-white
                       {% endif %}
                      " aria-hidden="true"></i></h5>
               </button>
