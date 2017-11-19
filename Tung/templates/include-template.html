@@ -208,66 +208,65 @@
                 {% for noti in notification %}
                   {% for hint in hints %}
                     {% if noti.contract_maker[-1] == hint.username %}
-              <div class="row">
-                <div class="col-10">
-                  <span>
-                    <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}">
-                      <span class=" font-weight-bold text-success">
-                        {% if hint.image is none %}
-                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-
-
-
-                          {{ hint.name }}
-                      </span>
-                      <p class="m-0">mời bạn tham gia một giao kèo.
-                      <span class="text-primary">Chi tiết
-                      </span>
-                    </p>
-                    </a>
-                    </span>
-                </div>
-                <div class=" col-2 p-0 text-left">
-                  <a class="text-lg font-weight-bold text-success mr-1" class="text-success" href="/bet.request/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                  <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                </div>
-              </div>
-                  {% endif %}
+                      <div class="row">
+                        <div class="col-10">
+                          <span>
+                            <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}">
+                              <span class=" font-weight-bold text-success">
+                                {% if hint.image is none %}
+                              <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                                  {% else %}
+                              <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                                  {% endif %}
+                                  {{ hint.name }}
+                              </span>
+                              <p class="m-0">mời bạn tham gia một giao kèo.
+                              <span class="text-primary">Chi tiết
+                              </span>
+                            </p>
+                            </a>
+                          </span>
+                        </div>
+                        <div class=" col-2 p-0 text-left">
+                          <a class="text-lg font-weight-bold text-success mr-1" class="text-success" href="/bet.request/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                          <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
               {% for noti in notification %}
                 {% for hint in hints %}
                   {% if noti.victory_claim[-1] == hint.username %}
-              <div class="col-10">
-                <span>
-                  <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}"><span class=" font-weight-bold text-success">
-                    {% if hint.image is none %}
-                  <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                    {% else %}
-                  <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
-                    {% endif %}
-                      {{ hint.name }}</span>
-                  <p class="m-0">tuyên bố đã chiến thắng 1 kèo mà bạn tham gia.
-                    <span class="text-primary">Chi tiết</span></p></a>
-                </span>
-              </div>
-                <div class=" col-2 p-0 text-left">
-                  <a class="text-lg font-weight-bold text-success mr-1" href="/bet.vote.victory/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                  <a class="text-lg font-weight-bold text-danger" href="/bet.vote.victory/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-                </div>
-              </div>
+                    <div class="row">
+                      <div class="col-10">
+                        <span>
+                          <a class="dropdown-item pb-2" href="/active.bet/{{noti.id}}"><span class=" font-weight-bold text-success">
+                            {% if hint.image is none %}
+                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                            {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                            {% endif %}
+                              {{ hint.name }}</span>
+                          <p class="m-0">tuyên bố đã chiến thắng 1 kèo mà bạn tham gia.
+                            <span class="text-primary">Chi tiết</span></p></a>
+                        </span>
+                      </div>
+                      <div class=" col-2 p-0 text-left">
+                        <a class="text-lg font-weight-bold text-success mr-1" href="/bet.vote.victory/accept/{{ noti.id }}"><i class="fa fa-check" aria-hidden="true"></i></a>
+                        <a class="text-lg font-weight-bold text-danger" href="/bet.vote.victory/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                      </div>
+                    </div>
                   {% endif %}
                 {% endfor %}
               {% endfor %}
             {% else %}
-                      <div class="text-dark text-right pr-4">Không có thông báo nào</div>
+                  <div class="text-dark text-right pr-4">Không có thông báo nào</div>
           {% endif %}
                   <div class="dropdown-divider m-0"></div>
-                  <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="#">Xem toàn bộ</a>
-                </div>
+                <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="#">Xem toàn bộ</a>
+              </div>
+              </div>  
             </li>
 
             <li class="nav-item active rounded mr-3 p-0 pb-1 pt-1">

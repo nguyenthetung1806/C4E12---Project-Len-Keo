@@ -191,8 +191,6 @@ def friend_list(username_url):
     account_other = Account.objects.get(username = username_url)
     notification =[]
     hints = Account.objects()
-    for each in account.active_bet:
-        notification.insert(0, Contract_type_1.objects().with_id(each))
     for each in account.pending_bet:
         notification.insert(0, Contract_type_1.objects().with_id(each))
     for each in account.other_claiming_winner_bets:
