@@ -146,6 +146,27 @@
         <!--button end_ -->
       </div>
       <!-- block end_ -->
+
+      {% for bet in bets_invited %}
+      <div class="">
+        <div class="row">
+          <div class="col-9">
+            <span>{{bet.contract_name}}</span>
+          </div>
+          <div class="col">
+            <span>
+              <a class="text-success font-weight-bold" href="/contract.list/{{bet.id}}">
+                <i class="fa fa-sign-in-o" aria-hidden="true"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+
+
+
       <!-- badges -->
       <div class="p-0 pr-2 m-0">
         <div class="col row rounded-left border border-right-0 border-success m-0 p-2 bg-success mb-2">

@@ -135,6 +135,9 @@ def profile(username_url):
     win_bets_to_show = []
     for bet in account_other.win_bet:
         win_bets_to_show.insert(0, Contract_type_1.objects().with_id(bet))
+    bets_invited = []
+    for bet in account_other.bet_spectator:
+        bets_invited.insert(0, Contract_type_1.objects().with_id(bet))
     return render_template('profile.html',  account = account,
                                             account_other = account_other,
                                             username = username,
@@ -144,7 +147,8 @@ def profile(username_url):
                                             lost_bets_to_show = lost_bets_to_show,
                                             win_bets_to_show = win_bets_to_show,
                                             hints = hints,
-                                            notification = notification)
+                                            notification = notification,
+                                            bets_invited = bets_invited)
 
 
 
@@ -319,13 +323,11 @@ def contract_type_1(contract_class):
     username = session['username']
     account = Account.objects.get(username = username)
     friendlist_information = []
-
     notification =[]
     for each in account.pending_bet:
         notification.insert(0, Contract_type_1.objects().with_id(each))
     for each in account.other_claiming_winner_bets:
         notification.insert(0, Contract_type_1.objects().with_id(each))
-
     for friend in account.friendlist:
         friendlist_information.insert(0, Account.objects().get(username = friend))
     if request.method == "GET":
@@ -352,11 +354,9 @@ def contract_type_1(contract_class):
             spectator = form.getlist('spectator')
             punishment = form['punishment']
             #times
-            month = form['month']
-            year = form['year']
-            day = form['day']
-            dates = month + "/" + day + "/" + year + "/"
-            times = form['times']
+
+            dates = form['dates']
+            # times = form['times']
             contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
                                                 contract_term = contract_term,
                                                 party_left_pending = party_left_pending,
@@ -364,7 +364,7 @@ def contract_type_1(contract_class):
                                                 spectator = spectator,
                                                 punishment = punishment,
                                                 dates = dates,
-                                                times = times,
+                                                # times = times,
                                                 contract_name = contract_name)
             contract_type_1.save()
             account.update(add_to_set__active_bet = str(contract_type_1.id))
@@ -396,11 +396,9 @@ def contract_type_1(contract_class):
             spectator = form.getlist('spectator')
             punishment = form['punishment']
             #times
-            month = form['month']
-            year = form['year']
-            day = form['day']
-            dates = month + "/" + day + "/" + year + "/"
-            times = form['times']
+
+            dates = form['dates']
+            # times = form['times']
             contract_type_1 = Contract_type_1(  contract_maker = contract_maker,
                                                 contract_term = contract_term,
                                                 party_multiplayers_pending = party_multiplayers_pending,
@@ -408,7 +406,7 @@ def contract_type_1(contract_class):
                                                 spectator = spectator,
                                                 punishment = punishment,
                                                 dates = dates,
-                                                times = times,
+                                                # times = times,
                                                 contract_name = contract_name)
             contract_type_1.save()
             contract_type_1.update(pull__party_multiplayers_pending = username)
