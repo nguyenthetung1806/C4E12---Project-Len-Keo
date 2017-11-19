@@ -78,7 +78,7 @@
 
   <body>
 
-    <img style="position: absolute; z-index:-1;" class=" w-100 h-80" src="" alt="First slide">
+    <img style="z-index:-1;" class="fixed-top w-100 h-80" src="https://www.pixelstalk.net/wp-content/uploads/2016/04/Wonderful-totoro-wallpaper-HD-backgounds.jpg" alt="Totoro Wallpaper Hd" >
 
     <!-- nav -->
     <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark p-0 ">
@@ -234,7 +234,8 @@
               {% if notification|length != 0 %}
                 {% for noti in notification %}
                   {% for hint in hints %}
-                    {% if noti.contract_maker[-1] == hint.username %}
+                    {% if noti.victory_claim|length == 0 %}
+                      {% if noti.contract_maker[-1] == hint.username %}
                       <div class="row">
                         <div class="col-10">
                           <span>
@@ -259,6 +260,7 @@
                           <a class="text-lg font-weight-bold text-danger" class="text-success" href="/bet.request/decline/{{ noti.id }}"><i class="fa fa-times" aria-hidden="true"></i></a>
                         </div>
                       </div>
+                      {% endif %}
                     {% endif %}
                   {% endfor %}
                 {% endfor %}
