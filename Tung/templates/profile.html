@@ -115,7 +115,7 @@ Nhưng trước hết, hãy bắt đầu bằng việc tìm kiếm một vài ng
                 <!-- đồng hồ -->
                 <div class="card-title text-secondary font-weight-bold m-0 ml-3 ">
                     <span class="text-dark" id="clock">
-                      <span  class="just_the_fuckin_clock" id="{{bet.times}}">
+                      <span  class="just_the_fuckin_clock" >
                         <h6 style="display:none;" id="{{bet.dates}}">
                         </h6>
                         <span style="font-size: 25px" id="{{bet.id}}"></span>
@@ -367,12 +367,12 @@ sp2 = sp.getElementsByClassName('just_the_fuckin_clock');
 var x = setInterval(function() {
 for (var i = 0; i < sp2.length; i++) {
   var sp1 = sp2[i].getElementsByTagName('span')[0];
-  var h51 = sp2[i].id;
+  // var h51 = sp2[i].id;
   var h52 = sp2[i].getElementsByTagName('h6')[0];
   h52 = h52.id;
   // h52 = h52.toDateString();
   // Set the date we're counting down to
-  var countDownDate = new Date(h52 + h51).getTime();
+  var countDownDate = new Date(h52).getTime();
   // Update the count down every 1 second
   // Get todays date and time
   var now = new Date().getTime();
