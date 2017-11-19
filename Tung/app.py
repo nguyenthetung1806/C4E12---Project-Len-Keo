@@ -27,7 +27,6 @@ class Account(Document):
     friendlist = ListField()
     friend_request_sent = ListField()
     friend_accept_pending = ListField()
-    
     #
     #bet system
     pending_bet = ListField()
