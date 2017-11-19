@@ -10,7 +10,20 @@
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-
+    <script type="text/javascript">
+      function check_pass(){
+        var check = document.getElementById('password_check').value;
+        var pass = document.getElementById('password').value;
+        if (check != pass) {
+          alert("Vui lòng kiểm tra lại mật khẩu!");
+          return false;
+        }
+        else {
+          alert("Đăng ký thành công");
+          return true;
+        }
+      }
+    </script>
   </head>
 
   <body>
@@ -88,7 +101,7 @@
       <div class="d-flex justify-content-center align-items-center">
         <div class="card border-dark col-xl-6 col-lg-11">
           <div class="card-body">
-            <form name="frm" class="" action="" method="post">
+            <form name="frm" onsubmit="return(check_pass())" class="" action="" method="post">
               <div class="form-group font-weight-bold text-success">
                 <label class="m-0" for="">Tên đăng nhập</label>
                 <input class="form-control" type="text" name="username" value="{{usn}}" required>
@@ -96,12 +109,12 @@
 
               <div class="form-group font-weight-bold">
                 <label class="m-0" for="">Mật khẩu</label>
-                <input class="form-control" type="password" name="password" value="{{psw}}" required>
+                <input class="form-control" id="password" type="password" name="password" value="{{psw}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
                 <label class="m-0" for="">Kiểm tra mật khẩu</label>
-                <input class="form-control" type="password_check" name="password_check" value="{{psw}}" required>
+                <input class="form-control" id="password_check" type="password" name="password_check" value="{{psw}}" required>
               </div>
 
               <div class="form-group font-weight-bold">
