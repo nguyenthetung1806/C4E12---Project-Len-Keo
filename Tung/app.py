@@ -72,7 +72,6 @@ def login():
         form = request.form
         username = form['username']
         password = form['password']
-        hid = form['hid']
         try:
             account = Account.objects.get(username=username)
         except Account.DoesNotExist:
@@ -83,15 +82,9 @@ def login():
             return render_template('login.html', prompt = prompt,usn=username,psw=password)
         else:
             if sha256_crypt.verify(password, account.password) == True:
-
-
-                if hid != "4":
-                    prompt=3
-                    return render_template('login.html', prompt = prompt,usn=username,psw=password)
-                elif hid == "4":
-                    session["username"] = account.username
-                    url = "/profile/" + account.username
-                    return redirect(url)
+                session["username"] = account.username
+                url = "/profile/" + account.username
+                return redirect(url)
             else:
                 # message = "Sai mật khẩu"
                 prompt=2
