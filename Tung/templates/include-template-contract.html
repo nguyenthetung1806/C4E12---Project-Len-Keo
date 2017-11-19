@@ -3,6 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker({
+        showOn: 'button',
+        buttonImage: 'https://maxcdn.icons8.com/Share/icon/Time_And_Date//tear_off_calendar1600.png',
+        buttonText: '',
+        buttonImageOnly: true,
+        minDate: 0,
+        defaultDate: +0,
+        dayNamesMin: ["CN", "H", "B", "T", "N", "S", "B"],
+        monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+      });
+    } );
+  </script>
     <script type="text/javascript">
 
       // Hàm để disable và enable, không cho một người một lúc hai cửa
@@ -102,15 +119,16 @@
         </div>
         <br>
         <label for="">Nhập ngày
-        <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
+          <input name="dates" type="text" id="datepicker" disabled required></label>
+        <!-- <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
         <label for="">Nhập tháng
         <input type="number"  name="month"   list="month-list" min="1"  max="12" required></label>
         <label for="">Nhập năm
-        <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br>
+        <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br> -->
 
         <label for="">Nhập thời gian
         <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" ></label>
-        <datalist id="month-list">
+        <!-- <datalist id="month-list">
           <option value="01">
           <option value="02">
           <option value="03">
@@ -157,7 +175,7 @@
           <option value="30">
           <option value="31">
 
-        </datalist>
+        </datalist> -->
         <!-- Thời gian end -->
 
   </body>
