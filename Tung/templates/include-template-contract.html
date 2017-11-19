@@ -15,86 +15,34 @@
 
     <script type="text/javascript" src="../static/js/bootstrap-datetimepicker.min.js"></script>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
-    <!-- <script type="text/javascript" scr="../static/js/bootstrap-datetimepicker.min.js" crossorigin="anonymous"></script> -->
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script> -->
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
-    <!-- <script>
-    $( function() {
-      $( "#datepicker" ).datepicker({
-        // showOn: 'button',
-        // buttonImage: 'https://www.normandysc.org/cms/lib/MO02201556/Centricity/template/globalassets/images/calendar-icon.png',
-        // buttonText: '',
-        // buttonImageOnly: true,
-        minDate: 0,
-        defaultDate: +0,
-        dayNamesMin: ["CN", "H", "B", "T", "N", "S", "B"],
-        monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-      });
-    } );
-  </script> -->
+
     <script type="text/javascript">
 
       // Hàm để disable và enable, không cho một người một lúc hai cửa
       // Ngoài cái javascript này ra thì em chỉ thay đổi ở các dòng: 79, 103, 119, 150 và 166 thôi
       // Nhớ là viết KHÔNG SAI MỘT CHỮ!!!
-      function _check_state(val, party) {
-        if (party == "right") {
-          if (document.getElementById(val).disabled == false) {
-            document.getElementById(val).disabled = true;
-          }
-          else {
-            document.getElementById(val).disabled = false;
-          }
-        }
-        else {
-          if (document.getElementById(val + "1").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
-          }
-          else {
-            document.getElementById(val + "1").disabled = false;
-          }
-        }
-      }
 
-      function _check_friend_state(val, party) {
-        if (party == "right") {
-          if (document.getElementById(val).disabled == false || document.getElementById(val + "2").disabled == false) {
-            document.getElementById(val).disabled = true;
-            document.getElementById(val + "2").disabled = true;
-          }
-          else {
-            document.getElementById(val).disabled = false;
-            document.getElementById(val + "2").disabled = false;
-          }
-        }
-        else if (party == "spectator") {
-          if (document.getElementById(val).disabled == false || document.getElementById(val + "1").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
-            document.getElementById(val).disabled = true;
-          }
-          else {
-            document.getElementById(val + "1").disabled = false;
-            document.getElementById(val).disabled = false;
-          }
+      function _checkTime(){
+        var datetime = document.getElementById('dates').value;
+        var date = new Date(datetime).getTime();
+        var now = new Date().getTime();
+        var distance = date - now;
+        if (distance <= 0) {
+          alert("Không được phép chọn thời gian trước thời điểm hiện tại!");
+          return false;
         }
         else {
-          if (document.getElementById(val + "1").disabled == false || document.getElementById(val + "2").disabled == false) {
-            document.getElementById(val + "1").disabled = true;
-            document.getElementById(val + "2").disabled = true;
-          }
-          else {
-            document.getElementById(val + "1").disabled = false;
-            document.getElementById(val + "2").disabled = false;
-          }
+          return true;
         }
+
       }
     </script>
   </head>
@@ -142,7 +90,7 @@
             <div class="col p-0">
               <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                  <input name="dates" type='text' class="form-control" required/>
+                  <input id="dates" name="dates" type='text' placeholder="mm/dd/yyyy h:m(AM/PM)" class="form-control" required/>
                     <span class="input-group-addon">
                       <span class="fa fa-calendar" id="pick_"></span>
                     </span>
@@ -153,74 +101,10 @@
                   <script type="text/javascript">
                       $(function () {
                           $('#datetimepicker1').datetimepicker();
-                          // $('#pick_').click(() => {
-                          //   console.log($('#datetimepicker1').html());
-                          //   console.log('buzz');
-                          //   $('.glyphicon').addClass('fa').removeClass('glyphicon');
-                          //   $('.glyphicon-calendar').addClass('fa-calendar').removeClass('glyphicon-calendar');
-                          //   $('.glyphicon-time').addClass('fa-trash').removeClass('glyphicon-time');
-                          // });
+
                       });
                   </script>
 
-
-
-        <!-- <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
-        <label for="">Nhập tháng
-        <input type="number"  name="month"   list="month-list" min="1"  max="12" required></label>
-        <label for="">Nhập năm
-        <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br> -->
-        <!-- <label for="">Nhập thời gian
-        <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" ></label> -->
-        <!-- <datalist id="month-list">
-          <option value="01">
-          <option value="02">
-          <option value="03">
-          <option value="04">
-          <option value="05">
-          <option value="06">
-          <option value="07">
-          <option value="08">
-          <option value="09">
-          <option value="10">
-          <option value="11">
-          <option value="12">
-        </datalist>
-        <datalist id="day-list">
-          <option value="01">
-          <option value="02">
-          <option value="03">
-          <option value="04">
-          <option value="05">
-          <option value="06">
-          <option value="07">
-          <option value="08">
-          <option value="09">
-          <option value="10">
-          <option value="11">
-          <option value="12">
-          <option value="13">
-          <option value="14">
-          <option value="15">
-          <option value="16">
-          <option value="17">
-          <option value="18">
-          <option value="19">
-          <option value="20">
-          <option value="21">
-          <option value="22">
-          <option value="23">
-          <option value="24">
-          <option value="25">
-          <option value="26">
-          <option value="27">
-          <option value="28">
-          <option value="29">
-          <option value="30">
-          <option value="31">
-
-        </datalist> -->
-        <!-- Thời gian end -->
 
   </body>
 </html>
