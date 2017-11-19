@@ -27,6 +27,7 @@ class Account(Document):
     friendlist = ListField()
     friend_request_sent = ListField()
     friend_accept_pending = ListField()
+    friend_accepted = ListField()
     #
     #bet system
     pending_bet = ListField()
@@ -239,6 +240,7 @@ def friend_request_method(method, username_url):
         account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(add_to_set__friendlist = account.username)
         account_other.update(pull__friend_request_sent = account.username)
+        account_other.update(add_to_set__friend_accepted = account.username)
         return redirect(url_self)
     elif method == "send.request":
         account.update(add_to_set__friend_request_sent = account_other.username)
@@ -248,8 +250,9 @@ def friend_request_method(method, username_url):
         account.update(pull__friend_accept_pending = account_other.username)
         account_other.update(pull__friend_request_sent = account.username)
         return redirect(url)
-
-
+    elif method == "clear":
+        account.update(pull__friend_friend_accepted = account_other.username)
+        return redirect(url_self)
 
     # friendlist = ListField()
     # friend_request_sent = ListField()

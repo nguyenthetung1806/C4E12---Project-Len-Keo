@@ -148,7 +148,7 @@
             <div data-toggle="tooltip" data-placement="bottom" title="Lời mời kết bạn" class="btn-group rounded p-0 m-0" >
               <button type="button" class="rounded btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <h5 class="m-0"><i class="fa
-                      {% if account.friend_accept_pending|length == 0 %}
+                      {% if account.friend_accept_pending|length == 0 or account.friend_accepted|length == 0 %}
                       fa-user
                       text-secondary
                       {% else %}
@@ -158,9 +158,45 @@
                      " aria-hidden="true"></i></h5>
               </button>
               <div class="dropdown-menu dropdown-menu-right rounded pb-1 pt-1" >
-                {% if account.friend_accept_pending|length == 0 %}
+                {% if account.friend_accept_pending|length == 0 or account.friend_accepted|length == 0 %}
                   <div class="text-dark text-right pr-4 col-12">Không có lời mời nào</div>
                 {% else %}
+
+
+                {% for request in account.friend_accepted %}
+                  {% for hint in hints %}
+                    {% if request == hint.username %}
+                <div class="row">
+                  <div class="col-10">
+                    <span>
+                      <a class="dropdown-item pb-2" href="/profile/{{hint.username}}"> <span class=" font-weight-bold text-success">
+                        {% if hint.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="15px" width="15px" alt="">
+                        {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="15px" width="15px" alt="">
+                        {% endif %}
+                        {{ hint.name }}</span>
+                        <p class="m-0">đã chấp nhận lời mời kết bạn của bạn
+                        <span class="text-primary">Xem trang cá nhân</span></p></a>
+                    </span>
+                  </div>
+                  <div class=" col-2 p-0 text-left">
+                    <a class="text-lg font-weight-bold text-success mr-1" href="/friend.request/clear/{{request}}"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                    <a class="text-lg font-weight-bold text-danger invisible" href="/friend.request/decline/{{request}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+                  </div>
+                  </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+
+
+
+
+
+
+
+
+
                   {% for request in account.friend_accept_pending %}
                     {% for hint in hints %}
                       {% if request == hint.username %}
@@ -266,7 +302,7 @@
                   <div class="dropdown-divider m-0"></div>
                 <a class="dropdown-item text-right font-weight-bold text-dark bg-muted" href="#">Xem toàn bộ</a>
               </div>
-              </div>  
+              </div>
             </li>
 
             <li class="nav-item active rounded mr-3 p-0 pb-1 pt-1">
@@ -284,9 +320,9 @@
                 <i class="fa fa-tasks" aria-hidden="true"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right rounded pt-1 pb-0 text-right " aria-labelledby="navbarDropdown">
-                <a class="dropdown-item pt-0" href="#">Cài đặt</a>
+                <a class="dropdown-item pt-0" href="#"><i class="fa fa-address-book-o" aria-hidden="true"></i> Cài đặt</a>
                 <div class="dropdown-divider m-0"></div>
-                <a class="dropdown-item text-right font-weight-bold text-dark bg-info pb-1" href="/logout"><span class="nav-item text-light">Đăng xuất</span></a>
+                <a class="dropdown-item text-right font-weight-bold text-dark bg-dark pb-1" href="/logout"><span class="nav-item text-light">Đăng xuất</span></a>
               </div>
             </li>
 
