@@ -315,6 +315,18 @@ def clone_user_information (bet, users_involved_list):
 #     if contract.victory_claim in party_left:
 
 
+@app.route('/delete.follow/<bet_id>/<username>', methods=['GET','POST'])
+def delete_follow(bet_id, username):
+    bet = Contract_type_1.objects.with_id(str(bet_id))
+    account = Account.objects.get(username = username)
+    account.update(pull__bet_spectator = bet_id)
+    bet.update(pull__spectator = username)
+    url = '/profile/' + username
+    return redirect(url)
+
+
+
+
 
 
 
