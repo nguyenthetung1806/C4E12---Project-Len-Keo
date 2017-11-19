@@ -4,18 +4,23 @@
     <meta charset="utf-8">
     <title></title>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.min.css.map">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
 
+    <script type="text/javascript" src="../static/js/bootstrap-datetimepicker.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+    <!-- <script type="text/javascript" scr="../static/js/bootstrap-datetimepicker.min.js" crossorigin="anonymous"></script> -->
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script> -->
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> -->
 
@@ -129,37 +134,42 @@
 
 
         <!-- Thời gian -->
-        <div data-toggle="collapse" class="p-1 text-center bg-dark text-light btn-block rounded-top" href="#collapsex" aria-expanded="true" aria-controls="collapse3">
-        Thời hạn cho giao kèo
-        </div>
-        <br>
-        <label for="">Nhập ngày
-          <div class="container">
-              <div class="row">
-                  <div class='col-sm-12'>
-                      <div class="form-group">
-                          <div class='input-group date' id='datetimepicker1'>
-                              <input name="dates" type='text' class="form-control" />
-                              <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
-                          </div>
-                      </div>
+
+        <div class="row m-0 mt-2 p-0">
+          <div class="col-4 col-xl-6  p-0">
+            <label class="ml-1" for=""><strong>Thời hạn cho giao kèo (Tùy chỉnh)</strong></label>
+          </div>
+            <div class="col p-0">
+              <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                  <input name="dates" type='text' class="form-control" required/>
+                    <span class="input-group-addon">
+                      <span class="fa fa-calendar" id="pick_"></span>
+                    </span>
                   </div>
+                </div>
+              </div>
+            </div>
                   <script type="text/javascript">
                       $(function () {
                           $('#datetimepicker1').datetimepicker();
+                          // $('#pick_').click(() => {
+                          //   console.log($('#datetimepicker1').html());
+                          //   console.log('buzz');
+                          //   $('.glyphicon').addClass('fa').removeClass('glyphicon');
+                          //   $('.glyphicon-calendar').addClass('fa-calendar').removeClass('glyphicon-calendar');
+                          //   $('.glyphicon-time').addClass('fa-trash').removeClass('glyphicon-time');
+                          // });
                       });
                   </script>
-              </div>
-          </div>
-          </label>
+
+
+
         <!-- <input type="number"  name="day"    list="day-list" min="1" max="31" required></label>
         <label for="">Nhập tháng
         <input type="number"  name="month"   list="month-list" min="1"  max="12" required></label>
         <label for="">Nhập năm
         <input type="number"  name="year"  list="year-list" min="2017" max="4000" required></label><br> -->
-        <br>
         <!-- <label for="">Nhập thời gian
         <input type = "time" id="myTime" type="time"  step="1" name = "times" width="500" ></label> -->
         <!-- <datalist id="month-list">

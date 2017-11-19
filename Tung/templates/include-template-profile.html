@@ -9,21 +9,6 @@
       <!-- row top -->
       <div class="col row rounded-left border border-right-0 border-secondary pt-2 pb-2 pr-2 pl-1 m-0">
         <div class="col-lg-4 col-xl-2 pr-2 pl-2 pt-2">
-          <a data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" href="/friend.list/{{account_other.username}}">
-            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
-              <p class="m-0" data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" >
-                <i class="fa fa-address-book-o" aria-hidden="true"></i>
-              </p>
-            </div>
-          </a>
-          <a  data-toggle="tooltip" data-placement="top" title="Danh sách Kèo bet" href="/contract.list/{{account_other.username}}">
-            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
-              <p class="m-0" >
-                <i class="fa fa-list" aria-hidden="true">
-                </i>
-              </p>
-            </div>
-          </a>
           {% if account.username != account_other.username %}
           <a  data-toggle="tooltip" data-placement="top" title="Thông tin cá nhân" href="/edit.profile/{{account_other.username}}">
             <div class="btn btn-dark d-flex align-items-center text-center mb-2">
@@ -43,6 +28,21 @@
           </div>
         </a>
           {% endif %}
+          <a data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" href="/friend.list/{{account_other.username}}">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+              <p class="m-0" data-toggle="tooltip" data-placement="top" title="Danh sách bạn bè" >
+                <i class="fa fa-address-book-o" aria-hidden="true"></i>
+              </p>
+            </div>
+          </a>
+          <a  data-toggle="tooltip" data-placement="top" title="Danh sách Kèo bet" href="/contract.list/{{account_other.username}}">
+            <div class="btn btn-dark d-flex align-items-center text-center mb-2">
+              <p class="m-0" >
+                <i class="fa fa-list" aria-hidden="true">
+                </i>
+              </p>
+            </div>
+          </a>
         </div>
         <!--image -->
         <div class="col-lg col-xl rounded-left mx-auto d-block p-0 m-0" >
@@ -178,9 +178,9 @@
         </div>
       </div>
       <!-- badges end_ -->
-
+{% if account_other.username == account.username %}
       {% if bets_invited|length != 0 %}
-        <p class="mb-0 mt-3 text-center text-dark font-weight-bold">Danh sách theo dõi:</p>
+        <p style="font-size:20px;" class="mb-0 mt-3 text-center text-dark font-weight-bold">Danh sách theo dõi:</p>
       {% endif %}
 
       {% for bet in bets_invited %}
@@ -214,6 +214,6 @@
           </div>
         </div>
       {% endfor %}
-
+{% endif %}
   </body>
 </html>
