@@ -1,7 +1,13 @@
+#first_page{
 
+  width: 200px;
+  height: 740px;
+  overflow: hidden;
+
+}
 .carousel-caption {
-    top: 32%;
-    left:20%;
+    top: 15%;
+    left:10%;
 }
 
 .navbar-brand{
@@ -13,11 +19,7 @@
       font-weight: bold;
       font-family: 'Montserrat', sans-serif;
 }
-#Varela_1{
-        font-size: 2.2rem;
-        font-weight: bold;
-        font-family: 'Montserrat', sans-serif;
-}
+
 #Varela_1_1{
         font-size: 1.9rem;
         font-weight: bold;
