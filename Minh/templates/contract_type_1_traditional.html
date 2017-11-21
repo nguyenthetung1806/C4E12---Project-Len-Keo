@@ -111,10 +111,14 @@
           var hidleft = Number(hid_left.value);
           if (hidright >= input_left.length) {
             alert("Cửa trên không được để trống!");
+            hid_right.value = "0";
+            hid_left.value = "0";
             return false;
           }
           if (hidleft >= input_left.length) {
             alert("Cửa dưới không được để trống!");
+            hid_right.value = "0";
+            hid_left.value = "0";
             return false;
           }
           if (hidright < input_left.length || hidleft < input_left.length) {
@@ -132,11 +136,11 @@
 
 
 
-    <div class="container col-xl-6 col-lg-11 p-0 mt-3 ">
+    <div class="container  col-xl-6 col-lg-11 p-0 mt-3 ">
 
         <div class="row">
           <div class="col-md-3 col-5 m-0 pr-0 ">
-            <div class="container rounded-top border border-success border-bottom-0 p-0  ">
+            <div class="container rounded-top border border-success border-bottom-0 p-0 bg-light ">
               <a class="nav-link active border-success border-bottom-0 text-success font-weight-bold pl-4" href="/contract.type.1/traditional">
                 <i class="fa fa-handshake-o" aria-hidden="true"></i>
                 <span style="display:inline-block; width: YOURWIDTH;"></span>
@@ -147,7 +151,7 @@
           <div class="col-md-3 col-5 m-0 pl-0 pr-0 ">
             <div class="container rounded-top border border-success border-top-0 border-left-0 border-right-0 p-0">
               <a data-toggle="tooltip" data-placement="top" title="Đang trong quá trình phát triển"
-               class="nav-link active border-success border-bottom-0 text-dark font-weight-bold pl-4" href="#">
+              class="nav-link active border-success border-bottom-0 text-light font-weight-bold pl-4" href="#">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span style="display:inline-block; width: YOURWIDTH;"></span>
                 Nhiều bên
@@ -159,7 +163,7 @@
         </div>
     </div>
     <div class="container col-xl-6 col-lg-11  p-0">
-    <div class="container  rounded-bottom border border-success border-top-0 pl-4 pr-4">
+      <div class="container bg-light rounded-bottom border border-success border-top-0 pl-4 pr-4">
       <br>
       <!-- Tabs để chọn loại kèo -->
 

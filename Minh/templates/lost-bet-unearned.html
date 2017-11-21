@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Thông tin tài khoản</title>
+    <script type="text/javascript">
+      function _submit(){
+        var a = document.getElementById('hidd');
+        a.value = "0";
+        document.frm.submit();
+      }
+      function _submit1(){
+        var a = document.getElementById('hidd');
+        a.value = "1";
+        document.frm.submit();
+      }
+    </script>
+  </head>
+  <body>
+    {% include 'include-template.html' %}
+    <div class="container mt-3 p-0">
+      <div class="row mr-1 ml-1">
+        <div class="text-light col-lg-12 col-xl-4 p-0 ">
+        {% include 'include-template-profile.html' %}
+        </div>
+        <!--One of two columns end_-->
+        <!--One of two columns-->
+        <div class="col-sm col-md-12 col-lg-7 bg-light rounded-right border border-dark p-0 pl-3 pr-3">
+
+
+          <table class="table">
+            <thead class="thead-dark ">
+              <tr  class="row p-1 pb-0">
+                <th style="font-size: 15px;" class="align-middle col-md-1 m-0 p-1 text-center">#</th>
+                <th style="font-size: 15px;" class="align-middle col-md-3 m-0 p-1 text-center">Tên kèo</th>
+                <th style="font-size: 15px;" class="align-middle col-md-5 m-0 p-1 text-center">Hình phạt</th>
+                <th style="font-size: 15px;" class="align-middle col-md-3 m-0 p-1 text-center">Xác nhận thực hiện</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {% for bet in bets_to_show %}
+                <tr class="row p-1 pt-0">
+                  <th style="font-size: 15px;" class="align-middle col-md-1 m-0 p-1 text-center font-weight-bold">{{ loop.index }}</th>
+
+                  <td style="font-size: 17px;" class="text-success align-middle col-md-3 m-0 p-1 text-center font-weight-bold">{{ bet.contract_name }}</td>
+                  <td style="font-size: 15px;" class="align-middle col-md-5 m-0 p-1 text-center font-weight-bold">{{ bet.punishment }}</td>
+                  <td style="font-size: 15px;" class="align-middle col-md-3 m-0 p-1 text-center font-weight-bold">
+                  {% if account.username in bet.winner %}
+                    <a href="/lost.bet.earned/{{bet.id}}/{{account_other.username}}">
+                      <span class="m-0 text-success font-weight-bold"><i class="fa fa-check" aria-hidden="true"></i> Xác nhận</span>
+                    </a>
+                  {% else %}
+                    <p >
+                      <span class="m-0 text-secondary font-weight-bold">Chỉ bên thắng mới có quyền này</span>
+                    </p>
+                  {% endif %}
+                  </td>
+                </tr>
+              {% endfor%}
+            </tbody>
+
+          </table>
+
+
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
