@@ -11,23 +11,158 @@
       // Hàm để disable và enable, không cho một người một lúc hai cửa
       // Ngoài cái javascript này ra thì em chỉ thay đổi ở các dòng: 79, 103, 119, 150 và 166 thôi
       // Nhớ là viết KHÔNG SAI MỘT CHỮ!!!
-      function _check_state(val, party) {
-        if (party == "right") {
-          if (document.getElementById(val).disabled == false) {
-            document.getElementById(val).disabled = true;
+
+      function _focus123(){
+        var check = document.getElementById('check_but123');
+        check.value = "1";
+      }
+
+      function _focus321(){
+        var check = document.getElementById('check_but321');
+        check.value = "1";
+      }
+
+      function _focus3210(){
+        var check = document.getElementById('check_but3210');
+        check.value = "1";
+      }
+
+      function _search123(){
+        var check = document.getElementById('check_but123');
+        if (check.value == "1") {
+          var but = document.getElementById('dropdownMenuButton123');
+          but.click();
+          check.value = "0";
+        }
+        // Tìm kiếm phần tử:
+        var input, filter, ul, li, a, i, p;
+        input = document.getElementById('search_input123');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("search_hint123");
+        li = ul.getElementsByTagName('li');
+
+        // Xóa toàn bộ gợi ý không phù hợp
+        var limit = document.getElementById('limit123');
+        var nonresult = document.getElementById('result123');
+        for (i = 0; i < li.length; i++) {
+          p = li[i].getElementsByTagName("p")[0];
+          if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            nonresult.value = "1";
+            var limit1 = Number(limit.value);
+            if (limit1 < 10) {
+              li[i].style.display = "";
+              limit1++;
+              limit.value = limit1.toString();
+            }
+            else {
+              li[i].style.display = "none";
+            }
           }
           else {
-            document.getElementById(val).disabled = false;
+            li[i].style.display = "none";
           }
+        }
+        limit.value = "0";
+        var no_result = document.getElementById('no_result123');
+        if (nonresult.value == "1") {
+            no_result.style.display = "none";
         }
         else {
-          if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
-            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
+            no_result.style.display = "";
+        }
+        nonresult.value = "0";
+      }
+
+      function _search3210(){
+        var check = document.getElementById('check_but3210');
+        if (check.value == "1") {
+          var but = document.getElementById('dropdownMenuButton3210');
+          but.click();
+          check.value = "0";
+        }
+        // Tìm kiếm phần tử:
+        var input, filter, ul, li, a, i, p;
+        input = document.getElementById('search_input3210');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("search_hint3210");
+        li = ul.getElementsByTagName('li');
+
+        // Xóa toàn bộ gợi ý không phù hợp
+        var limit = document.getElementById('limit3210');
+        var nonresult = document.getElementById('result3210');
+        for (i = 0; i < li.length; i++) {
+          p = li[i].getElementsByTagName("p")[0];
+          if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            nonresult.value = "1";
+            var limit1 = Number(limit.value);
+            if (limit1 < 10) {
+              li[i].style.display = "";
+              limit1++;
+              limit.value = limit1.toString();
+            }
+            else {
+              li[i].style.display = "none";
+            }
           }
           else {
-            document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
+            li[i].style.display = "none";
           }
         }
+        limit.value = "0";
+        var no_result = document.getElementById('no_result3210');
+        if (nonresult.value == "1") {
+            no_result.style.display = "none";
+        }
+        else {
+            no_result.style.display = "";
+        }
+        nonresult.value = "0";
+      }
+
+      function _search321(){
+        var check = document.getElementById('check_but321');
+        if (check.value == "1") {
+          var but = document.getElementById('dropdownMenuButton321');
+          but.click();
+          check.value = "0";
+        }
+        // Tìm kiếm phần tử:
+        var input, filter, ul, li, a, i, p;
+        input = document.getElementById('search_input321');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("search_hint321");
+        li = ul.getElementsByTagName('li');
+
+        // Xóa toàn bộ gợi ý không phù hợp
+        var limit = document.getElementById('limit321');
+        var nonresult = document.getElementById('result321');
+        for (i = 0; i < li.length; i++) {
+          p = li[i].getElementsByTagName("p")[0];
+          if (p.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            nonresult.value = "1";
+            var limit1 = Number(limit.value);
+            if (limit1 < 10) {
+              li[i].style.display = "";
+              limit1++;
+              limit.value = limit1.toString();
+            }
+            else {
+              li[i].style.display = "none";
+            }
+          }
+          else {
+            li[i].style.display = "none";
+          }
+        }
+        limit.value = "0";
+        var no_result = document.getElementById('no_result321');
+        if (nonresult.value == "1") {
+            no_result.style.display = "none";
+        }
+        else {
+            no_result.style.display = "";
+        }
+        nonresult.value = "0";
       }
 
       function _check_friend_state(val, party) {
@@ -35,30 +170,102 @@
           if (document.getElementById(val).disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
             document.getElementById(val).disabled = true;
             document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
+            var hidden_right = document.getElementById('hid_rightlist');
+            document.getElementById('h4_rightlist').style.display = "";
+            document.getElementById(val + "jfjfjfjhfjhfjfyjti6686567t6ttu6tu6t7iti6ti6ti76ti6ti6ti76t").style.display = "";
+            if (hidden_right.value == "") {
+              hidden_right.value = "1";
+            }
+            else {
+              var hidden_right1 = Number(hidden_right.value);
+              hidden_right1 += 1;
+              hidden_right.value = hidden_right1.toString();
+            }
           }
           else {
             document.getElementById(val).disabled = false;
             document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
+            document.getElementById(val + "jfjfjfjhfjhfjfyjti6686567t6ttu6tu6t7iti6ti6ti76ti6ti6ti76t").style.display = "none";
+            var hidden_right = document.getElementById('hid_rightlist');
+            if (hidden_right.value == "0") {
+              document.getElementById('h4_rightlist').style.display = "none";
+            }
+            else {
+              var hidden_right1 = Number(hidden_right.value);
+              hidden_right1 -= 1;
+              hidden_right.value = hidden_right1.toString();
+              if (hidden_right.value == "0") {
+                document.getElementById('h4_rightlist').style.display = "none";
+              }
+            }
           }
         }
         else if (party == "left") {
           if (document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false || document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled == false) {
             document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
             document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = true;
+            var hidden_left = document.getElementById('hid_leftlist');
+            document.getElementById('h4_leftlist').style.display = "";
+            document.getElementById(val + "yktryryruruytryrut7658g8g9ygv9yv9tvytvyvyv9vyv9ytv9ytvyv9tvyvuvu9yv9uyvuvijhvijhvjihgihbjbibibijhkjbjkhbkjbjkbjbkjgiyiguiguguy").style.display = "";
+            if (hidden_left.value == "") {
+              hidden_left.value = "1";
+            }
+            else {
+              var hidden_left1 = Number(hidden_left.value);
+              hidden_left1 += 1;
+              hidden_left.value = hidden_left1.toString();
+            }
           }
           else {
             document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
             document.getElementById(val + "2vưvbrytvbb87w87465vqb4v547").disabled = false;
+            document.getElementById(val + "yktryryruruytryrut7658g8g9ygv9yv9tvytvyvyv9vyv9ytv9ytvyv9tvyvuvu9yv9uyvuvijhvijhvjihgihbjbibibijhkjbjkhbkjbjkbjbkjgiyiguiguguy").style.display = "none";
+            var hidden_left = document.getElementById('hid_leftlist');
+            if (hidden_left.value == "0") {
+              document.getElementById('h4_leftlist').style.display = "none";
+            }
+            else {
+              var hidden_left1 = Number(hidden_left.value);
+              hidden_left1 -= 1;
+              hidden_left.value = hidden_left1.toString();
+              if (hidden_left.value == "0") {
+                document.getElementById('h4_leftlist').style.display = "none";
+              }
+            }
           }
         }
         else {
           if (document.getElementById(val).disabled == false || document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled == false) {
             document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = true;
             document.getElementById(val).disabled = true;
+            var hidden_spec = document.getElementById('hid_speclist');
+            document.getElementById('h4_speclist').style.display = "";
+            document.getElementById(val + "iaygfisdagfsjkbkjhbfeyufbwyf842rt829gr9vf2fb2uhfuefhiq8rh9q84r9qewhr89q34h8r9hqewuhriqewhr9q4hr9qehriqehriwqhr").style.display = "";
+            if (hidden_spec.value == "") {
+              hidden_spec.value = "1";
+            }
+            else {
+              var hidden_spec1 = Number(hidden_spec.value);
+              hidden_spec1 += 1;
+              hidden_spec.value = hidden_spec1.toString();
+            }
           }
           else {
             document.getElementById(val + "1gdfg34t3g3gege6en6n").disabled = false;
             document.getElementById(val).disabled = false;
+            document.getElementById(val + "iaygfisdagfsjkbkjhbfeyufbwyf842rt829gr9vf2fb2uhfuefhiq8rh9q84r9qewhr89q34h8r9hqewuhriqewhr9q4hr9qehriqehriwqhr").style.display = "none";
+            var hidden_spec = document.getElementById('hid_speclist');
+            if (hidden_spec.value == "0") {
+              document.getElementById('h4_speclist').style.display = "none";
+            }
+            else {
+              var hidden_spec1 = Number(hidden_spec.value);
+              hidden_spec1 -= 1;
+              hidden_spec.value = hidden_spec1.toString();
+              if (hidden_spec.value == "0") {
+                document.getElementById('h4_speclist').style.display = "none";
+              }
+            }
           }
         }
       }
@@ -73,8 +280,8 @@
           return false;
         }
         if (distance > 0) {
-          var right = document.getElementById('right_div');
-          var left = document.getElementById('left_div');
+          var right = document.getElementById('search_hint123');
+          var left = document.getElementById('search_hint321');
           var input_right = right.getElementsByTagName('input');
           var input_left = left.getElementsByTagName('input');
           var hid_right = document.getElementById('hid_right');
@@ -193,7 +400,7 @@
                   </div>
                   <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion">
                     <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
-                      <div class="m-0 p-0 pl-4 mr-4">
+                      <!-- <div class="m-0 p-0 pl-4 mr-4">
                       <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
                         <input id="{{account.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{account.username}}">
                         <span class="custom-control-indicator custom-control-success"></span>
@@ -207,27 +414,61 @@
                         <span style="display:inline-block; width: YOURWIDTH;"></span>
                         <span class="custom-control-description"><option value="{{account.username}}">{{account.name}}</option></span>
                       </label>
+                      </div> -->
+                      <div class="dropdown">
+                        <button class="dropdown-toggle invisible" type="button" id="dropdownMenuButton123" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <input class="form-control mr-sm-2" id="search_input123" onfocus="_focus123()" onkeyup="_search123()" type="search" placeholder="Nhập để Tìm bạn" aria-label="Search">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton123">
+                          <ul id="search_hint123" class="p-0">
+                          {% for hint in hints %}
+                            <div class="m-0 p-0 pl-4 mr-4">
+                              <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
+                                <li class="dropdown-item" class="pl-3 pr-3">
+                                  <input id="{{hint['username']}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{hint['username']}}">
+                                  <span class="custom-control-indicator custom-control-success"></span>
+                                  <span>
+                                    {% if hint.image is none %}
+                                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                                    {% else %}
+                                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                                    {% endif %}
+                                  </span>
+                                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                                  <span class="custom-control-description">
+                                    <p>{{hint['name']}}</p></span>
+
+                                </li>
+                              </label>
+                            </div>
+                          {% endfor %}
+                          </ul>
+                          <p class="dropdown-item pl-3 pr-3" id="no_result123">Không tìm thấy</p>
+                        </div>
                       </div>
-                      {% for friend in friendlist_information %}
-                      <div class="m-0 p-0 pl-4 mr-4">
-                      <label multiple name="party_right" class="custom-control custom-checkbox mb-0">
-                        <input id="{{friend.username}}1gdfg34t3g3gege6en6n" type="checkbox" onclick="_check_friend_state(this.value, 'right')" class="custom-control-input" name="party_right" value="{{friend.username}}">
-                        <span class="custom-control-indicator custom-control-success"></span>
-                        <span>
-                          {% if friend.image is none %}
+                      <input type="hidden" id="check_but123" name="" value="1">
+                      <input type="hidden" id="limit123" name="" value="0">
+                      <input type="hidden" id="result123" name="" value="0">
+                      <h4 id="h4_rightlist" style="display: none;">Danh sách người người tham gia: </h4>
+                      <ul id="ul_right">
+                        {% for hint in hints %}
+                        <li id="{{hint['username']}}jfjfjfjhfjhfjfyjti6686567t6ttu6tu6t7iti6ti6ti76ti6ti6ti76t" style="display: none;" class="pl-3 pr-3">
+                          <div class="row text-dark text-left">
+                          <span>
+                        {% if hint.image is none %}
                           <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-                        </span>
-                        <span style="display:inline-block; width: YOURWIDTH;"></span>
-                        <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
-                      </label>
-                      </div>
-                      {% endfor %}
+                        {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                      </span>
+                          <span>
+                            <p>{{hint['name']}}</p></span>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      <input type="hidden" id="hid_rightlist" name="" value="">
                     </div>
                   </div>
-
               </div>
             </div>
             <input type="hidden" id="hid_right" value="0">
@@ -242,38 +483,61 @@
                   </div>
                   <div id="collapse2" class="collapse show" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion">
                     <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
-                      <div class="m-0 p-0 pl-4 mr-4" >
-                      <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
-                        <input id="{{account.username}}" type="checkbox" onclick="_check_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{account.username}}">
-                        <span class="custom-control-indicator custom-control-success"></span>
-                        <span>
-                          {% if account.image is none %}
-                          <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{account.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-                        </span>
-                        <span style="display:inline-block; width: YOURWIDTH;"></span>
-                        <span class="custom-control-description"><option value="{{account.username}}">{{account.name}}</option></span>
-                      </label>
+
+
+                      <div class="dropdown">
+                        <button class="dropdown-toggle invisible" type="button" id="dropdownMenuButton321" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <input class="form-control mr-sm-2" id="search_input321" onfocus="_focus321()" onkeyup="_search321()" type="search" placeholder="Nhập để Tìm bạn" aria-label="Search">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton321">
+                          <ul id="search_hint321" class="p-0">
+                          {% for hint in hints %}
+                            <div class="m-0 p-0 pl-4 mr-4">
+                              <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
+                                <li class="dropdown-item" class="pl-3 pr-3">
+                                  <input id="{{hint['username']}}" type="checkbox" onclick="_check_friend_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{hint['username']}}">
+                                  <span class="custom-control-indicator custom-control-success"></span>
+                                  <span>
+                                    {% if hint.image is none %}
+                                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                                    {% else %}
+                                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                                    {% endif %}
+                                  </span>
+                                  <span style="display:inline-block; width: YOURWIDTH;"></span>
+                                  <span class="custom-control-description">
+                                    <p>{{hint['name']}}</p></span>
+
+                                </li>
+                              </label>
+                            </div>
+                          {% endfor %}
+                          </ul>
+                          <p class="dropdown-item pl-3 pr-3" id="no_result321">Không tìm thấy</p>
+                        </div>
                       </div>
-                      {% for friend in friendlist_information %}
-                      <div class="m-0 p-0 pl-4 mr-4" >
-                      <label multiple name="party_left" class="custom-control custom-checkbox mb-0">
-                        <input type="checkbox" id="{{friend.username}}" onclick="_check_friend_state(this.value, 'left')" class="custom-control-input" name="party_left" value="{{friend.username}}">
-                        <span class="custom-control-indicator custom-control-success"></span>
-                        <span>
-                          {% if friend.image is none %}
+                      <input type="hidden" id="check_but321" name="" value="1">
+                      <input type="hidden" id="limit321" name="" value="0">
+                      <input type="hidden" id="result321" name="" value="0">
+                      <h4 id="h4_leftlist" style="display: none;">Danh sách người người tham gia: </h4>
+                      <ul id="ul_left">
+                        {% for hint in hints %}
+                        <li id="{{hint['username']}}yktryryruruytryrut7658g8g9ygv9yv9tvytvyvyv9vyv9ytv9ytvyv9tvyvuvu9yv9uyvuvijhvijhvjihgihbjbibibijhkjbjkhbkjbjkbjbkjgiyiguiguguy" style="display: none;" class="pl-3 pr-3">
+                          <div class="row text-dark text-left">
+                          <span>
+                        {% if hint.image is none %}
                           <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                          {% else %}
-                          <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
-                          {% endif %}
-                        </span>
-                        <span style="display:inline-block; width: YOURWIDTH;"></span>
-                        <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
-                      </label>
-                      </div>
-                      {% endfor %}
+                        {% else %}
+                          <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                        {% endif %}
+                      </span>
+                          <span>
+                            <p>{{hint['name']}}</p></span>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      <input type="hidden" id="hid_leftlist" name="" value="">
+
                     </div>
                   </div>
 
@@ -296,25 +560,61 @@
               <div id="collapse3" class="collapse" role="tabpane3" aria-labelledby="heading3" data-parent="#accordion">
                 <div class="card-body pb-1 pt-1 border border-success bg-light border-top-0 rounded-bottom">
 
-                  {% for friend in friendlist_information %}
 
-                    <div class="m-0 p-0 pl-4 mr-4" >
-                    <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
-                      <input id="{{friend.username}}2vưvbrytvbb87w87465vqb4v547" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{friend.username}}">
-                      <span class="custom-control-indicator custom-control-success"></span>
-                      <span>
-                        {% if friend.image is none %}
-                        <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
-                        {% else %}
-                        <img class=" rounded-circle" src="data:image/*;base64,{{friend.image}}" height="20px" width="20px" alt="">
-                        {% endif %}
-                      </span>
-                      <span style="display:inline-block; width: YOURWIDTH;"></span>
-                      <span class="custom-control-description"><option value="{{friend.username}}">{{friend.name}}</option></span>
-                    </label>
+                  <div class="dropdown">
+                    <button class="dropdown-toggle invisible" type="button" id="dropdownMenuButton3210" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <input class="form-control mr-sm-2" id="search_input3210" onfocus="_focus3210()" onkeyup="_search3210()" type="search" placeholder="Nhập để Tìm bạn" aria-label="Search">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3210">
+                      <ul id="search_hint3210" class="p-0">
+                      {% for hint in hints %}
+                        <div class="m-0 p-0 pl-4 mr-4">
+                          <label multiple name="spectator" class="custom-control custom-checkbox mb-0">
+                            <li class="dropdown-item" class="pl-3 pr-3">
+                              <input id="{{hint['username']}}2vưvbrytvbb87w87465vqb4v547" onclick="_check_friend_state(this.value,'spectator')" type="checkbox" class="custom-control-input" name="spectator" value="{{hint['username']}}">
+                              <span class="custom-control-indicator custom-control-success"></span>
+                              <span>
+                                {% if hint.image is none %}
+                                  <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                                {% else %}
+                                  <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                                {% endif %}
+                              </span>
+                              <span style="display:inline-block; width: YOURWIDTH;"></span>
+                              <span class="custom-control-description">
+                                <p>{{hint['name']}}</p></span>
+
+                            </li>
+                          </label>
+                        </div>
+                      {% endfor %}
+                      </ul>
+                      <p class="dropdown-item pl-3 pr-3" id="no_result3210">Không tìm thấy</p>
                     </div>
+                  </div>
+                  <input type="hidden" id="check_but3210" name="" value="1">
+                  <input type="hidden" id="limit3210" name="" value="0">
+                  <input type="hidden" id="result3210" name="" value="0">
+                  <h4 id="h4_speclist" style="display: none;">Danh sách khán giả: </h4>
+                  <ul id="ul_spec">
+                    {% for hint in hints %}
+                    <li id="{{hint['username']}}iaygfisdagfsjkbkjhbfeyufbwyf842rt829gr9vf2fb2uhfuefhiq8rh9q84r9qewhr89q34h8r9hqewuhriqewhr9q4hr9qehriqehriwqhr" style="display: none;" class="pl-3 pr-3">
+                      <div class="row text-dark text-left">
+                      <span>
+                    {% if hint.image is none %}
+                      <img class=" rounded-circle" src="https://www.frankfurt-airport.com/etc/clientlibs/fraport-airport/fraport.base.app/resources/img/fra_avatar.jpg" height="20px" width="20px" alt="">
+                    {% else %}
+                      <img class=" rounded-circle" src="data:image/*;base64,{{hint.image}}" height="20px" width="20px" alt="">
+                    {% endif %}
+                  </span>
+                      <span>
+                        <p>{{hint['name']}}</p></span>
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  <input type="hidden" id="hid_speclist" name="" value="">
 
-                  {% endfor %}
+
                 </div>
               </div>
           </div>
